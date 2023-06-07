@@ -7,6 +7,9 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
+import 'package:voting_app/src/event_voting/presentation/pages/event_details_page.dart';
+import 'package:voting_app/src/event_voting/presentation/pages/voting_contestant_page.dart';
+import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';
 
@@ -22,6 +25,13 @@ class _EventListPageState extends State<EventListPage>
   int endTime = DateTime.now().millisecondsSinceEpoch + 100000 * 60 * 3;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('initvaegfv');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 10,
@@ -30,12 +40,19 @@ class _EventListPageState extends State<EventListPage>
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius:
-                BorderRadius.only(topLeft: 8.circular, topRight: 8.circular),
-            child: CachedNetworkImage(
-              imageUrl:
-                  'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg',
+          InkWell(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EventDetailsPage(),
+                )),
+            child: ClipRRect(
+              borderRadius:
+                  BorderRadius.only(topLeft: 8.circular, topRight: 8.circular),
+              child: CachedNetworkImage(
+                imageUrl:
+                    'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg',
+              ),
             ),
           ),
           5.verticalSpace,
@@ -66,17 +83,22 @@ class _EventListPageState extends State<EventListPage>
                   Expanded(
                     child: Row(
                       children: [
-                        _timerCountView(
+                        TimerCountView(
                             title: 'Days', value: '${time.days ?? '00'}'),
-                        _timerCountView(
+                        TimerCountView(
                             title: 'Hours', value: '${time.hours ?? '00'}'),
-                        _timerCountView(
+                        TimerCountView(
                             title: 'Min', value: '${time.min ?? '00'}'),
                       ],
                     ),
                   ),
-                  const CustomButton(
+                  CustomButton(
                     title: 'VOTE NOW',
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const VotingContestantPage(),
+                        )),
                   )
                 ],
               );
@@ -87,26 +109,5 @@ class _EventListPageState extends State<EventListPage>
         ],
       )).px(20.w).pOnly(bottom: 28.h),
     );
-  }
-
-  Widget _timerCountView({required String title, required String value}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          value,
-          style: AppStyles.text14PxSemiBold.activeDark.appFontFamily
-              .lineHeight(0.h),
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          title,
-          style: AppStyles.text12PxRegular.activeDark.appFontFamily
-              .lineHeight(0.h),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    ).pOnly(right: 10);
   }
 }

@@ -9,12 +9,10 @@ class NetworkImageViewer extends StatelessWidget {
     this.height,
     this.errorWidget,
     this.width,
-    this.petType,
     this.fit,
     this.progressIndicator,
   }) : super(key: key);
   final String? imageUrl;
-  final int? petType;
   final double? height;
   final double? width;
   final BoxFit? fit;

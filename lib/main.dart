@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/helpers/theme_helper.dart';
-
-import 'src/event_voting/presentation/pages/event_list_page.dart';
 import 'src/event_voting/presentation/pages/voting_view_page.dart';
 
 void main() {
