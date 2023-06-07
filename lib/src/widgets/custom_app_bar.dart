@@ -27,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         title: Text(
           appBarTitle ?? '',
-          style: AppStyles.text18PxMedium.appFontFamily.primary,
+          style: AppStyles.text18PxMedium.appFontFamily.activeNormal,
         ).pOnly(right: 42.w),
         leading: CircleButton(
           onTap: () {},

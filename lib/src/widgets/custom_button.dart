@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     this.title,
     this.onPressed,
     this.titleStyle,
-    this.backgroundColor = AppColors.activeNormal,
+    this.backgroundColor = AppColors.activeAccent,
     this.width = 140,
     this.height = 50,
     this.icon,
@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
   final Widget? icon;
 
   ShapeBorder get _shape => RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(28.r),
+        borderRadius: BorderRadius.circular(8.r),
         side: BorderSide(
           color: (backgroundColor == AppColors.whiteColor)
               ? AppColors.activeNormal

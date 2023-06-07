@@ -43,7 +43,7 @@ class CircleButton extends StatelessWidget {
                     width: 24.w,
                     height: 24.h,
                   )
-                  .padAll(12),
+                  .padAll(10),
             ),
           ),
         ),

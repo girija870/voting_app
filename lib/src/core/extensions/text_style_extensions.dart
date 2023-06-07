@@ -7,7 +7,13 @@ extension TextStyleX on TextStyle {
   TextStyle get appFontFamily => copyWith(fontFamily: FontFamily.poppins);
 
   ///color attachment on text style
-  TextStyle get primary => copyWith(color: AppColors.activeNormal);
+  TextStyle get activeNormal => copyWith(color: AppColors.activeNormal);
+
+  TextStyle get activeDark => copyWith(color: AppColors.activeDark);
+
+  TextStyle get activeAccent => copyWith(color: AppColors.activeAccent);
+
+  TextStyle get inActiveAccent => copyWith(color: AppColors.inActiveAccent);
 
   TextStyle get whiteColor => copyWith(color: AppColors.whiteColor);
 
