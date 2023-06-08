@@ -6,10 +6,4 @@ extension ContextX on BuildContext {
 
   double get height => MediaQuery.of(this).size.height;
 
-  ///paddings getter
-  EdgeInsets get padding => MediaQuery.of(this).padding;
-
-  EdgeInsets get viewPadding => MediaQuery.of(this).viewPadding;
-
-  EdgeInsets get viewInsets => MediaQuery.of(this).viewInsets;
 }

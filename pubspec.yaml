@@ -50,11 +50,7 @@ dependencies:
   #screen util
   #cached
   cached_network_image: ^3.2.3
-  shimmer: ^2.0.0
-  device_info_plus: ^8.1.0
 
-  #functional_widget_annotation:
-  modal_bottom_sheet: ^2.1.2
   #retrofit:
   connectivity_plus: ^3.0.4
   flutter_countdown_timer: ^4.1.0

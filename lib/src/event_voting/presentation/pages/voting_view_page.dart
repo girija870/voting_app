@@ -72,6 +72,7 @@ class _VotingViewPageState extends State<VotingViewPage>
                                           label: Text(tabs[index]),
                                           backgroundColor: selectedtabs == index
                                               ? AppColors.activeAccent
+                                                  .withOpacity(.4)
                                               : Colors.transparent,
                                         ).px(6.w),
                                       ))),
