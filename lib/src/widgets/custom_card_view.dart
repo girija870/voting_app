@@ -31,21 +31,21 @@ class CustomCardView extends StatelessWidget {
     return Material(
       color: backgroundColor ?? AppColors.whiteColor,
       elevation: elevation ?? 0.sp,
-      shadowColor: shadowColor ?? null,
+      shadowColor: shadowColor,
       borderRadius: borderRadius ?? BorderRadius.circular(15.sp),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           border: border,
           color: backgroundColor ?? AppColors.whiteColor,
-          // boxShadow: [
-          //   BoxShadow(
-          //     offset: Offset.zero,
-          //     spreadRadius: 2,
-          //     blurRadius: 8,
-          //     color: boxShadowColor ?? AppColors.activeNormal.withOpacity(0.1),
-          //   )
-          // ],
+          boxShadow: [
+            BoxShadow(
+              offset: Offset.zero,
+              spreadRadius: 2,
+              blurRadius: 8,
+              color: boxShadowColor ?? AppColors.activeNormal.withOpacity(0.1),
+            )
+          ],
           borderRadius:
               BorderRadius.only(topLeft: 8.circular, topRight: 8.circular),
         ),

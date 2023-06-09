@@ -7,6 +7,7 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
+import 'package:voting_app/src/event_voting/presentation/pages/contestant_details_page.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';
@@ -101,26 +102,34 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
               (context, index) {
                 return CustomCardView(
                     child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       '01',
-                      style: AppStyles.text10PxBold
+                      style: AppStyles.text12PxRegular
                           .copyWith(color: AppColors.inActiveAccent),
                     ),
                     4.verticalSpace,
-                    ClipRRect(
-                      borderRadius: BorderRadius.all(60.circular),
-                      child: const NetworkImageViewer(
-                        width: 80,
-                        height: 80,
-                        imageUrl:
-                            'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg',
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ContestantDetailsPage(),
+                          )),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(60.circular),
+                        child: const CacheNetworkImageViewer(
+                          width: 80,
+                          height: 80,
+                          imageUrl:
+                              'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg',
+                        ),
                       ),
                     ),
                     4.verticalSpace,
                     Text(
                       'Sn Gurung',
-                      style: AppStyles.text10PxBold
+                      style: AppStyles.text12PxSemiBold
                           .copyWith(color: AppColors.inActiveAccent),
                     ),
                     6.verticalSpace,

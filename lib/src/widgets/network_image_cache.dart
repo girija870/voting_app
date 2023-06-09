@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 
-class NetworkImageViewer extends StatelessWidget {
-  const NetworkImageViewer({
+class CacheNetworkImageViewer extends StatelessWidget {
+  const CacheNetworkImageViewer({
     Key? key,
     required this.imageUrl,
     this.height,

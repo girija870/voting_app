@@ -13,19 +13,16 @@ class VotingViewPage extends StatefulWidget {
 
 class _VotingViewPageState extends State<VotingViewPage>
     with SingleTickerProviderStateMixin {
-  // late TabController tabController;
   final tabs = [
     'All Events',
     'Award',
-    'Award',
-    'Award',
-    'Award',
-    'Award',
   ];
+
+
+
 
   @override
   void initState() {
-    // tabController = TabController(length: tabs.length, vsync: this);
     selectedtabs = 0;
     super.initState();
   }
@@ -80,7 +77,9 @@ class _VotingViewPageState extends State<VotingViewPage>
                       ).pOnly(left: 14.w))),
             ];
           },
-          body: EventListPage()),
+
+          ///TODO: pass the tabsValue to filter the event data
+          body: const EventListPage()),
     );
   }
 }

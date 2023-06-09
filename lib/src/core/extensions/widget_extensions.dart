@@ -29,4 +29,8 @@ extension WidgetX on Widget {
         padding: EdgeInsets.all(value),
         child: this,
       );
+
+  SliverToBoxAdapter get toSliverBox => SliverToBoxAdapter(
+        child: this,
+      );
 }

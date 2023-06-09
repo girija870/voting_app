@@ -39,7 +39,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 ClipRRect(
                   borderRadius: BorderRadius.only(
                       topLeft: 8.circular, topRight: 8.circular),
-                  child: NetworkImageViewer(
+                  child: CacheNetworkImageViewer(
                     height: 140,
                     width: context.width,
                     fit: BoxFit.cover,

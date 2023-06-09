@@ -33,45 +33,41 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   flutter_screenutil: ^5.8.4
-  flutter_bloc: ^8.1.2
-  dio: ^5.0.1
+  bloc: ^8.1.1
+  flutter_bloc: ^8.1.3
+  dio: ^5.2.0+1
   #data class
   freezed_annotation: ^2.2.0
-  json_annotation: ^4.8.0
+  json_annotation: ^4.8.1
   #functional programming
   dartz: ^0.10.1
   #dependency injection
-  get_it: ^7.2.0
-  injectable: ^2.1.0
+  get_it: ^7.6.0
+  injectable: ^2.1.2
   #svg
-  flutter_svg: ^2.0.5
+  flutter_svg: ^2.0.6
   #screen util
   #cached
   cached_network_image: ^3.2.3
-
-  #retrofit:
-  connectivity_plus: ^3.0.4
+  connectivity_plus: ^4.0.1
   flutter_countdown_timer: ^4.1.0
+  equatable: ^2.0.5
+  logo_n_spinner: ^0.1.3
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.3.3
+  build_runner: ^2.4.5
   flutter_gen_runner:
-  json_serializable: ^6.6.1
-  freezed: ^2.3.2
-
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
+  json_serializable: ^6.7.0
+  freezed: ^2.3.5
+  injectable_generator: ^2.1.6
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
 
 flutter_gen:
   integrations:
