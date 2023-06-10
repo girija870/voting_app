@@ -10,6 +10,6 @@ class EventCategoryState with _$EventCategoryState {
 
   const factory EventCategoryState.error({required String errMessage}) = _Error;
 
-  const factory EventCategoryState.success({required ApiResponse response}) =
+  const factory EventCategoryState.success({required ApiResponse<List<String>> response}) =
       _Success;
 }

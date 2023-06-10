@@ -15,6 +15,7 @@ class CustomCardView extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.boxShadowColor,
+    this.boxShadowEnabled = false,
   }) : super(key: key);
 
   final Widget child;
@@ -25,6 +26,7 @@ class CustomCardView extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final BorderRadiusGeometry? borderRadius;
   final Color? boxShadowColor;
+  final bool boxShadowEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +40,17 @@ class CustomCardView extends StatelessWidget {
         decoration: BoxDecoration(
           border: border,
           color: backgroundColor ?? AppColors.whiteColor,
-          boxShadow: [
-            BoxShadow(
-              offset: Offset.zero,
-              spreadRadius: 2,
-              blurRadius: 8,
-              color: boxShadowColor ?? AppColors.activeNormal.withOpacity(0.1),
-            )
-          ],
+          boxShadow: boxShadowEnabled
+              ? [
+                  BoxShadow(
+                    offset: Offset.zero,
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                    color: boxShadowColor ??
+                        AppColors.activeNormal.withOpacity(0.1),
+                  )
+                ]
+              : [],
           borderRadius:
               BorderRadius.only(topLeft: 8.circular, topRight: 8.circular),
         ),

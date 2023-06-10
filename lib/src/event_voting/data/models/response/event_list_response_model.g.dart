@@ -12,13 +12,13 @@ _$_EventListResponseModel _$$_EventListResponseModelFromJson(
       id: json['id'] as String,
       name: json['name'] as String,
       location: json['location'] as String?,
-      startDate: json['start_date'] as String?,
-      endDate: json['end_date'] as String,
+      startDate: json['startDate'] as String?,
+      endDate: json['endDate'] as String,
       image: json['image'] as String,
       description: json['description'] as String,
       type: json['type'] as String?,
       setting: json['setting'] as String?,
-      price: json['price'] as int?,
+      price: (json['price'] as num?)?.toDouble(),
       status: json['status'] as String?,
       participants: (json['participants'] as List<dynamic>?)
               ?.map((e) => Participants.fromJson(e as Map<String, dynamic>))
@@ -32,15 +32,15 @@ Map<String, dynamic> _$$_EventListResponseModelToJson(
       'id': instance.id,
       'name': instance.name,
       'location': instance.location,
-      'start_date': instance.startDate,
-      'end_date': instance.endDate,
+      'startDate': instance.startDate,
+      'endDate': instance.endDate,
       'image': instance.image,
       'description': instance.description,
       'type': instance.type,
       'setting': instance.setting,
       'price': instance.price,
       'status': instance.status,
-      'participants': instance.participants?.map((e) => e.toJson()).toList(),
+      'participants': instance.participants.map((e) => e.toJson()).toList(),
     };
 
 _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>

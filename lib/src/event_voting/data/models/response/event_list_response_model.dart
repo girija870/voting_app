@@ -11,15 +11,15 @@ class EventListResponseModel with _$EventListResponseModel {
     required String id,
     required String name,
     String? location,
-    String? startDate,
-    required String endDate,
+    @JsonKey(name: 'startDate') String? startDate,
+    @JsonKey(name: 'endDate') required String endDate,
     required String image,
     required String description,
     String? type,
     String? setting,
-    int? price,
+    double? price,
     String? status,
-    @Default([]) List<Participants>? participants,
+    @Default([]) List<Participants> participants,
   }) = _EventListResponseModel;
 
   factory EventListResponseModel.fromJson(Map<String, dynamic> json) =>

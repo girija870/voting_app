@@ -2,20 +2,24 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:voting_app/src/core/errors/app_exception.dart';
 import 'package:voting_app/src/core/network/api_endpoints.dart';
+import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
 import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
 
-abstract class EventVotingRemoteSource {
-  Future<ApiResponse> fetchEventCategory();
+import '../models/response/history/event_history_response_model.dart';
 
-  Future<ApiResponse<EventListResponseModel>> fetchEventList(
+abstract class EventVotingRemoteSource {
+  Future<ApiResponse<List<String>>> fetchEventCategory();
+
+  Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
       {required String eventType});
 
   Future<ApiResponse> fetchDenominationList({required String eventId});
 
-  Future<ApiResponse> fetchEventHistory();
+  Future<ApiResponse<List<EventHistoryResponseModel>>> fetchEventHistory(
+      {required String userId});
 
-  Future<ApiResponse> postVote();
+  Future<ApiResponse> postVote({required ContestantVotingParam param});
 }
 
 @LazySingleton(as: EventVotingRemoteSource)
@@ -25,13 +29,16 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   EventVotingRemoteSourceImpl(this._dio);
 
   @override
-  Future<ApiResponse<EventListResponseModel>> fetchEventList(
+  Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
       {required String eventType}) async {
     try {
-      final response = await _dio.get(ApiEndPoints.fetchEventsList);
+      final response = await _dio.get(ApiEndPoints.fetchEventsList,
+          options: Options(headers: {'category': eventType}));
       if (response.statusCode == 200) {
         return ApiResponse(
-          data: EventListResponseModel.fromJson(response.data['data']),
+          data: List.from(response.data['data'])
+              .map((e) => EventListResponseModel.fromJson(e))
+              .toList(),
           message: response.data['message'] as String,
           success: response.data['success'] as bool,
         );
@@ -62,12 +69,16 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<ApiResponse> fetchEventHistory() async {
+  Future<ApiResponse<List<EventHistoryResponseModel>>> fetchEventHistory(
+      {required String userId}) async {
     try {
-      final response = await _dio.get(ApiEndPoints.fetchVoteHistory);
+      final response = await _dio.get(ApiEndPoints.fetchVoteHistory,
+          options: Options(headers: {'userId': userId}));
       if (response.statusCode == 200) {
         return ApiResponse(
-          data: {},
+          data: List.from(response.data['data'])
+              .map((e) => EventHistoryResponseModel.fromJson(e))
+              .toList(),
           message: response.data['message'] as String,
           success: response.data['success'] as bool,
         );
@@ -80,12 +91,12 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<ApiResponse> fetchEventCategory() async {
+  Future<ApiResponse<List<String>>> fetchEventCategory() async {
     try {
       final response = await _dio.get(ApiEndPoints.fetchCategory);
       if (response.statusCode == 200) {
         return ApiResponse(
-          data: {},
+          data: List.from(response.data['data']),
           message: response.data['message'] as String,
           success: response.data['success'] as bool,
         );
@@ -98,9 +109,14 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<ApiResponse> postVote() async {
+  Future<ApiResponse> postVote({required ContestantVotingParam param}) async {
     try {
-      final response = await _dio.get(ApiEndPoints.postVote);
+      final response = await _dio.post(ApiEndPoints.postVote, data: {
+        "userId": param.userId,
+        "eventDetailId": param.eventDetailId,
+        "count": param.count,
+        "type": param.type
+      });
       if (response.statusCode == 200) {
         return ApiResponse(
           data: {},

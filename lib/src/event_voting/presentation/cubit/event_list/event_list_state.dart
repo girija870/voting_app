@@ -10,6 +10,6 @@ class EventListState with _$EventListState {
 
   const factory EventListState.error({required String errMessage}) = _Error;
 
-  const factory EventListState.success({required ApiResponse<EventListResponseModel> response}) =
-  _Success;
+  const factory EventListState.success(
+      {required ApiResponse<List<EventListResponseModel>> response}) = _Success;
 }

@@ -8,20 +8,21 @@ import 'package:voting_app/src/core/extensions/num_extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/voting_contestant_page.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/circle_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
-class ContestantDetailsPage extends StatefulWidget {
-  const ContestantDetailsPage({Key? key}) : super(key: key);
+class ContestantDetailsPage extends StatelessWidget {
+  const ContestantDetailsPage(
+      {Key? key, required this.eventListResponseModel, required this.index})
+      : super(key: key);
 
-  @override
-  State<ContestantDetailsPage> createState() => _ContestantDetailsPageState();
-}
+  final EventListResponseModel eventListResponseModel;
+  final int index;
 
-class _ContestantDetailsPageState extends State<ContestantDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +45,7 @@ class _ContestantDetailsPageState extends State<ContestantDetailsPage> {
                         height: 140,
                         width: context.width,
                         fit: BoxFit.cover,
-                        imageUrl:
-                            'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg',
+                        imageUrl: eventListResponseModel.image,
                       ),
                     ),
                     Positioned(
@@ -56,12 +56,12 @@ class _ContestantDetailsPageState extends State<ContestantDetailsPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const CircleView(
+                          CircleView(
                               child: CacheNetworkImageViewer(
-                                  imageUrl:
-                                      'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg')),
+                                  imageUrl: eventListResponseModel
+                                      .participants[index].image)),
                           Text(
-                            '01',
+                            eventListResponseModel.participants[index].id,
                             style: AppStyles
                                 .text14PxBold.appFontFamily.activeNormal
                                 .lineHeight(21.h),
@@ -74,7 +74,7 @@ class _ContestantDetailsPageState extends State<ContestantDetailsPage> {
                 ),
                 60.verticalSpace,
                 Text(
-                  'Sn Gurung',
+                  eventListResponseModel.participants[index].name,
                   style: AppStyles.text14PxBold.appFontFamily.activeNormal
                       .lineHeight(21.h),
                   textAlign: TextAlign.center,

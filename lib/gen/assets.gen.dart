@@ -14,6 +14,9 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
+
   /// File path: assets/icons/back_arrow.svg
   SvgGenImage get backArrow => const SvgGenImage('assets/icons/back_arrow.svg');
 
@@ -44,7 +47,8 @@ class $AssetsIconsGen {
       const SvgGenImage('assets/icons/vote_filled.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
+        appIcon,
         backArrow,
         bookNow,
         clock,

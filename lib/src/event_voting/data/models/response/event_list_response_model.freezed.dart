@@ -24,15 +24,17 @@ mixin _$EventListResponseModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'startDate')
   String? get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'endDate')
   String get endDate => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   String? get setting => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  List<Participants>? get participants => throw _privateConstructorUsedError;
+  List<Participants> get participants => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,15 +52,15 @@ abstract class $EventListResponseModelCopyWith<$Res> {
       {String id,
       String name,
       String? location,
-      String? startDate,
-      String endDate,
+      @JsonKey(name: 'startDate') String? startDate,
+      @JsonKey(name: 'endDate') String endDate,
       String image,
       String description,
       String? type,
       String? setting,
-      int? price,
+      double? price,
       String? status,
-      List<Participants>? participants});
+      List<Participants> participants});
 }
 
 /// @nodoc
@@ -86,7 +88,7 @@ class _$EventListResponseModelCopyWithImpl<$Res,
     Object? setting = freezed,
     Object? price = freezed,
     Object? status = freezed,
-    Object? participants = freezed,
+    Object? participants = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -128,15 +130,15 @@ class _$EventListResponseModelCopyWithImpl<$Res,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      participants: freezed == participants
+      participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
-              as List<Participants>?,
+              as List<Participants>,
     ) as $Val);
   }
 }
@@ -153,15 +155,15 @@ abstract class _$$_EventListResponseModelCopyWith<$Res>
       {String id,
       String name,
       String? location,
-      String? startDate,
-      String endDate,
+      @JsonKey(name: 'startDate') String? startDate,
+      @JsonKey(name: 'endDate') String endDate,
       String image,
       String description,
       String? type,
       String? setting,
-      int? price,
+      double? price,
       String? status,
-      List<Participants>? participants});
+      List<Participants> participants});
 }
 
 /// @nodoc
@@ -187,7 +189,7 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
     Object? setting = freezed,
     Object? price = freezed,
     Object? status = freezed,
-    Object? participants = freezed,
+    Object? participants = null,
   }) {
     return _then(_$_EventListResponseModel(
       id: null == id
@@ -229,15 +231,15 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      participants: freezed == participants
+      participants: null == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
-              as List<Participants>?,
+              as List<Participants>,
     ));
   }
 }
@@ -250,15 +252,15 @@ class _$_EventListResponseModel implements _EventListResponseModel {
       {required this.id,
       required this.name,
       this.location,
-      this.startDate,
-      required this.endDate,
+      @JsonKey(name: 'startDate') this.startDate,
+      @JsonKey(name: 'endDate') required this.endDate,
       required this.image,
       required this.description,
       this.type,
       this.setting,
       this.price,
       this.status,
-      final List<Participants>? participants = const []})
+      final List<Participants> participants = const []})
       : _participants = participants;
 
   factory _$_EventListResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -271,8 +273,10 @@ class _$_EventListResponseModel implements _EventListResponseModel {
   @override
   final String? location;
   @override
+  @JsonKey(name: 'startDate')
   final String? startDate;
   @override
+  @JsonKey(name: 'endDate')
   final String endDate;
   @override
   final String image;
@@ -283,18 +287,16 @@ class _$_EventListResponseModel implements _EventListResponseModel {
   @override
   final String? setting;
   @override
-  final int? price;
+  final double? price;
   @override
   final String? status;
-  final List<Participants>? _participants;
+  final List<Participants> _participants;
   @override
   @JsonKey()
-  List<Participants>? get participants {
-    final value = _participants;
-    if (value == null) return null;
+  List<Participants> get participants {
     if (_participants is EqualUnmodifiableListView) return _participants;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_participants);
   }
 
   @override
@@ -362,15 +364,15 @@ abstract class _EventListResponseModel implements EventListResponseModel {
       {required final String id,
       required final String name,
       final String? location,
-      final String? startDate,
-      required final String endDate,
+      @JsonKey(name: 'startDate') final String? startDate,
+      @JsonKey(name: 'endDate') required final String endDate,
       required final String image,
       required final String description,
       final String? type,
       final String? setting,
-      final int? price,
+      final double? price,
       final String? status,
-      final List<Participants>? participants}) = _$_EventListResponseModel;
+      final List<Participants> participants}) = _$_EventListResponseModel;
 
   factory _EventListResponseModel.fromJson(Map<String, dynamic> json) =
       _$_EventListResponseModel.fromJson;
@@ -382,8 +384,10 @@ abstract class _EventListResponseModel implements EventListResponseModel {
   @override
   String? get location;
   @override
+  @JsonKey(name: 'startDate')
   String? get startDate;
   @override
+  @JsonKey(name: 'endDate')
   String get endDate;
   @override
   String get image;
@@ -394,11 +398,11 @@ abstract class _EventListResponseModel implements EventListResponseModel {
   @override
   String? get setting;
   @override
-  int? get price;
+  double? get price;
   @override
   String? get status;
   @override
-  List<Participants>? get participants;
+  List<Participants> get participants;
   @override
   @JsonKey(ignore: true)
   _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>

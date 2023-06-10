@@ -7,24 +7,25 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/contestant_details_page.dart';
+import 'package:voting_app/src/event_voting/presentation/pages/dinomination_list_page.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
-class VotingContestantPage extends StatefulWidget {
-  const VotingContestantPage({Key? key}) : super(key: key);
+class VotingContestantPage extends StatelessWidget {
+  const VotingContestantPage({Key? key, required this.eventListResponseModel})
+      : super(key: key);
 
-  @override
-  State<VotingContestantPage> createState() => _VotingContestantPageState();
-}
-
-class _VotingContestantPageState extends State<VotingContestantPage> {
-  int endTime = DateTime.now().millisecondsSinceEpoch + 100000 * 60 * 3;
+  final EventListResponseModel eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
+    int endTime =
+        DateTime.parse(eventListResponseModel.endDate).millisecondsSinceEpoch;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -33,20 +34,23 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
               floating: true,
               automaticallyImplyLeading: true,
               actions: [const Icon(Icons.share).pOnly(right: 20.w)],
-              // title: const Text('Mrs.National 2023'),
-              bottom: const PreferredSize(
-                  preferredSize: Size.fromHeight(40),
-                  child: Column(
-                    children: [Text('Mrs.National 2023')],
-                  ))),
+              bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(40),
+                  child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(eventListResponseModel.name))
+                      .pOnly(left: 20))),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                10.verticalSpace,
                 Text('Vote you favorite contestant',
-                    style: AppStyles
-                        .text12PxRegular.appFontFamily.inActiveAccent
-                        .lineHeight(18.h)),
+                        style: AppStyles
+                            .text12PxRegular.appFontFamily.inActiveAccent
+                            .lineHeight(18.h))
+                    .pOnly(left: 20.w),
+                10.verticalSpace,
                 Container(
                   color: AppColors.activeAccent.withOpacity(.1),
                   padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -91,56 +95,68 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
               ],
             ),
           ),
+          20.verticalSpace.toSliverBox,
           SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 10,
-              crossAxisSpacing: 4,
+              crossAxisSpacing: 0,
               childAspectRatio: .9,
             ),
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return CustomCardView(
+                    boxShadowEnabled: true,
                     child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '01',
-                      style: AppStyles.text12PxRegular
-                          .copyWith(color: AppColors.inActiveAccent),
-                    ),
-                    4.verticalSpace,
-                    InkWell(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ContestantDetailsPage(),
-                          )),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(60.circular),
-                        child: const CacheNetworkImageViewer(
-                          width: 80,
-                          height: 80,
-                          imageUrl:
-                              'https://english.khabarhub.com/wp-content/uploads/2020/12/Pro_Ktm_Missnepal2020b-1-scaled.jpg',
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        10.verticalSpace,
+                        Text(
+                          eventListResponseModel.participants[index].id,
+                          style: AppStyles.text12PxRegular
+                              .copyWith(color: AppColors.inActiveAccent),
                         ),
-                      ),
-                    ),
-                    4.verticalSpace,
-                    Text(
-                      'Sn Gurung',
-                      style: AppStyles.text12PxSemiBold
-                          .copyWith(color: AppColors.inActiveAccent),
-                    ),
-                    6.verticalSpace,
-                    const CustomButton(
-                      width: 120,
-                      title: 'VOTE',
-                    )
-                  ],
-                )).py(10.h);
+                        4.verticalSpace,
+                        InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ContestantDetailsPage(
+                                  eventListResponseModel:
+                                      eventListResponseModel,
+                                  index: index,
+                                ),
+                              )),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(60.circular),
+                            child: CacheNetworkImageViewer(
+                              width: 80,
+                              height: 80,
+                              imageUrl: eventListResponseModel
+                                  .participants[index].image,
+                            ),
+                          ),
+                        ),
+                        4.verticalSpace,
+                        Text(
+                          eventListResponseModel.participants[index].name,
+                          style: AppStyles.text12PxSemiBold
+                              .copyWith(color: AppColors.inActiveAccent),
+                        ),
+                        6.verticalSpace,
+                        CustomButton(
+                          width: 120,
+                          title: 'VOTE',
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DenominationListPage())),
+                        )
+                      ],
+                    )).px(20.h);
               },
-              childCount: 10,
+              childCount: eventListResponseModel.participants.length,
             ),
           ),
         ],

@@ -6,10 +6,8 @@ extension NumX on num {
 
   Duration get milliSeconds => Duration(milliseconds: toInt());
 
-
-
-
-
   Radius get circular => Radius.circular(toDouble());
+  BorderRadiusGeometry get rounded => BorderRadius.circular(toDouble());
+
 
 }

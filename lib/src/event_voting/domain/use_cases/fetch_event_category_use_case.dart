@@ -7,12 +7,12 @@ import 'package:voting_app/src/event_voting/domain/repositories/event_voting_rep
 
 @lazySingleton
 class FetchEventCategoryUseCase
-    extends BaseUseCase<void, ApiResponse<dynamic>> {
+    extends BaseUseCase<void, ApiResponse<List<String>>> {
   FetchEventCategoryUseCase(this._repository);
 
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, ApiResponse<dynamic>>> execute(_) =>
+  Future<Either<AppError, ApiResponse<List<String>>>> execute(param) =>
       _repository.fetchEventCategory();
 }

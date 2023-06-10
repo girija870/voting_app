@@ -13,7 +13,7 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i3;
 import 'package:dio/dio.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:voting_app/src/core/di/register_modules.dart' as _i15;
+import 'package:voting_app/src/core/di/register_modules.dart' as _i19;
 import 'package:voting_app/src/core/helpers/internet_info_helper.dart' as _i6;
 import 'package:voting_app/src/event_voting/data/repositories/event_voting_repository_impl.dart'
     as _i8;
@@ -33,6 +33,14 @@ import 'package:voting_app/src/event_voting/domain/use_cases/post_vote_use_case.
     as _i13;
 import 'package:voting_app/src/event_voting/presentation/cubit/denomation_list/denomination_list_cubit.dart'
     as _i14;
+import 'package:voting_app/src/event_voting/presentation/cubit/event_category/event_category_cubit.dart'
+    as _i15;
+import 'package:voting_app/src/event_voting/presentation/cubit/event_list/event_list_cubit.dart'
+    as _i16;
+import 'package:voting_app/src/event_voting/presentation/cubit/event_vote_history/event_vote_history_cubit.dart'
+    as _i17;
+import 'package:voting_app/src/event_voting/presentation/cubit/post_vote/post_vote_cubit.dart'
+    as _i18;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -69,8 +77,16 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.PostVoteUseCase(gh<_i7.EventVotingRepository>()));
     gh.factory<_i14.DenominationListCubit>(() =>
         _i14.DenominationListCubit(gh<_i9.FetchDenominationListUseCase>()));
+    gh.factory<_i15.EventCategoryCubit>(
+        () => _i15.EventCategoryCubit(gh<_i10.FetchEventCategoryUseCase>()));
+    gh.factory<_i16.EventListCubit>(
+        () => _i16.EventListCubit(gh<_i11.FetchEventListUseCase>()));
+    gh.factory<_i17.EventVoteHistoryCubit>(
+        () => _i17.EventVoteHistoryCubit(gh<_i12.FetchVoteHistoryUseCase>()));
+    gh.factory<_i18.PostVoteCubit>(
+        () => _i18.PostVoteCubit(gh<_i13.PostVoteUseCase>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i15.RegisterModule {}
+class _$RegisterModule extends _i19.RegisterModule {}
