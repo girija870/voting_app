@@ -4,6 +4,7 @@ import 'package:voting_app/src/core/errors/app_exception.dart';
 import 'package:voting_app/src/core/network/api_endpoints.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
 import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
+import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
 
 import '../models/response/history/event_history_response_model.dart';
@@ -14,7 +15,8 @@ abstract class EventVotingRemoteSource {
   Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
       {required String eventType});
 
-  Future<ApiResponse> fetchDenominationList({required String eventId});
+  Future<ApiResponse<List<DenominationListResponseModel>>>
+      fetchDenominationList({required String eventId});
 
   Future<ApiResponse<List<EventHistoryResponseModel>>> fetchEventHistory(
       {required String userId});
@@ -51,13 +53,17 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<ApiResponse> fetchDenominationList({required String eventId}) async {
+  Future<ApiResponse<List<DenominationListResponseModel>>>
+      fetchDenominationList({required String eventId}) async {
     try {
-      final response = await _dio.get(ApiEndPoints.fetchDenominationList);
+      final response = await _dio.get(ApiEndPoints.fetchDenominationList,
+          options: Options(headers: {'eventId': eventId}));
       if (response.statusCode == 200) {
         return ApiResponse(
-          data: {},
-          message: response.data['message'] as String,
+          data: List.from(response.data['data'])
+              .map((e) => DenominationListResponseModel.fromJson(e))
+              .toList(),
+          message:  response.data['message'] != null ? response.data['message'] as String : 'Successfully',
           success: response.data['success'] as bool,
         );
       } else {

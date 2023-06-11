@@ -5,6 +5,7 @@ import 'package:voting_app/src/core/errors/app_exception.dart';
 import 'package:voting_app/src/core/helpers/internet_info_helper.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
 import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
+import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/history/event_history_response_model.dart';
 import 'package:voting_app/src/event_voting/data/source/event_voting_remote_source.dart';
@@ -18,7 +19,7 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   EventVotingRepositoryImpl(this._internetInfo, this._remoteSource);
 
   @override
-  Future<Either<AppError, ApiResponse>> fetchDenominationList(
+  Future<Either<AppError, ApiResponse<List<DenominationListResponseModel>>>> fetchDenominationList(
       {required String eventId}) async {
     if (await _internetInfo.isConnected) {
       try {

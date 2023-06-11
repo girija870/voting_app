@@ -22,7 +22,9 @@ mixin _$DenominationListState {
     required TResult Function() loading,
     required TResult Function() noInternet,
     required TResult Function(String errMessage) error,
-    required TResult Function(ApiResponse<dynamic> response) success,
+    required TResult Function(
+            ApiResponse<List<DenominationListResponseModel>> response)
+        success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +33,9 @@ mixin _$DenominationListState {
     TResult? Function()? loading,
     TResult? Function()? noInternet,
     TResult? Function(String errMessage)? error,
-    TResult? Function(ApiResponse<dynamic> response)? success,
+    TResult? Function(
+            ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +44,8 @@ mixin _$DenominationListState {
     TResult Function()? loading,
     TResult Function()? noInternet,
     TResult Function(String errMessage)? error,
-    TResult Function(ApiResponse<dynamic> response)? success,
+    TResult Function(ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +139,9 @@ class _$_Initial implements _Initial {
     required TResult Function() loading,
     required TResult Function() noInternet,
     required TResult Function(String errMessage) error,
-    required TResult Function(ApiResponse<dynamic> response) success,
+    required TResult Function(
+            ApiResponse<List<DenominationListResponseModel>> response)
+        success,
   }) {
     return initial();
   }
@@ -146,7 +153,9 @@ class _$_Initial implements _Initial {
     TResult? Function()? loading,
     TResult? Function()? noInternet,
     TResult? Function(String errMessage)? error,
-    TResult? Function(ApiResponse<dynamic> response)? success,
+    TResult? Function(
+            ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
   }) {
     return initial?.call();
   }
@@ -158,7 +167,8 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function()? noInternet,
     TResult Function(String errMessage)? error,
-    TResult Function(ApiResponse<dynamic> response)? success,
+    TResult Function(ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -253,7 +263,9 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function() noInternet,
     required TResult Function(String errMessage) error,
-    required TResult Function(ApiResponse<dynamic> response) success,
+    required TResult Function(
+            ApiResponse<List<DenominationListResponseModel>> response)
+        success,
   }) {
     return loading();
   }
@@ -265,7 +277,9 @@ class _$_Loading implements _Loading {
     TResult? Function()? loading,
     TResult? Function()? noInternet,
     TResult? Function(String errMessage)? error,
-    TResult? Function(ApiResponse<dynamic> response)? success,
+    TResult? Function(
+            ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
   }) {
     return loading?.call();
   }
@@ -277,7 +291,8 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? noInternet,
     TResult Function(String errMessage)? error,
-    TResult Function(ApiResponse<dynamic> response)? success,
+    TResult Function(ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -373,7 +388,9 @@ class _$_NoInternet implements _NoInternet {
     required TResult Function() loading,
     required TResult Function() noInternet,
     required TResult Function(String errMessage) error,
-    required TResult Function(ApiResponse<dynamic> response) success,
+    required TResult Function(
+            ApiResponse<List<DenominationListResponseModel>> response)
+        success,
   }) {
     return noInternet();
   }
@@ -385,7 +402,9 @@ class _$_NoInternet implements _NoInternet {
     TResult? Function()? loading,
     TResult? Function()? noInternet,
     TResult? Function(String errMessage)? error,
-    TResult? Function(ApiResponse<dynamic> response)? success,
+    TResult? Function(
+            ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
   }) {
     return noInternet?.call();
   }
@@ -397,7 +416,8 @@ class _$_NoInternet implements _NoInternet {
     TResult Function()? loading,
     TResult Function()? noInternet,
     TResult Function(String errMessage)? error,
-    TResult Function(ApiResponse<dynamic> response)? success,
+    TResult Function(ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
     required TResult orElse(),
   }) {
     if (noInternet != null) {
@@ -518,7 +538,9 @@ class _$_Error implements _Error {
     required TResult Function() loading,
     required TResult Function() noInternet,
     required TResult Function(String errMessage) error,
-    required TResult Function(ApiResponse<dynamic> response) success,
+    required TResult Function(
+            ApiResponse<List<DenominationListResponseModel>> response)
+        success,
   }) {
     return error(errMessage);
   }
@@ -530,7 +552,9 @@ class _$_Error implements _Error {
     TResult? Function()? loading,
     TResult? Function()? noInternet,
     TResult? Function(String errMessage)? error,
-    TResult? Function(ApiResponse<dynamic> response)? success,
+    TResult? Function(
+            ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
   }) {
     return error?.call(errMessage);
   }
@@ -542,7 +566,8 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function()? noInternet,
     TResult Function(String errMessage)? error,
-    TResult Function(ApiResponse<dynamic> response)? success,
+    TResult Function(ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -607,7 +632,7 @@ abstract class _$$_SuccessCopyWith<$Res> {
           _$_Success value, $Res Function(_$_Success) then) =
       __$$_SuccessCopyWithImpl<$Res>;
   @useResult
-  $Res call({ApiResponse<dynamic> response});
+  $Res call({ApiResponse<List<DenominationListResponseModel>> response});
 }
 
 /// @nodoc
@@ -626,7 +651,7 @@ class __$$_SuccessCopyWithImpl<$Res>
       response: null == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as ApiResponse<dynamic>,
+              as ApiResponse<List<DenominationListResponseModel>>,
     ));
   }
 }
@@ -637,7 +662,7 @@ class _$_Success implements _Success {
   const _$_Success({required this.response});
 
   @override
-  final ApiResponse<dynamic> response;
+  final ApiResponse<List<DenominationListResponseModel>> response;
 
   @override
   String toString() {
@@ -669,7 +694,9 @@ class _$_Success implements _Success {
     required TResult Function() loading,
     required TResult Function() noInternet,
     required TResult Function(String errMessage) error,
-    required TResult Function(ApiResponse<dynamic> response) success,
+    required TResult Function(
+            ApiResponse<List<DenominationListResponseModel>> response)
+        success,
   }) {
     return success(response);
   }
@@ -681,7 +708,9 @@ class _$_Success implements _Success {
     TResult? Function()? loading,
     TResult? Function()? noInternet,
     TResult? Function(String errMessage)? error,
-    TResult? Function(ApiResponse<dynamic> response)? success,
+    TResult? Function(
+            ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
   }) {
     return success?.call(response);
   }
@@ -693,7 +722,8 @@ class _$_Success implements _Success {
     TResult Function()? loading,
     TResult Function()? noInternet,
     TResult Function(String errMessage)? error,
-    TResult Function(ApiResponse<dynamic> response)? success,
+    TResult Function(ApiResponse<List<DenominationListResponseModel>> response)?
+        success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -744,10 +774,11 @@ class _$_Success implements _Success {
 }
 
 abstract class _Success implements DenominationListState {
-  const factory _Success({required final ApiResponse<dynamic> response}) =
-      _$_Success;
+  const factory _Success(
+      {required final ApiResponse<List<DenominationListResponseModel>>
+          response}) = _$_Success;
 
-  ApiResponse<dynamic> get response;
+  ApiResponse<List<DenominationListResponseModel>> get response;
   @JsonKey(ignore: true)
   _$$_SuccessCopyWith<_$_Success> get copyWith =>
       throw _privateConstructorUsedError;

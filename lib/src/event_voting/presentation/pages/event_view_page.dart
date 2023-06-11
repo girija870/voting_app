@@ -30,6 +30,7 @@ class _EventViewPageState extends State<EventViewPage>
   }
 
   int? selectedtabs;
+  String selectedTabsValue = 'ALL';
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +84,13 @@ class _EventViewPageState extends State<EventViewPage>
                                                 textDirection:
                                                     TextDirection.rtl,
                                                 child: ActionChip(
+                                                  side: const BorderSide(
+                                                      color: AppColors
+                                                          .activeAccent),
                                                   onPressed: () => setState(() {
                                                     selectedtabs = index;
+                                                    selectedTabsValue =
+                                                        data.data[index];
                                                     context
                                                         .read<EventListCubit>()
                                                         .fetchEventList(

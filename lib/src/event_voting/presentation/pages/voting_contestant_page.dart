@@ -150,8 +150,11 @@ class VotingContestantPage extends StatelessWidget {
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DenominationListPage())),
+                                  builder: (context) => DenominationListPage(
+                                        eventListResponseModel:
+                                            eventListResponseModel,
+                                        index: index,
+                                      ))),
                         )
                       ],
                     )).px(20.h);

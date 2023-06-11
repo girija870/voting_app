@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
+import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_denomination_list_use_case.dart';
 
 part 'denomination_list_state.dart';

@@ -8,8 +8,10 @@ class DenominationListState with _$DenominationListState {
 
   const factory DenominationListState.noInternet() = _NoInternet;
 
-  const factory DenominationListState.error({required String errMessage}) = _Error;
+  const factory DenominationListState.error({required String errMessage}) =
+      _Error;
 
-  const factory DenominationListState.success({required ApiResponse response}) =
-      _Success;
+  const factory DenominationListState.success(
+      {required ApiResponse<List<DenominationListResponseModel>>
+          response}) = _Success;
 }
