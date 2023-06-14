@@ -19,7 +19,7 @@ class AppException with _$AppException {
   factory AppException.fromJson(Map<String, dynamic> json) =>
       _$AppExceptionFromJson(json);
 
-  factory AppException.fromDioError(DioError e) {
+  factory AppException.fromDioError(DioException e) {
     if (e.response != null) {
       return AppException(message: e.response?.data['message'] as String);
     } else if (e.message != null) {

@@ -1,5 +1,6 @@
-class ApiEndPoints{
+class ApiEndPoints {
   ApiEndPoints._();
+
   static const String fetchCategory = 'event/category';
   static const String fetchEventsList = 'event/list';
   static const String fetchDenominationList = 'denomination/list';

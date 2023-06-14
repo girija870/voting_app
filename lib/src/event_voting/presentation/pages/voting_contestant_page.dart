@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -51,45 +50,48 @@ class VotingContestantPage extends StatelessWidget {
                             .lineHeight(18.h))
                     .pOnly(left: 20.w),
                 10.verticalSpace,
-                Container(
-                  color: AppColors.activeAccent.withOpacity(.1),
-                  padding: EdgeInsets.symmetric(vertical: 8.h),
-                  child: Column(
-                    children: [
-                      Text('Voting Closes In:',
-                          style: AppStyles
-                              .text12PxRegular.appFontFamily.inActiveAccent
-                              .lineHeight(18.h)),
-                      6.verticalSpace,
-                      CountdownTimer(
-                        endTime: endTime,
-                        widgetBuilder: (_, CurrentRemainingTime? time) {
-                          if (time == null) {
-                            return Text(
-                              'Voting Closed',
-                              style: AppStyles.text12PxRegular
-                                  .copyWith(color: AppColors.inActiveAccent),
+                Center(
+                  child: Container(
+                    color: AppColors.activeAccent.withOpacity(.1),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    child: Column(
+                      children: [
+                        Text('Voting Closes In:',
+                            style: AppStyles
+                                .text12PxRegular.appFontFamily.inActiveAccent
+                                .lineHeight(18.h)),
+                        6.verticalSpace,
+                        CountdownTimer(
+                          endTime: endTime,
+                          widgetBuilder: (_, CurrentRemainingTime? time) {
+                            if (time == null) {
+                              return Text(
+                                'Voting Closed',
+                                style: AppStyles.text12PxRegular
+                                    .copyWith(color: AppColors.inActiveAccent),
+                              );
+                            }
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                TimerCountView(
+                                    title: 'Days',
+                                    value: '${time.days ?? '00'}'),
+                                TimerCountView(
+                                    title: 'Hours',
+                                    value: '${time.hours ?? '00'}'),
+                                TimerCountView(
+                                    title: 'Min', value: '${time.min ?? '00'}'),
+                              ],
                             );
-                          }
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              TimerCountView(
-                                  title: 'Days', value: '${time.days ?? '00'}'),
-                              TimerCountView(
-                                  title: 'Hours',
-                                  value: '${time.hours ?? '00'}'),
-                              TimerCountView(
-                                  title: 'Min', value: '${time.min ?? '00'}'),
-                            ],
-                          );
-                        },
-                        textStyle: AppStyles.text14PxSemiBold.copyWith(
-                            color: AppColors.activeAccent,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
+                          },
+                          textStyle: AppStyles.text14PxSemiBold.copyWith(
+                              color: AppColors.activeAccent,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -153,7 +155,7 @@ class VotingContestantPage extends StatelessWidget {
                                   builder: (context) => DenominationListPage(
                                         eventListResponseModel:
                                             eventListResponseModel,
-                                        index: index,
+                                        participantIndex: index,
                                       ))),
                         )
                       ],

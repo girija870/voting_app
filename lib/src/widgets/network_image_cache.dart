@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:voting_app/src/core/themes/themes.dart';
 
 class CacheNetworkImageViewer extends StatelessWidget {
   const CacheNetworkImageViewer({
@@ -20,39 +19,21 @@ class CacheNetworkImageViewer extends StatelessWidget {
       progressIndicator;
   final Widget Function(BuildContext, String, dynamic)? errorWidget;
 
-
-
   @override
   Widget build(BuildContext context) {
-    return
-      // imageUrl.isNotNullNotEmpty
-      //   ?
-      CachedNetworkImage(
-            imageUrl: imageUrl ?? '',
-            // progressIndicatorBuilder: progressIndicator ??
-            //     (_, url, downloadProgress) {
-            //       return url.isEmpty
-            //           ? Image.asset(
-            //               placeholderImage!,
-            //               fit: BoxFit.cover,
-            //             )
-            //           : CircularProgressIndicator(
-            //               value: downloadProgress.progress,
-            //               color: AppColors.activeAccent,
-            //             );
-            //     },
-
-            // errorWidget: errorWidget ??
-            //     (_, __, ___) => placeholderImage.isNotNullNotEmpty
-            //         ? Image.asset(
-            //             placeholderImage!,
-            //             fit: BoxFit.cover,
-            //           )
-            //         : Image.asset(AssetHelper.dogPlaceholderImage),
-            fit: fit ?? BoxFit.cover,
-            height: height,
-            width: width,
-          );
-        // : Image.asset(AssetHelper.dogPlaceholderImage);
+    return CachedNetworkImage(
+      imageUrl: imageUrl ?? '',
+      // progressIndicatorBuilder: progressIndicator ??
+      //     (_, url, downloadProgress) {
+      //       return CircularProgressIndicator(
+      //         value: downloadProgress.progress,
+      //         color: AppColors.activeAccent,
+      //       );
+      //     },
+      fit: fit ?? BoxFit.cover,
+      height: height,
+      width: width,
+    );
+    // : Image.asset(AssetHelper.dogPlaceholderImage);
   }
 }

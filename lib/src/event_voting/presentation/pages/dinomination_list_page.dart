@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_countdown_timer/current_remaining_time.dart';
-import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/gen/assets.gen.dart';
 import 'package:voting_app/src/core/di/injection.dart';
@@ -22,16 +20,19 @@ import 'dart:math' as math;
 
 class DenominationListPage extends StatelessWidget {
   const DenominationListPage(
-      {Key? key, required this.eventListResponseModel, required this.index})
+      {Key? key,
+      required this.eventListResponseModel,
+      required this.participantIndex})
       : super(key: key);
 
   final EventListResponseModel eventListResponseModel;
-  final int index;
+  final int participantIndex;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DenominationListCubit>()..fetchDenominationList(eventListResponseModel.id),
+      create: (context) => getIt<DenominationListCubit>()
+        ..fetchDenominationList(eventListResponseModel.id),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -42,14 +43,16 @@ class DenominationListPage extends StatelessWidget {
                 CircleView(
                     radius: 80.r,
                     child: CacheNetworkImageViewer(
-                      imageUrl:
-                          eventListResponseModel.participants[index].image,
+                      imageUrl: eventListResponseModel
+                          .participants[participantIndex].image,
                     )),
                 10.horizontalSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(eventListResponseModel.participants[index].name,
+                    Text(
+                        eventListResponseModel
+                            .participants[participantIndex].name,
                         style: AppStyles
                             .text16PxBold.appFontFamily.inActiveAccent
                             .lineHeight(18.h)),
@@ -84,20 +87,30 @@ class DenominationListPage extends StatelessWidget {
                                   onTap: () => showDialog(
                                       context: context,
                                       builder: (context) => CustomDialogView(
-                                          message: 'Are you sure to proceed',
-                                          onConfirmClicked: () {},
-                                          buttonLabel: 'Confirm')),
+                                            message: 'Are you sure to proceed',
+                                            onConfirmClicked: () {},
+                                            buttonLabel: 'Confirm',
+                                            eventDetailsId:
+                                                eventListResponseModel
+                                                    .participants[
+                                                        participantIndex]
+                                                    .id,
+                                            denominationListResponseModel:
+                                                data.data[index],
+                                          )),
                                   child: Stack(
                                     clipBehavior: Clip.antiAlias,
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: index == 1 || index == 0
+                                            color: (data.data[index].type !=
+                                                    'PAID')
                                                 ? AppColors.activeAccent
                                                     .withOpacity(.1)
                                                 : AppColors.whiteColor,
                                             border: Border.all(
-                                                color: index == 1 || index == 0
+                                                color: (data.data[index].type !=
+                                                        'PAID')
                                                     ? AppColors.activeAccent
                                                     : AppColors.activeNormal
                                                         .withOpacity(.2)),
@@ -140,8 +153,8 @@ class DenominationListPage extends StatelessWidget {
                                                           .appFontFamily
                                                           .inActiveAccent
                                                           .lineHeight(18.h)),
-                                                  if ((index == 1 ||
-                                                      index == 0))
+                                                  if (data.data[index].type !=
+                                                      'PAID')
                                                     Text(
                                                         '${data.data[index].detail}',
                                                         style: AppStyles
@@ -159,7 +172,7 @@ class DenominationListPage extends StatelessWidget {
                                           ],
                                         ).px(10.w).py(8.h),
                                       ).pOnly(bottom: 20.h),
-                                      if (index == 1 || index == 0)
+                                      if (data.data[index].type != 'PAID')
                                         Positioned(
                                             child: Transform.rotate(
                                                 angle: -math.pi / 4,

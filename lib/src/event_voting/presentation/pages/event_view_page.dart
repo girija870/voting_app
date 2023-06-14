@@ -46,76 +46,80 @@ class _EventViewPageState extends State<EventViewPage>
         ),
       ],
       child: Scaffold(
-        body: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  floating: true,
-                  pinned: true,
-                  title: const Text('Voting'),
-                  actions: [
-                    IconButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const VotingHistoryPage(),
-                          )),
-                      icon: const Icon(Icons.history),
-                    ),
-                    4.horizontalSpace,
-                  ],
-                  bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(80),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child:
-                          BlocBuilder<EventCategoryCubit, EventCategoryState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                              orElse: () => const SizedBox(),
-                              success: (data) {
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                      children: List.generate(
-                                          data.data.length,
-                                          (index) => Directionality(
-                                                textDirection:
-                                                    TextDirection.rtl,
-                                                child: ActionChip(
-                                                  side: const BorderSide(
-                                                      color: AppColors
-                                                          .activeAccent),
-                                                  onPressed: () => setState(() {
-                                                    selectedtabs = index;
-                                                    selectedTabsValue =
-                                                        data.data[index];
-                                                    context
-                                                        .read<EventListCubit>()
-                                                        .fetchEventList(
-                                                            eventType: data
-                                                                .data[index]);
-                                                  }),
-                                                  label: Text(data.data[index]),
-                                                  backgroundColor:
-                                                      selectedtabs == index
-                                                          ? AppColors
-                                                              .activeAccent
-                                                              .withOpacity(.4)
-                                                          : Colors.transparent,
-                                                ).px(6.w),
-                                              ))),
-                                );
-                              });
-                        },
-                      ),
-                    ).pOnly(left: 14.w),
-                  ),
+        body: NestedScrollView(headerSliverBuilder:
+            (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              floating: true,
+              pinned: true,
+              title: const Text('Voting'),
+              actions: [
+                IconButton(
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const VotingHistoryPage(),
+                      )),
+                  icon: const Icon(Icons.history),
                 ),
-              ];
-            },
-            body: const EventListPage()),
+                4.horizontalSpace,
+              ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(80),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: BlocBuilder<EventCategoryCubit, EventCategoryState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                          orElse: () => const SizedBox(),
+                          success: (data) {
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                  children: List.generate(
+                                      data.data.length,
+                                      (index) => Directionality(
+                                            textDirection: TextDirection.rtl,
+                                            child: ActionChip(
+                                              side: const BorderSide(
+                                                  color:
+                                                      AppColors.activeAccent),
+                                              onPressed: () => setState(() {
+                                                selectedtabs = index;
+                                                selectedTabsValue =
+                                                    data.data[index];
+                                                context
+                                                    .read<EventListCubit>()
+                                                    .fetchEventList(
+                                                        eventType:
+                                                            data.data[index]);
+                                              }),
+                                              label: Text(data.data[index]),
+                                              backgroundColor:
+                                                  selectedtabs == index
+                                                      ? AppColors.activeAccent
+                                                          .withOpacity(.4)
+                                                      : Colors.transparent,
+                                            ).px(6.w),
+                                          ))),
+                            );
+                          });
+                    },
+                  ),
+                ).pOnly(left: 14.w),
+              ),
+            ),
+          ];
+        }, body: Builder(builder: (context) {
+          return RefreshIndicator(
+              onRefresh: () async {
+                await context.read<EventCategoryCubit>().fetchEventCategory();
+                await context
+                    .read<EventListCubit>()
+                    .fetchEventList(eventType: selectedTabsValue);
+              },
+              child: const Center(child: EventListPage()));
+        })),
       ),
     );
   }

@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/gen/assets.gen.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -15,12 +13,12 @@ import 'package:voting_app/src/event_voting/presentation/pages/voting_contestant
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';
-import 'package:logo_n_spinner/logo_n_spinner.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
 class EventListPage extends StatelessWidget {
   const EventListPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +71,7 @@ class EventListPage extends StatelessWidget {
                             .text12PxRegular.appFontFamily.inActiveAccent
                             .lineHeight(18.h)),
                     6.verticalSpace,
-                    Text('Voting Closes In:',
-                        style: AppStyles
-                            .text12PxRegular.appFontFamily.inActiveAccent
-                            .lineHeight(18.h)),
-                    6.verticalSpace,
+
                     CountdownTimer(
                       endTime: endTime,
                       widgetBuilder: (_, CurrentRemainingTime? time) {
@@ -88,33 +82,43 @@ class EventListPage extends StatelessWidget {
                                 .copyWith(color: AppColors.colorsRed),
                           );
                         }
-                        return Row(
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  TimerCountView(
-                                      title: 'Days',
-                                      value: '${time.days ?? '00'}'),
-                                  TimerCountView(
-                                      title: 'Hours',
-                                      value: '${time.hours ?? '00'}'),
-                                  TimerCountView(
-                                      title: 'Min',
-                                      value: '${time.min ?? '00'}'),
-                                ],
-                              ),
+                            Text('Voting Closes In:',
+                                style: AppStyles
+                                    .text12PxRegular.appFontFamily.inActiveAccent
+                                    .lineHeight(18.h)),
+                            6.verticalSpace,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      TimerCountView(
+                                          title: 'Days',
+                                          value: '${time.days ?? '00'}'),
+                                      TimerCountView(
+                                          title: 'Hours',
+                                          value: '${time.hours ?? '00'}'),
+                                      TimerCountView(
+                                          title: 'Min',
+                                          value: '${time.min ?? '00'}'),
+                                    ],
+                                  ),
+                                ),
+                                CustomButton(
+                                  title: 'VOTE NOW',
+                                  onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => VotingContestantPage(
+                                          eventListResponseModel: eventData,
+                                        ),
+                                      )),
+                                )
+                              ],
                             ),
-                            CustomButton(
-                              title: 'VOTE NOW',
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => VotingContestantPage(
-                                      eventListResponseModel: eventData,
-                                    ),
-                                  )),
-                            )
                           ],
                         );
                       },

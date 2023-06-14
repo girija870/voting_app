@@ -63,7 +63,9 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
           data: List.from(response.data['data'])
               .map((e) => DenominationListResponseModel.fromJson(e))
               .toList(),
-          message:  response.data['message'] != null ? response.data['message'] as String : 'Successfully',
+          message: response.data['message'] != null
+              ? response.data['message'] as String
+              : 'Successfully',
           success: response.data['success'] as bool,
         );
       } else {
@@ -79,7 +81,7 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
       {required String userId}) async {
     try {
       final response = await _dio.get(ApiEndPoints.fetchVoteHistory,
-          options: Options(headers: {'userId': userId}));
+          options: Options(headers: {'username': '9849423081'}));
       if (response.statusCode == 200) {
         return ApiResponse(
           data: List.from(response.data['data'])
@@ -117,15 +119,13 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   @override
   Future<ApiResponse> postVote({required ContestantVotingParam param}) async {
     try {
-      final response = await _dio.post(ApiEndPoints.postVote, data: {
-        "userId": param.userId,
-        "eventDetailId": param.eventDetailId,
-        "count": param.count,
-        "type": param.type
-      });
+      print('paramData${param.toJson}');
+      final response =
+          await _dio.post(ApiEndPoints.postVote, data: param.toJson);
+
       if (response.statusCode == 200) {
         return ApiResponse(
-          data: {},
+          data: const {},
           message: response.data['message'] as String,
           success: response.data['success'] as bool,
         );
