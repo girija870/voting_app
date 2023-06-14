@@ -89,7 +89,7 @@ class CustomDialogView extends StatelessWidget {
                             width: context.width * .5,
                             title: buttonLabel,
                             titleStyle: AppStyles
-                                .text14PxMedium.appFontFamily.inActiveAccent
+                                .text14PxMedium.appFontFamily.whiteColor
                                 .lineHeight(16.59),
                             onPressed: () {
                               context.read<PostVoteCubit>().postVote(

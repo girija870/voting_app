@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     this.title,
     this.onPressed,
     this.titleStyle,
-    this.backgroundColor = AppColors.activeAccent,
+    this.backgroundColor = AppColors.activeDark,
     this.width = 140,
     this.height = 50,
     this.icon,

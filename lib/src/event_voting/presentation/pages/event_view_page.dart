@@ -94,7 +94,7 @@ class _EventViewPageState extends State<EventViewPage>
                                                         eventType:
                                                             data.data[index]);
                                               }),
-                                              label: Text(data.data[index]),
+                                              label: Text(data.data[index].replaceAll('_', ' ')),
                                               backgroundColor:
                                                   selectedtabs == index
                                                       ? AppColors.activeAccent
