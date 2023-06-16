@@ -5,7 +5,8 @@ import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/app_styles.dart';
 
 class TimerCountView extends StatelessWidget {
-  const TimerCountView({Key? key, required this.title, required this.value}) : super(key: key);
+  const TimerCountView({Key? key, required this.title, required this.value})
+      : super(key: key);
 
   final String title;
   final String value;

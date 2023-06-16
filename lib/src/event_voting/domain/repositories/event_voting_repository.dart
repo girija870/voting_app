@@ -9,8 +9,8 @@ import 'package:voting_app/src/event_voting/data/models/response/history/event_h
 abstract class EventVotingRepository {
   Future<Either<AppError, ApiResponse<List<String>>>> fetchEventCategory();
 
-  Future<Either<AppError, ApiResponse<List<EventListResponseModel>>>>
-      fetchEventList({required String eventType});
+  Future<Either<AppError, EventListResponseModel>> fetchEventList(
+      {required String eventType});
 
   Future<Either<AppError, ApiResponse<List<DenominationListResponseModel>>>>
       fetchDenominationList({required String eventId});

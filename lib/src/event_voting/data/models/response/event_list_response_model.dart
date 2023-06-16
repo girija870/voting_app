@@ -8,22 +8,33 @@ part 'event_list_response_model.g.dart';
 class EventListResponseModel with _$EventListResponseModel {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory EventListResponseModel({
+    @Default([]) List<EventListData> data,
+  }) = _EventListResponseModel;
+
+  factory EventListResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$EventListResponseModelFromJson(json);
+}
+
+@freezed
+class EventListData with _$EventListData {
+  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+  const factory EventListData({
     required String id,
     required String name,
     String? location,
     @JsonKey(name: 'startDate') String? startDate,
-    @JsonKey(name: 'endDate') required String endDate,
+    @JsonKey(name: 'endDate') String? endDate,
     required String image,
-    required String description,
+    String? description,
     String? type,
     String? setting,
     double? price,
     String? status,
     @Default([]) List<Participants> participants,
-  }) = _EventListResponseModel;
+  }) = _EventListData;
 
-  factory EventListResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$EventListResponseModelFromJson(json);
+  factory EventListData.fromJson(Map<String, dynamic> json) =>
+      _$EventListDataFromJson(json);
 }
 
 @freezed

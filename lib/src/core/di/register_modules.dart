@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:voting_app/src/core/extensions/num_extensions.dart';
+import 'package:voting_app/src/core/network/network_services.dart';
 
 @module
 abstract class RegisterModule {
@@ -27,4 +28,7 @@ abstract class RegisterModule {
             requestBody: true, requestHeader: true, responseHeader: true)
       ]);
   }
+
+  @lazySingleton
+  NetworkServices get networkServices => NetworkServices(authenticatedDio);
 }

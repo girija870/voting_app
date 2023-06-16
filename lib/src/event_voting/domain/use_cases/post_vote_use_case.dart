@@ -14,6 +14,7 @@ class PostVoteUseCase
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, ApiResponse<dynamic>>> execute(ContestantVotingParam param) =>
+  Future<Either<AppError, ApiResponse<dynamic>>> execute(
+          ContestantVotingParam param) =>
       _repository.postVote(param: param);
 }

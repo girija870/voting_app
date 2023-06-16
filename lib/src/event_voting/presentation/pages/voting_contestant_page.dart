@@ -18,12 +18,13 @@ class VotingContestantPage extends StatelessWidget {
   const VotingContestantPage({Key? key, required this.eventListResponseModel})
       : super(key: key);
 
-  final EventListResponseModel eventListResponseModel;
+  final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime =
-        DateTime.parse(eventListResponseModel.endDate).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
 
     return Scaffold(
       body: CustomScrollView(

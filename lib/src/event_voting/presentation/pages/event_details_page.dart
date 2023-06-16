@@ -15,12 +15,13 @@ import 'package:voting_app/src/widgets/network_image_cache.dart';
 class EventDetailsPage extends StatelessWidget {
   const EventDetailsPage({Key? key, required this.eventListResponseModel})
       : super(key: key);
-  final EventListResponseModel eventListResponseModel;
+  final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime =
-        DateTime.parse(eventListResponseModel.endDate).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -51,7 +52,7 @@ class EventDetailsPage extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 Text(
-                  eventListResponseModel.description,
+                  eventListResponseModel.description ?? '',
                   style: AppStyles.text12PxRegular.appFontFamily.inActiveAccent
                       .lineHeight(18.h),
                 ),

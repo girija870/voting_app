@@ -19,8 +19,8 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   EventVotingRepositoryImpl(this._internetInfo, this._remoteSource);
 
   @override
-  Future<Either<AppError, ApiResponse<List<DenominationListResponseModel>>>> fetchDenominationList(
-      {required String eventId}) async {
+  Future<Either<AppError, ApiResponse<List<DenominationListResponseModel>>>>
+      fetchDenominationList({required String eventId}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response =
@@ -50,7 +50,7 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   }
 
   @override
-  Future<Either<AppError, ApiResponse<List<EventListResponseModel>>>>
+  Future<Either<AppError, EventListResponseModel>>
       fetchEventList({required String eventType}) async {
     if (await _internetInfo.isConnected) {
       try {

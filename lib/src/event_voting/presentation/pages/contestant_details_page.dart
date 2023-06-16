@@ -15,7 +15,7 @@ class ContestantDetailsPage extends StatelessWidget {
       {Key? key, required this.eventListResponseModel, required this.index})
       : super(key: key);
 
-  final EventListResponseModel eventListResponseModel;
+  final EventListData eventListResponseModel;
   final int index;
 
   @override

@@ -14,6 +14,6 @@ class FetchVoteHistoryUseCase
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, ApiResponse<List<EventHistoryResponseModel>>>> execute(String param) =>
-      _repository.fetchVoteHistory(userId: param);
+  Future<Either<AppError, ApiResponse<List<EventHistoryResponseModel>>>>
+      execute(String param) => _repository.fetchVoteHistory(userId: param);
 }

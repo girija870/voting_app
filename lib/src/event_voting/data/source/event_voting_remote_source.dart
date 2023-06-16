@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:voting_app/src/core/errors/app_exception.dart';
 import 'package:voting_app/src/core/network/api_endpoints.dart';
+import 'package:voting_app/src/core/network/network_services.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
 import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
@@ -12,7 +13,7 @@ import '../models/response/history/event_history_response_model.dart';
 abstract class EventVotingRemoteSource {
   Future<ApiResponse<List<String>>> fetchEventCategory();
 
-  Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
+  Future<EventListResponseModel> fetchEventList(
       {required String eventType});
 
   Future<ApiResponse<List<DenominationListResponseModel>>>
@@ -28,28 +29,27 @@ abstract class EventVotingRemoteSource {
 class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   final Dio _dio;
 
-  EventVotingRemoteSourceImpl(this._dio);
+  EventVotingRemoteSourceImpl(this._dio, this._networkServices);
+
+  final NetworkServices _networkServices;
 
   @override
-  Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
+  Future<EventListResponseModel> fetchEventList(
       {required String eventType}) async {
-    try {
-      final response = await _dio.get(ApiEndPoints.fetchEventsList,
-          options: Options(headers: {'category': eventType}));
-      if (response.statusCode == 200) {
-        return ApiResponse(
-          data: List.from(response.data['data'])
-              .map((e) => EventListResponseModel.fromJson(e))
-              .toList(),
-          message: response.data['message'] as String,
-          success: response.data['success'] as bool,
-        );
-      } else {
-        throw const AppException(message: 'Unknown Error');
-      }
-    } on DioException catch (e) {
-      throw AppException.fromDioError(e);
-    }
+    return await _networkServices.fetchEventList(eventType);
+    // try {
+    //   final response = await _dio.get(ApiEndPoints.fetchEventsList,
+    //       options: Options(headers: {'category': eventType}));
+    //   if (response.statusCode == 200) {
+    //     return List.from(response.data['data'])
+    //         .map((e) => EventListData.fromJson(e))
+    //         .toList();
+    //   } else {
+    //     throw const AppException(message: 'Unknown Error');
+    //   }
+    // } on DioException catch (e) {
+    //   throw AppException.fromDioError(e);
+    // }
   }
 
   @override

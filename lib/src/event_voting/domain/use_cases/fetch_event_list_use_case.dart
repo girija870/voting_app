@@ -9,13 +9,12 @@ import '../../data/models/response/event_list_response_model.dart';
 
 @lazySingleton
 class FetchEventListUseCase
-    extends BaseUseCase<String, ApiResponse<List<EventListResponseModel>>> {
+    extends BaseUseCase<String, EventListResponseModel> {
   FetchEventListUseCase(this._repository);
 
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, ApiResponse<List<EventListResponseModel>>>> execute(
-          String param) =>
+  Future<Either<AppError, EventListResponseModel>> execute(String param) =>
       _repository.fetchEventList(eventType: param);
 }
