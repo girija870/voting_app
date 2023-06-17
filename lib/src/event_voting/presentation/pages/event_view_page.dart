@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/extensions/num_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -49,11 +50,8 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
             title: const Text('Voting'),
             actions: [
               IconButton(
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const VotingHistoryPage(),
-                    )),
+                onPressed: () => Navigator.of(context)
+                    .pushNamed(RoutePath.votingHistoryPage),
                 icon: const Icon(Icons.history),
               ),
               4.horizontalSpace,

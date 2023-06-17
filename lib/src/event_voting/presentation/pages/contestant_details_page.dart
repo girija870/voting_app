@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -76,16 +77,11 @@ class ContestantDetailsPage extends StatelessWidget {
                 ),
                 40.verticalSpace,
                 CustomButton(
-                  width: 120,
-                  title: 'VOTE',
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DenominationListPage(
-                                eventListResponseModel: eventListResponseModel,
-                                participantIndex: index,
-                              ))),
-                )
+                    width: 120,
+                    title: 'VOTE',
+                    onPressed: () => Navigator.of(context).pushNamed(
+                        RoutePath.denominationListPage,
+                        arguments: [index, eventListResponseModel]))
               ],
             ).px(20.w),
           )

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/di/injection.dart';
 
 import 'package:voting_app/src/core/extensions/extensions.dart';
@@ -43,12 +44,7 @@ class CustomDialogView extends ConsumerWidget {
           },
           success: (data) {
             Navigator.pop(context);
-
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VotingHistoryPage(),
-                ));
+            Navigator.of(context).pushNamed(RoutePath.votingHistoryPage);
           });
     });
     return Builder(builder: (context) {

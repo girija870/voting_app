@@ -3,6 +3,7 @@ import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -43,13 +44,9 @@ class EventListPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EventDetailsPage(
-                                  eventListResponseModel: eventData,
-                                ),
-                              )),
+                          onTap: () => Navigator.of(context).pushNamed(
+                              RoutePath.eventDetailsPage,
+                              arguments: eventData),
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
                                 topLeft: 8.circular, topRight: 8.circular),
@@ -108,14 +105,11 @@ class EventListPage extends StatelessWidget {
                                     ),
                                     CustomButton(
                                       title: 'VOTE NOW',
-                                      onPressed: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                VotingContestantPage(
-                                              eventListResponseModel: eventData,
-                                            ),
-                                          )),
+                                      onPressed: () => Navigator.of(context)
+                                          .pushNamed(
+                                              RoutePath
+                                                  .votingContestantListPage,
+                                              arguments: eventData),
                                     )
                                   ],
                                 ),

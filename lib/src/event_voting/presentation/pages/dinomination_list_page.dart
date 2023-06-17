@@ -18,14 +18,14 @@ import 'package:voting_app/src/widgets/network_image_cache.dart';
 import 'dart:math' as math;
 
 class DenominationListPage extends StatelessWidget {
-  const DenominationListPage(
-      {Key? key,
-      required this.eventListResponseModel,
-      required this.participantIndex})
-      : super(key: key);
+  const DenominationListPage({
+    Key? key,
+    required this.participantIndex,
+    required this.eventListResponseModel,
+  }) : super(key: key);
 
-  final EventListData eventListResponseModel;
   final int participantIndex;
+  final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -121,15 +122,9 @@ class VotingContestantPage extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         InkWell(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ContestantDetailsPage(
-                                  eventListResponseModel:
-                                      eventListResponseModel,
-                                  index: index,
-                                ),
-                              )),
+                          onTap: () => Navigator.of(context).pushNamed(
+                              RoutePath.contestantDetailsPage,
+                              arguments: [index, eventListResponseModel]),
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(60.circular),
                             child: CacheNetworkImageViewer(
@@ -148,17 +143,11 @@ class VotingContestantPage extends StatelessWidget {
                         ),
                         6.verticalSpace,
                         CustomButton(
-                          width: 120,
-                          title: 'VOTE',
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DenominationListPage(
-                                        eventListResponseModel:
-                                            eventListResponseModel,
-                                        participantIndex: index,
-                                      ))),
-                        )
+                            width: 120,
+                            title: 'VOTE',
+                            onPressed: () => Navigator.of(context).pushNamed(
+                                RoutePath.denominationListPage,
+                                arguments: [index, eventListResponseModel]))
                       ],
                     )).px(20.h);
               },

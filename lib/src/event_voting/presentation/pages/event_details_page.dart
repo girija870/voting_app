@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -100,15 +101,10 @@ class EventDetailsPage extends StatelessWidget {
                 ),
                 40.verticalSpace,
                 CustomButton(
-                  title: 'VOTE NOW',
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VotingContestantPage(
-                          eventListResponseModel: eventListResponseModel,
-                        ),
-                      )),
-                ),
+                    title: 'VOTE NOW',
+                    onPressed: () => Navigator.of(context).pushNamed(
+                        RoutePath.votingContestantListPage,
+                        arguments: eventListResponseModel)),
               ],
             ).px(20.w),
           )
