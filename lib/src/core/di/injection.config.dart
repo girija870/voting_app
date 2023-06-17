@@ -27,9 +27,9 @@ import 'package:voting_app/src/event_voting/domain/use_cases/fetch_denomination_
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_category_use_case.dart'
     as _i11;
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_list_use_case.dart'
-    as _i12;
-import 'package:voting_app/src/event_voting/domain/use_cases/fetch_group_list_use_case.dart'
     as _i13;
+import 'package:voting_app/src/event_voting/domain/use_cases/fetch_group_list_use_case.dart'
+    as _i12;
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_vote_history_use_case.dart'
     as _i14;
 import 'package:voting_app/src/event_voting/domain/use_cases/post_vote_use_case.dart'
@@ -66,10 +66,10 @@ extension GetItInjectableX on _i1.GetIt {
         _i10.FetchDenominationListUseCase(gh<_i8.EventVotingRepository>()));
     gh.lazySingleton<_i11.FetchEventCategoryUseCase>(
         () => _i11.FetchEventCategoryUseCase(gh<_i8.EventVotingRepository>()));
-    gh.lazySingleton<_i12.FetchEventListUseCase>(
-        () => _i12.FetchEventListUseCase(gh<_i8.EventVotingRepository>()));
-    gh.lazySingleton<_i13.FetchGroupListUseCase>(
-        () => _i13.FetchGroupListUseCase(gh<_i8.EventVotingRepository>()));
+    gh.lazySingleton<_i12.FetchGroupListUseCase>(
+        () => _i12.FetchGroupListUseCase(gh<_i8.EventVotingRepository>()));
+    gh.lazySingleton<_i13.FetchEventListUseCase>(
+        () => _i13.FetchEventListUseCase(gh<_i8.EventVotingRepository>()));
     gh.lazySingleton<_i14.FetchVoteHistoryUseCase>(
         () => _i14.FetchVoteHistoryUseCase(gh<_i8.EventVotingRepository>()));
     gh.lazySingleton<_i15.PostVoteUseCase>(
