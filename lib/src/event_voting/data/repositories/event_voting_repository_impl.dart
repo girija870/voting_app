@@ -94,4 +94,19 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
       return left(const AppError.noInternet());
     }
   }
+
+  @override
+  Future<Either<AppError, ApiResponse<List<EventHistoryResponseModel>>>> fetchGroupList({required String eventId}) async{
+    if (await _internetInfo.isConnected) {
+      try {
+        final response = await _remoteSource.fetchGroupList(eventId: eventId);
+        return right(response);
+      } on AppException catch (e) {
+        return left(AppError.serverError(message: e.message));
+      }
+    } else {
+      return left(const AppError.noInternet());
+    }
+
+  }
 }

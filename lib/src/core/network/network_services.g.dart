@@ -19,6 +19,29 @@ class _NetworkServices implements NetworkServices {
   String? baseUrl;
 
   @override
+  Future<EventListResponseModel> fetchEventCategory() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EventListResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'event/category',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EventListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<EventListResponseModel> fetchEventList(String category) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -28,6 +51,93 @@ class _NetworkServices implements NetworkServices {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<EventListResponseModel>(Options(
       method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'event/list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EventListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<EventListResponseModel> fetchDenominationList(String eventId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'eventId': eventId};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EventListResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'denomination/list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EventListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<EventListResponseModel> fetchEventHistory(String userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'userId': userId};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EventListResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'vote/history',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EventListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<EventListResponseModel> postVote(
+    String userId,
+    String username,
+    String denoId,
+    String participantId,
+    String count,
+    String type,
+    String refTransactionId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'userId': userId,
+      'username': username,
+      'denoId': denoId,
+      'participantId': participantId,
+      'count': count,
+      'type': type,
+      'refTransactionId': refTransactionId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EventListResponseModel>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )

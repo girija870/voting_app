@@ -20,4 +20,7 @@ abstract class EventVotingRepository {
 
   Future<Either<AppError, ApiResponse>> postVote(
       {required ContestantVotingParam param});
+
+  Future<Either<AppError, ApiResponse<List<EventHistoryResponseModel>>>>
+      fetchGroupList({required String eventId});
 }

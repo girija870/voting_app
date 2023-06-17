@@ -13,7 +13,7 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i3;
 import 'package:dio/dio.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:voting_app/src/core/di/register_modules.dart' as _i15;
+import 'package:voting_app/src/core/di/register_modules.dart' as _i16;
 import 'package:voting_app/src/core/helpers/internet_info_helper.dart' as _i5;
 import 'package:voting_app/src/core/network/network_services.dart' as _i6;
 import 'package:voting_app/src/event_voting/data/repositories/event_voting_repository_impl.dart'
@@ -28,10 +28,12 @@ import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_categor
     as _i11;
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_list_use_case.dart'
     as _i12;
-import 'package:voting_app/src/event_voting/domain/use_cases/fetch_vote_history_use_case.dart'
+import 'package:voting_app/src/event_voting/domain/use_cases/fetch_group_list_use_case.dart'
     as _i13;
-import 'package:voting_app/src/event_voting/domain/use_cases/post_vote_use_case.dart'
+import 'package:voting_app/src/event_voting/domain/use_cases/fetch_vote_history_use_case.dart'
     as _i14;
+import 'package:voting_app/src/event_voting/domain/use_cases/post_vote_use_case.dart'
+    as _i15;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -66,12 +68,14 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i11.FetchEventCategoryUseCase(gh<_i8.EventVotingRepository>()));
     gh.lazySingleton<_i12.FetchEventListUseCase>(
         () => _i12.FetchEventListUseCase(gh<_i8.EventVotingRepository>()));
-    gh.lazySingleton<_i13.FetchVoteHistoryUseCase>(
-        () => _i13.FetchVoteHistoryUseCase(gh<_i8.EventVotingRepository>()));
-    gh.lazySingleton<_i14.PostVoteUseCase>(
-        () => _i14.PostVoteUseCase(gh<_i8.EventVotingRepository>()));
+    gh.lazySingleton<_i13.FetchGroupListUseCase>(
+        () => _i13.FetchGroupListUseCase(gh<_i8.EventVotingRepository>()));
+    gh.lazySingleton<_i14.FetchVoteHistoryUseCase>(
+        () => _i14.FetchVoteHistoryUseCase(gh<_i8.EventVotingRepository>()));
+    gh.lazySingleton<_i15.PostVoteUseCase>(
+        () => _i15.PostVoteUseCase(gh<_i8.EventVotingRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i15.RegisterModule {}
+class _$RegisterModule extends _i16.RegisterModule {}

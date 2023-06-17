@@ -23,6 +23,9 @@ abstract class EventVotingRemoteSource {
       {required String userId});
 
   Future<ApiResponse> postVote({required ContestantVotingParam param});
+
+  Future<ApiResponse<List<EventHistoryResponseModel>>> fetchGroupList(
+      {required String eventId});
 }
 
 @LazySingleton(as: EventVotingRemoteSource)
@@ -135,5 +138,24 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
     } on DioException catch (e) {
       throw AppException.fromDioError(e);
     }
+  }
+
+  @override
+  Future<ApiResponse<List<EventHistoryResponseModel>>> fetchGroupList({required String eventId}) async{
+    try {
+      final response = await _dio.get(ApiEndPoints.fetchCategory);
+      if (response.statusCode == 200) {
+        return ApiResponse(
+          data: List.from(response.data['data']),
+          message: response.data['message'] as String,
+          success: response.data['success'] as bool,
+        );
+      } else {
+        throw const AppException(message: 'Unknown Error');
+      }
+    } on DioException catch (e) {
+      throw AppException.fromDioError(e);
+    }
+
   }
 }

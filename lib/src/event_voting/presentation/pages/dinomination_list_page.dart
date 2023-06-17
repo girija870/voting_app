@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/gen/assets.gen.dart';
@@ -11,6 +12,7 @@ import 'package:voting_app/src/event_voting/data/models/response/event_list_resp
 import 'package:voting_app/src/event_voting/presentation/riverpod/denomination_list_riverpod.dart';
 
 import 'package:voting_app/src/widgets/circle_view.dart';
+import 'package:voting_app/src/widgets/custom_button.dart';
 
 import 'package:voting_app/src/widgets/custom_dialog_view.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
@@ -78,8 +80,8 @@ class DenominationListPage extends StatelessWidget {
                       orElse: () => const SizedBox(),
                       loading: () => const Loader(),
                       success: (data) {
-                        return Column(
-                          children: List.generate(
+                        return Column(children: [
+                          ...List.generate(
                               data.length,
                               (index) => InkWell(
                                     onTap: () => showDialog(
@@ -163,10 +165,10 @@ class DenominationListPage extends StatelessWidget {
                                                   ],
                                                 ),
                                               ),
-                                              Expanded(
+                                              const Expanded(
                                                   flex: 1,
-                                                  child: Assets.icons.backArrow
-                                                      .svg())
+                                                  child: Icon(
+                                                      Icons.arrow_forward_ios))
                                             ],
                                           ).px(10.w).py(8.h),
                                         ).pOnly(bottom: 20.h),
@@ -187,7 +189,133 @@ class DenominationListPage extends StatelessWidget {
                                       ],
                                     ),
                                   )),
-                        );
+                          10.verticalSpace,
+                          InkWell(
+                            onTap: () => showModalBottomSheet(
+                              backgroundColor: AppColors.whiteColor,
+                              context: context,
+                              builder: (context) =>
+                                  StatefulBuilder(
+                                builder: (BuildContext context,
+                                    void Function(void Function()) setState) {
+                                  return KeyboardVisibilityBuilder(
+                                    builder: (context, bool isKeyboardVisible) {
+                                      print('keyVisi::$isKeyboardVisible');
+                                      return FractionallySizedBox(
+                                        heightFactor:
+                                            isKeyboardVisible ? .8 : .6,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              20.verticalSpace,
+                                              Text(
+                                                'Enter Votes Manually',
+                                                style: AppStyles.text16PxMedium,
+                                              ),
+
+                                              20.verticalSpace,
+                                              Container(
+                                                height: 48.h,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color:
+                                                        AppColors.activeAccent,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                child: TextFormField(
+                                                  onChanged: (value) {},
+                                                  cursorColor:
+                                                      AppColors.activeAccent,
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  keyboardType:
+                                                      TextInputType.text,
+                                                  style: AppStyles
+                                                      .text14PxRegular
+                                                      .appFontFamily
+                                                      .copyWith(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    counter:
+                                                        const SizedBox.shrink(),
+                                                    hintText: 'Number of Votes',
+                                                    hintStyle: AppStyles
+                                                        .text12PxRegular
+                                                        .appFontFamily
+                                                        .inActiveAccent,
+                                                    contentPadding:
+                                                        const EdgeInsets.all(
+                                                            16),
+                                                    border: OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6.r),
+                                                      gapPadding: 0,
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6.r),
+                                                      gapPadding: 0,
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6.r),
+                                                      gapPadding: 0,
+                                                    ),
+                                                    isDense: true,
+                                                  ),
+                                                ),
+                                              ),
+                                              // if (errorText != null && errorText.isNotEmpty)
+                                              //   Text(
+                                              //     errorText,
+                                              //     style: AppStyles.text12PxRegular.appFontFamily.redColor,
+                                              //     textAlign: TextAlign.left,
+                                              //   ).py(10)
+                                              30.verticalSpace,
+                                              const CustomButton(
+                                                title: 'VOTE NOW',
+                                              )
+                                            ],
+                                          ).px(20.w),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                              isScrollControlled: true,
+                              useRootNavigator: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              'ENTER VOTES MANUALLY',
+                              style: AppStyles.text10PxSemiBold,
+                            ),
+                          ),
+                          40.verticalSpace
+                        ]);
                       });
             },
           ).px(20.w).toSliverBox,
