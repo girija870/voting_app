@@ -5,4 +5,5 @@ class RoutePath {
   static const contestantDetailsPage = 'contestantDetailsPage';
   static const denominationListPage = 'denominationListPage';
   static const votingHistoryPage = 'votingHistoryPage';
+  static const groupListPage = 'groupListPage';
 }

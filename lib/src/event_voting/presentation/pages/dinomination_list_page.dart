@@ -8,7 +8,7 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/denomination_list_riverpod.dart';
 
 import 'package:voting_app/src/widgets/circle_view.dart';
@@ -51,21 +51,23 @@ class DenominationListPage extends StatelessWidget {
                   Text(
                       eventListResponseModel
                           .participants[participantIndex].name,
-                      style: AppStyles.text16PxBold.appFontFamily.inActiveAccent
+                      style: AppStyles.boldText16
+                          .copyWith(color: AppColors.kColorNeutralBlack)
                           .lineHeight(18.h)),
                   Text(eventListResponseModel.name,
-                      style: AppStyles
-                          .text12PxSemiBold.appFontFamily.inActiveAccent
+                      style: AppStyles.semiBoldText12
+                          .copyWith(color: AppColors.kColorNeutralBlack)
                           .lineHeight(18.h)),
                 ],
               )
             ],
           ).px(20.w).toSliverBox,
           const Divider(
-            color: AppColors.activeNormal,
+            color: AppColors.kColorPrimary,
           ).toSliverBox,
           Text('Select an option to vote',
-                  style: AppStyles.text14PxMedium.appFontFamily.inActiveAccent
+                  style: AppStyles.mediumText14
+                      .copyWith(color: AppColors.kColorNeutralBlack)
                       .lineHeight(18.h))
               .px(20.w)
               .py(10.h)
@@ -104,17 +106,20 @@ class DenominationListPage extends StatelessWidget {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                              color:
-                                                  (data[index].type != 'PAID')
-                                                      ? AppColors.activeAccent
-                                                          .withOpacity(.1)
-                                                      : AppColors.whiteColor,
+                                              color: (data[index].type !=
+                                                      'PAID')
+                                                  ? AppColors.kColorSecondary
+                                                      .withOpacity(.1)
+                                                  : AppColors.kColorWhite,
                                               border: Border.all(
-                                                  color: (data[index].type !=
-                                                          'PAID')
-                                                      ? AppColors.activeAccent
-                                                      : AppColors.activeNormal
-                                                          .withOpacity(.2)),
+                                                  color:
+                                                      (data[index].type !=
+                                                              'PAID')
+                                                          ? AppColors
+                                                              .kColorSecondary
+                                                          : AppColors
+                                                              .kColorPrimary
+                                                              .withOpacity(.2)),
                                               borderRadius: 4.rounded),
                                           child: Row(
                                             children: [
@@ -124,18 +129,21 @@ class DenominationListPage extends StatelessWidget {
                                                   children: [
                                                     Text('${data[index].count}',
                                                         style: AppStyles
-                                                            .text14PxMedium
-                                                            .appFontFamily
-                                                            .inActiveAccent
+                                                            .mediumText14
+                                                            .copyWith(
+                                                                color: AppColors
+                                                                    .kColorNeutralBlack)
                                                             .lineHeight(18.h)),
                                                     Text(
-                                                        data[index].count > 1
+                                                        data[index].count >
+                                                                1
                                                             ? 'Votes'
                                                             : 'Vote',
                                                         style: AppStyles
-                                                            .text14PxMedium
-                                                            .appFontFamily
-                                                            .inActiveAccent
+                                                            .mediumText14
+                                                            .copyWith(
+                                                                color: AppColors
+                                                                    .kColorNeutralBlack)
                                                             .lineHeight(18.h))
                                                   ],
                                                 ),
@@ -149,18 +157,20 @@ class DenominationListPage extends StatelessWidget {
                                                   children: [
                                                     Text(data[index].title,
                                                         style: AppStyles
-                                                            .text16PxMedium
-                                                            .appFontFamily
-                                                            .inActiveAccent
+                                                            .mediumText16
+                                                            .copyWith(
+                                                                color: AppColors
+                                                                    .kColorNeutralBlack)
                                                             .lineHeight(18.h)),
                                                     if (data[index].type !=
                                                         'PAID')
                                                       Text(
                                                           '${data[index].detail}',
                                                           style: AppStyles
-                                                              .text12PxMedium
-                                                              .appFontFamily
-                                                              .inActiveAccent
+                                                              .mediumText12
+                                                              .copyWith(
+                                                                  color: AppColors
+                                                                      .kColorNeutralBlack)
                                                               .lineHeight(18.h))
                                                   ],
                                                 ),
@@ -181,9 +191,10 @@ class DenominationListPage extends StatelessWidget {
                                                       child: Text(
                                                         'Free',
                                                         style: AppStyles
-                                                            .text12PxMedium
-                                                            .appFontFamily
-                                                            .whiteColor
+                                                            .mediumText12
+                                                            .copyWith(
+                                                                color: AppColors
+                                                                    .kColorWhite)
                                                             .lineHeight(18.h),
                                                       ).px(10))))
                                       ],
@@ -192,15 +203,13 @@ class DenominationListPage extends StatelessWidget {
                           10.verticalSpace,
                           InkWell(
                             onTap: () => showModalBottomSheet(
-                              backgroundColor: AppColors.whiteColor,
+                              backgroundColor: AppColors.kColorWhite,
                               context: context,
-                              builder: (context) =>
-                                  StatefulBuilder(
+                              builder: (context) => StatefulBuilder(
                                 builder: (BuildContext context,
                                     void Function(void Function()) setState) {
                                   return KeyboardVisibilityBuilder(
                                     builder: (context, bool isKeyboardVisible) {
-                                      print('keyVisi::$isKeyboardVisible');
                                       return FractionallySizedBox(
                                         heightFactor:
                                             isKeyboardVisible ? .8 : .6,
@@ -212,7 +221,7 @@ class DenominationListPage extends StatelessWidget {
                                               20.verticalSpace,
                                               Text(
                                                 'Enter Votes Manually',
-                                                style: AppStyles.text16PxMedium,
+                                                style: AppStyles.mediumText16,
                                               ),
 
                                               20.verticalSpace,
@@ -220,8 +229,8 @@ class DenominationListPage extends StatelessWidget {
                                                 height: 48.h,
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
-                                                    color:
-                                                        AppColors.activeAccent,
+                                                    color: AppColors
+                                                        .kColorSecondary,
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(8),
@@ -229,14 +238,12 @@ class DenominationListPage extends StatelessWidget {
                                                 child: TextFormField(
                                                   onChanged: (value) {},
                                                   cursorColor:
-                                                      AppColors.activeAccent,
+                                                      AppColors.kColorSecondary,
                                                   textInputAction:
                                                       TextInputAction.done,
                                                   keyboardType:
                                                       TextInputType.text,
-                                                  style: AppStyles
-                                                      .text14PxRegular
-                                                      .appFontFamily
+                                                  style: AppStyles.regularText14
                                                       .copyWith(
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -246,9 +253,10 @@ class DenominationListPage extends StatelessWidget {
                                                         const SizedBox.shrink(),
                                                     hintText: 'Number of Votes',
                                                     hintStyle: AppStyles
-                                                        .text12PxRegular
-                                                        .appFontFamily
-                                                        .inActiveAccent,
+                                                        .regularText12
+                                                        .copyWith(
+                                                            color: AppColors
+                                                                .kColorNeutralBlack),
                                                     contentPadding:
                                                         const EdgeInsets.all(
                                                             16),
@@ -311,7 +319,7 @@ class DenominationListPage extends StatelessWidget {
                             ),
                             child: Text(
                               'ENTER VOTES MANUALLY',
-                              style: AppStyles.text10PxSemiBold,
+                              style: AppStyles.semiBoldText12,
                             ),
                           ),
                           40.verticalSpace

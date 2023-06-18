@@ -30,7 +30,7 @@ _$_EventListData _$$_EventListDataFromJson(Map<String, dynamic> json) =>
       endDate: json['endDate'] as String?,
       image: json['image'] as String,
       description: json['description'] as String?,
-      type: json['type'] as String?,
+      type: json['type'] as String,
       setting: json['setting'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       status: json['status'] as String?,

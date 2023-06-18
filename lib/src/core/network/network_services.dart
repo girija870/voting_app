@@ -5,7 +5,8 @@ import 'package:voting_app/src/core/network/api_endpoints.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/group_list/group_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/history/event_history_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/post_vote/post_vote_response_model.dart';
 
@@ -21,6 +22,11 @@ abstract class NetworkServices {
   @GET(ApiEndPoints.fetchEventsList)
   Future<EventListResponseModel> fetchEventList(
     @Header('category') String category,
+  );
+
+  @GET(ApiEndPoints.fetchGroupList)
+  Future<GroupListResponseModel> fetchGroupList(
+    @Header('eventId') String eventId,
   );
 
   @GET(ApiEndPoints.fetchDenominationList)

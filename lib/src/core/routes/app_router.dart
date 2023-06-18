@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/contestant_details_page.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/dinomination_list_page.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/event_details_page.dart';
+import 'package:voting_app/src/event_voting/presentation/pages/event_group_page.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/event_view_page.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/voting_contestant_page.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/voting_history_page.dart';
@@ -30,6 +31,13 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) =>
               VotingContestantPage(eventListResponseModel: eventData),
+        );
+
+      case RoutePath.groupListPage:
+        final eventData = settings.arguments as EventListData;
+
+        return MaterialPageRoute(
+          builder: (_) => EventGroupPage(eventListData: eventData),
         );
 
       case RoutePath.contestantDetailsPage:

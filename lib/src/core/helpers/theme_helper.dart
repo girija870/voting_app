@@ -4,8 +4,8 @@ import 'package:voting_app/src/core/themes/themes.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     useMaterial3: true,
-    primaryColor: AppColors.activeNormal,
-    scaffoldBackgroundColor: AppColors.whiteColor,
+    primaryColor: AppColors.kColorPrimary,
+    scaffoldBackgroundColor: AppColors.kColorWhite,
     // appBarTheme: AppBarTheme(
     //   surfaceTintColor: AppColors.activeAccent,
     //   // color: AppColors.whiteColor,

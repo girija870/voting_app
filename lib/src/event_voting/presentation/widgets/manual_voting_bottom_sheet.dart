@@ -19,7 +19,6 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
       builder: (context, bool isKeyboardVisible) {
-        print('keyVisi::$isKeyboardVisible');
         return FractionallySizedBox(
           heightFactor: isKeyboardVisible ? .6 : .4,
           child: SingleChildScrollView(
@@ -29,7 +28,7 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                 20.verticalSpace,
                 Text(
                   'Enter Votes Manually',
-                  style: AppStyles.text16PxMedium,
+                  style: AppStyles.mediumText16,
                 ),
 
                 20.verticalSpace,
@@ -37,23 +36,23 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                   height: 48.h,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: AppColors.activeAccent,
+                      color: AppColors.kColorSecondary,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextFormField(
                     onChanged: (value) {},
-                    cursorColor: AppColors.activeAccent,
+                    cursorColor: AppColors.kColorSecondary,
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.text,
-                    style: AppStyles.text14PxRegular.appFontFamily.copyWith(
+                    style: AppStyles.regularText14.copyWith(
                       overflow: TextOverflow.ellipsis,
                     ),
                     decoration: InputDecoration(
                       counter: const SizedBox.shrink(),
                       hintText: 'Number of Votes',
                       hintStyle: AppStyles
-                          .text12PxRegular.appFontFamily.inActiveAccent,
+                          .regularText12.copyWith(color: AppColors.kColorNeutralBlack),
                       contentPadding: const EdgeInsets.all(16),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,

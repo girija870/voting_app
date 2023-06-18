@@ -27,7 +27,7 @@ class EventListData with _$EventListData {
     @JsonKey(name: 'endDate') String? endDate,
     required String image,
     String? description,
-    String? type,
+    required String type,
     String? setting,
     double? price,
     String? status,

@@ -66,6 +66,30 @@ class _NetworkServices implements NetworkServices {
   }
 
   @override
+  Future<GroupListResponseModel> fetchGroupList(String eventId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'eventId': eventId};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GroupListResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/event/group/list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GroupListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<DenominationResponseModel> fetchDenominationList(
       String eventId) async {
     const _extra = <String, dynamic>{};

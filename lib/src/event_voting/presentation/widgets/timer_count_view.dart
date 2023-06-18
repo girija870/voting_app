@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
+import 'package:voting_app/src/core/themes/app_colors.dart';
 import 'package:voting_app/src/core/themes/app_styles.dart';
 
 class TimerCountView extends StatelessWidget {
@@ -19,13 +20,15 @@ class TimerCountView extends StatelessWidget {
       children: [
         Text(
           value,
-          style: AppStyles.text14PxSemiBold.activeDark.appFontFamily
+          style: AppStyles.semiBoldText14
+              .copyWith(color: AppColors.kColorDark)
               .lineHeight(0.h),
           textAlign: TextAlign.center,
         ),
         Text(
           title,
-          style: AppStyles.text12PxRegular.activeDark.appFontFamily
+          style: AppStyles.regularText12
+              .copyWith(color: AppColors.kColorDark)
               .lineHeight(0.h),
           textAlign: TextAlign.center,
         ),

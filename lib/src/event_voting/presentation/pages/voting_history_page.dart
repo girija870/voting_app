@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
@@ -22,7 +21,7 @@ class _VotingHistoryPageState extends State<VotingHistoryPage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        return ref.watch(eventVoteHistoryNotifierProvider('string')).maybeWhen(
+        return ref.watch(eventVoteHistoryNotifierProvider('9849423081')).maybeWhen(
             orElse: () => const SizedBox(),
             loading: () => const Scaffold(body: Center(child: Loader())),
             success: (data) {
@@ -52,24 +51,24 @@ class _VotingHistoryPageState extends State<VotingHistoryPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(historyData.event!.participant!,
-                                        style: AppStyles.text16PxBold
-                                            .appFontFamily.inActiveAccent
+                                        style: AppStyles.boldText16
+                                            .copyWith(color: AppColors.kColorNeutralBlack)
                                             .lineHeight(18.h)),
                                     Text(historyData.event!.name,
-                                        style: AppStyles.text14PxMedium
-                                            .appFontFamily.inActiveAccent
+                                        style: AppStyles.mediumText14
+                                            .copyWith(color: AppColors.kColorNeutralBlack)
                                             .lineHeight(18.h)),
                                     Text(historyData.voteDate!,
-                                        style: AppStyles.text14PxMedium
-                                            .appFontFamily.inActiveAccent
+                                        style: AppStyles.mediumText14
+                                            .copyWith(color: AppColors.kColorNeutralBlack)
                                             .lineHeight(18.h)),
                                   ],
                                 ),
                                 const Spacer(),
                                 Text(
                                     '${historyData.count! > 1 ? '${historyData.count} Votes' : '${historyData.count} Votes'} ',
-                                    style: AppStyles.text14PxRegular
-                                        .appFontFamily.inActiveAccent
+                                    style: AppStyles.regularText14
+                                        .copyWith(color: AppColors.kColorNeutralBlack)
                                         .lineHeight(18.h)),
                               ],
                             ).px(20.w).pOnly(bottom: 20.h);

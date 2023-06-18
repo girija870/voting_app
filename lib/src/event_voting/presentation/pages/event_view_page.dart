@@ -74,7 +74,7 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                                           textDirection: TextDirection.rtl,
                                           child: ActionChip(
                                             side: const BorderSide(
-                                                color: AppColors.activeAccent),
+                                                color: AppColors.kColorPrimary),
                                             onPressed: () => setState(() {
                                               selectedTabs = index;
                                               selectedTabsValue =
@@ -91,7 +91,7 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                                                 .replaceAll('_', ' ')),
                                             backgroundColor:
                                                 selectedTabs == index
-                                                    ? AppColors.activeAccent
+                                                    ? AppColors.kColorPrimary
                                                         .withOpacity(.4)
                                                     : Colors.transparent,
                                           ).px(6.w),

@@ -39,14 +39,14 @@ extension ContextX on BuildContext {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(title,
-                      style: AppStyles.text14PxMedium.appFontFamily.whiteColor
+                      style: AppStyles.mediumText14
+                          .copyWith(color: AppColors.kColorWhite)
                           .lineHeight(16.59)),
                   const SizedBox(height: 6),
                   Text(
                     message,
-                    style: AppStyles.text14PxRegular.appFontFamily
-                        .lineHeight(16.59)
-                        .copyWith(color: AppColors.whiteColor.withOpacity(0.7)),
+                    style: AppStyles.regularText14.lineHeight(16.59).copyWith(
+                        color: AppColors.kColorWhite.withOpacity(0.7)),
                     // overflow: TextOverflow.ellipsis,
                   ),
                 ],

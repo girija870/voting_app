@@ -179,7 +179,7 @@ mixin _$EventListData {
   String? get endDate => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
   String? get setting => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
@@ -205,7 +205,7 @@ abstract class $EventListDataCopyWith<$Res> {
       @JsonKey(name: 'endDate') String? endDate,
       String image,
       String? description,
-      String? type,
+      String type,
       String? setting,
       double? price,
       String? status,
@@ -232,7 +232,7 @@ class _$EventListDataCopyWithImpl<$Res, $Val extends EventListData>
     Object? endDate = freezed,
     Object? image = null,
     Object? description = freezed,
-    Object? type = freezed,
+    Object? type = null,
     Object? setting = freezed,
     Object? price = freezed,
     Object? status = freezed,
@@ -267,10 +267,10 @@ class _$EventListDataCopyWithImpl<$Res, $Val extends EventListData>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: freezed == type
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       setting: freezed == setting
           ? _value.setting
           : setting // ignore: cast_nullable_to_non_nullable
@@ -307,7 +307,7 @@ abstract class _$$_EventListDataCopyWith<$Res>
       @JsonKey(name: 'endDate') String? endDate,
       String image,
       String? description,
-      String? type,
+      String type,
       String? setting,
       double? price,
       String? status,
@@ -332,7 +332,7 @@ class __$$_EventListDataCopyWithImpl<$Res>
     Object? endDate = freezed,
     Object? image = null,
     Object? description = freezed,
-    Object? type = freezed,
+    Object? type = null,
     Object? setting = freezed,
     Object? price = freezed,
     Object? status = freezed,
@@ -367,10 +367,10 @@ class __$$_EventListDataCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: freezed == type
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       setting: freezed == setting
           ? _value.setting
           : setting // ignore: cast_nullable_to_non_nullable
@@ -403,7 +403,7 @@ class _$_EventListData implements _EventListData {
       @JsonKey(name: 'endDate') this.endDate,
       required this.image,
       this.description,
-      this.type,
+      required this.type,
       this.setting,
       this.price,
       this.status,
@@ -430,7 +430,7 @@ class _$_EventListData implements _EventListData {
   @override
   final String? description;
   @override
-  final String? type;
+  final String type;
   @override
   final String? setting;
   @override
@@ -514,7 +514,7 @@ abstract class _EventListData implements EventListData {
       @JsonKey(name: 'endDate') final String? endDate,
       required final String image,
       final String? description,
-      final String? type,
+      required final String type,
       final String? setting,
       final double? price,
       final String? status,
@@ -540,7 +540,7 @@ abstract class _EventListData implements EventListData {
   @override
   String? get description;
   @override
-  String? get type;
+  String get type;
   @override
   String? get setting;
   @override

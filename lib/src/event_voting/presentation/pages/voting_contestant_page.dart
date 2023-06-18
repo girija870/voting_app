@@ -7,7 +7,7 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/contestant_details_page.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/dinomination_list_page.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
@@ -47,20 +47,20 @@ class VotingContestantPage extends StatelessWidget {
               children: [
                 10.verticalSpace,
                 Text('Vote you favorite contestant',
-                        style: AppStyles
-                            .text12PxRegular.appFontFamily.inActiveAccent
+                        style: AppStyles.regularText12
+                            .copyWith(color: AppColors.kColorNeutralBlack)
                             .lineHeight(18.h))
                     .pOnly(left: 20.w),
                 10.verticalSpace,
                 Center(
                   child: Container(
-                    color: AppColors.activeAccent.withOpacity(.1),
+                    color: AppColors.kColorSecondary.withOpacity(.1),
                     padding: EdgeInsets.symmetric(vertical: 8.h),
                     child: Column(
                       children: [
                         Text('Voting Closes In:',
-                            style: AppStyles
-                                .text12PxRegular.appFontFamily.inActiveAccent
+                            style: AppStyles.regularText12
+                                .copyWith(color: AppColors.kColorNeutralBlack)
                                 .lineHeight(18.h)),
                         6.verticalSpace,
                         CountdownTimer(
@@ -69,8 +69,8 @@ class VotingContestantPage extends StatelessWidget {
                             if (time == null) {
                               return Text(
                                 'Voting Closed',
-                                style: AppStyles.text12PxRegular
-                                    .copyWith(color: AppColors.inActiveAccent),
+                                style: AppStyles.regularText12.copyWith(
+                                    color: AppColors.kColorNeutralBlack),
                               );
                             }
                             return Row(
@@ -88,8 +88,8 @@ class VotingContestantPage extends StatelessWidget {
                               ],
                             );
                           },
-                          textStyle: AppStyles.text14PxSemiBold.copyWith(
-                              color: AppColors.activeAccent,
+                          textStyle: AppStyles.semiBoldText14.copyWith(
+                              color: AppColors.kColorSecondary,
                               fontWeight: FontWeight.w600),
                         ),
                       ],
@@ -117,8 +117,10 @@ class VotingContestantPage extends StatelessWidget {
                         10.verticalSpace,
                         Text(
                           eventListResponseModel.participants[index].id,
-                          style: AppStyles.text12PxRegular
-                              .copyWith(color: AppColors.inActiveAccent),
+                          style: AppStyles.regularText12
+                              .copyWith(color: AppColors.kColorNeutralBlack),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
                         ),
                         4.verticalSpace,
                         InkWell(
@@ -138,8 +140,8 @@ class VotingContestantPage extends StatelessWidget {
                         4.verticalSpace,
                         Text(
                           eventListResponseModel.participants[index].name,
-                          style: AppStyles.text12PxSemiBold
-                              .copyWith(color: AppColors.inActiveAccent),
+                          style: AppStyles.semiBoldText12
+                              .copyWith(color: AppColors.kColorNeutralBlack),
                         ),
                         6.verticalSpace,
                         CustomButton(

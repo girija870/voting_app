@@ -50,7 +50,7 @@ class CustomDialogView extends ConsumerWidget {
     return Builder(builder: (context) {
       return Dialog(
         elevation: 0.w,
-        backgroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.kColorWhite,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(20.r),
@@ -63,7 +63,7 @@ class CustomDialogView extends ConsumerWidget {
             children: [
               Text(
                 message,
-                style: AppStyles.text14PxMedium.appFontFamily.activeAccent
+                style: AppStyles.mediumText14.copyWith(color: AppColors.kColorSecondary)
                     .lineHeight(18.sp),
                 textAlign: TextAlign.center,
               ),
@@ -79,7 +79,7 @@ class CustomDialogView extends ConsumerWidget {
                           width: context.width * .5,
                           title: buttonLabel,
                           titleStyle: AppStyles
-                              .text14PxMedium.appFontFamily.whiteColor
+                              .mediumText14.copyWith(color: AppColors.kColorWhite)
                               .lineHeight(16.59),
                           onPressed: () {
                             ref

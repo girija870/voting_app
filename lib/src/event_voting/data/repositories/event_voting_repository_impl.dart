@@ -7,7 +7,8 @@ import 'package:voting_app/src/event_voting/data/models/request/contestant_votin
 import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/group_list/group_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/history/event_history_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/post_vote/post_vote_response_model.dart';
 import 'package:voting_app/src/event_voting/data/source/event_voting_remote_source.dart';
@@ -98,7 +99,7 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   }
 
   @override
-  Future<Either<AppError, ApiResponse<List<EventHistoryResponseModel>>>> fetchGroupList({required String eventId}) async{
+  Future<Either<AppError, GroupListResponseModel>> fetchGroupList({required String eventId}) async{
     if (await _internetInfo.isConnected) {
       try {
         final response = await _remoteSource.fetchGroupList(eventId: eventId);

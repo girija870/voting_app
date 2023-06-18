@@ -4,6 +4,7 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
+import 'package:voting_app/src/core/enums/event_type.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
@@ -60,12 +61,12 @@ class EventListPage extends StatelessWidget {
                         ),
                         5.verticalSpace,
                         Text(eventData.name,
-                            style: AppStyles
-                                .text14PxSemiBold.appFontFamily.activeNormal
+                            style: AppStyles.semiBoldText14
+                                .copyWith(color: AppColors.kColorPrimary)
                                 .lineHeight(21.h)),
                         Text(eventData.description ?? '',
-                            style: AppStyles
-                                .text12PxRegular.appFontFamily.inActiveAccent
+                            style: AppStyles.regularText12
+                                .copyWith(color: AppColors.kColorNeutralBlack)
                                 .lineHeight(18.h)),
                         6.verticalSpace,
                         CountdownTimer(
@@ -74,16 +75,17 @@ class EventListPage extends StatelessWidget {
                             if (time == null) {
                               return Text(
                                 'Voting Closed',
-                                style: AppStyles.text12PxBold
-                                    .copyWith(color: AppColors.colorsRed),
+                                style: AppStyles.boldText12
+                                    .copyWith(color: AppColors.kColorRed),
                               );
                             }
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Voting Closes In:',
-                                    style: AppStyles.text12PxRegular
-                                        .appFontFamily.inActiveAccent
+                                    style: AppStyles.regularText12
+                                        .copyWith(
+                                            color: AppColors.kColorPrimary)
                                         .lineHeight(18.h)),
                                 6.verticalSpace,
                                 Row(
@@ -105,19 +107,24 @@ class EventListPage extends StatelessWidget {
                                     ),
                                     CustomButton(
                                       title: 'VOTE NOW',
-                                      onPressed: () => Navigator.of(context)
-                                          .pushNamed(
-                                              RoutePath
-                                                  .votingContestantListPage,
-                                              arguments: eventData),
+                                      onPressed: () {
+                                        (EventType.DIRECT.name.toLowerCase() ==
+                                                eventData.type.toLowerCase())
+                                            ? Navigator.of(context).pushNamed(
+                                                RoutePath
+                                                    .votingContestantListPage,
+                                                arguments: eventData)
+                                            : Navigator.of(context).pushNamed(
+                                                RoutePath.groupListPage,arguments: eventData);
+                                      },
                                     )
                                   ],
                                 ),
                               ],
                             );
                           },
-                          textStyle: AppStyles.text14PxSemiBold.copyWith(
-                              color: AppColors.activeAccent,
+                          textStyle: AppStyles.semiBoldText14.copyWith(
+                              color: AppColors.kColorPrimary,
                               fontWeight: FontWeight.w600),
                         )
                       ],
