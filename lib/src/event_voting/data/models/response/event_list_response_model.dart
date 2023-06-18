@@ -8,6 +8,7 @@ part 'event_list_response_model.g.dart';
 class EventListResponseModel with _$EventListResponseModel {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory EventListResponseModel({
+
     @Default([]) List<EventListData> data,
   }) = _EventListResponseModel;
 

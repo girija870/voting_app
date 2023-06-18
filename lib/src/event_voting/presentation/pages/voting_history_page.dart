@@ -35,11 +35,11 @@ class _VotingHistoryPageState extends State<VotingHistoryPage> {
                       title: Text('Voting History'),
                     ),
                     20.verticalSpace.toSliverBox,
-                    (data.isNotEmpty)
+                    (data.data.isNotEmpty)
                         ? SliverList(
                             delegate:
                                 SliverChildBuilderDelegate((context, index) {
-                            final historyData = data[index];
+                            final historyData = data.data[index];
 
                             return Row(
                               children: [
@@ -73,7 +73,7 @@ class _VotingHistoryPageState extends State<VotingHistoryPage> {
                                         .lineHeight(18.h)),
                               ],
                             ).px(20.w).pOnly(bottom: 20.h);
-                          }, childCount: data.length))
+                          }, childCount: data.data.length))
                         : const Center(
                             child: Text('No Voting History yet'),
                           ).toSliverBox,

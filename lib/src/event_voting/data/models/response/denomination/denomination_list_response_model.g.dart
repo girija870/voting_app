@@ -6,6 +6,22 @@ part of 'denomination_list_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$_DenominationResponseModel _$$_DenominationResponseModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_DenominationResponseModel(
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => DenominationListResponseModel.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$_DenominationResponseModelToJson(
+        _$_DenominationResponseModel instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+    };
+
 _$_DenominationListResponseModel _$$_DenominationListResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_DenominationListResponseModel(

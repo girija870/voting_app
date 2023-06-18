@@ -8,12 +8,12 @@ import 'package:voting_app/src/event_voting/domain/repositories/event_voting_rep
 
 @lazySingleton
 class FetchVoteHistoryUseCase
-    extends BaseUseCase<String, ApiResponse<List<EventHistoryResponseModel>>> {
+    extends BaseUseCase<String, EventHistoryResponseModel> {
   FetchVoteHistoryUseCase(this._repository);
 
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, ApiResponse<List<EventHistoryResponseModel>>>>
-      execute(String param) => _repository.fetchVoteHistory(userId: param);
+  Future<Either<AppError, EventHistoryResponseModel>> execute(String param) =>
+      _repository.fetchVoteHistory(userId: param);
 }

@@ -7,14 +7,13 @@ import 'package:voting_app/src/event_voting/data/models/response/denomination/de
 import 'package:voting_app/src/event_voting/domain/repositories/event_voting_repository.dart';
 
 @lazySingleton
-class FetchDenominationListUseCase extends BaseUseCase<String,
-    ApiResponse<List<DenominationListResponseModel>>> {
+class FetchDenominationListUseCase
+    extends BaseUseCase<String, DenominationResponseModel> {
   FetchDenominationListUseCase(this._repository);
 
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, ApiResponse<List<DenominationListResponseModel>>>>
-      execute(String param) =>
-          _repository.fetchDenominationList(eventId: param);
+  Future<Either<AppError, DenominationResponseModel>> execute(String param) =>
+      _repository.fetchDenominationList(eventId: param);
 }

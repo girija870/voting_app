@@ -69,7 +69,7 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                             scrollDirection: Axis.horizontal,
                             child: Row(
                                 children: List.generate(
-                                    data.length,
+                                    data.data.length,
                                     (index) => Directionality(
                                           textDirection: TextDirection.rtl,
                                           child: ActionChip(
@@ -77,7 +77,8 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                                                 color: AppColors.activeAccent),
                                             onPressed: () => setState(() {
                                               selectedTabs = index;
-                                              selectedTabsValue = data[index];
+                                              selectedTabsValue =
+                                                  data.data[index];
                                               ref
                                                   .read(
                                                       eventListNotifierProvider
@@ -86,7 +87,7 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                                                       eventType:
                                                           selectedTabsValue);
                                             }),
-                                            label: Text(data[index]
+                                            label: Text(data.data[index]
                                                 .replaceAll('_', ' ')),
                                             backgroundColor:
                                                 selectedTabs == index

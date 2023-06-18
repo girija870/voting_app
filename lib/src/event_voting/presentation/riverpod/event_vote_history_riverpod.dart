@@ -6,7 +6,7 @@ import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_list_us
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_vote_history_use_case.dart';
 
 class EventVoteHistoryNotifier
-    extends StateNotifier<AppState<List<EventHistoryResponseModel>>> {
+    extends StateNotifier<AppState<EventHistoryResponseModel>> {
   EventVoteHistoryNotifier(this._useCase) : super(const AppState.initial());
 
   final FetchVoteHistoryUseCase _useCase;
@@ -17,13 +17,13 @@ class EventVoteHistoryNotifier
         (failure) => failure.when(
             serverError: (errMessage) => AppState.error(message: errMessage),
             noInternet: AppState.noInternet),
-        (data) => AppState.success(data: data.data)));
+        (data) => AppState.success(data: data)));
   }
 }
 
 final eventVoteHistoryNotifierProvider = StateNotifierProvider.family<
     EventVoteHistoryNotifier,
-    AppState<List<EventHistoryResponseModel>>,
+    AppState<EventHistoryResponseModel>,
     String>((ref, userId) {
   return EventVoteHistoryNotifier(getIt<FetchVoteHistoryUseCase>())
     ..fetchEventVoteHistory(userId: userId);

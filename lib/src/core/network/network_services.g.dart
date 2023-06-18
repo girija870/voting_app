@@ -19,25 +19,25 @@ class _NetworkServices implements NetworkServices {
   String? baseUrl;
 
   @override
-  Future<EventListResponseModel> fetchEventCategory() async {
+  Future<CategoryResponseModel> fetchEventCategory() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<EventListResponseModel>(Options(
+        _setStreamType<CategoryResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'event/category',
+              'api/category',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EventListResponseModel.fromJson(_result.data!);
+    final value = CategoryResponseModel.fromJson(_result.data!);
     return value;
   }
 
@@ -56,7 +56,7 @@ class _NetworkServices implements NetworkServices {
     )
             .compose(
               _dio.options,
-              'event/list',
+              'api/event/list',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -66,60 +66,61 @@ class _NetworkServices implements NetworkServices {
   }
 
   @override
-  Future<EventListResponseModel> fetchDenominationList(String eventId) async {
+  Future<DenominationResponseModel> fetchDenominationList(
+      String eventId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'eventId': eventId};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<EventListResponseModel>(Options(
+        _setStreamType<DenominationResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'denomination/list',
+              'api/denomination/list',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EventListResponseModel.fromJson(_result.data!);
+    final value = DenominationResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<EventListResponseModel> fetchEventHistory(String userId) async {
+  Future<EventHistoryResponseModel> fetchEventHistory(String userId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'userId': userId};
+    final _headers = <String, dynamic>{r'username': userId};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<EventListResponseModel>(Options(
+        _setStreamType<EventHistoryResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'vote/history',
+              'api/vote/history',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EventListResponseModel.fromJson(_result.data!);
+    final value = EventHistoryResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<EventListResponseModel> postVote(
+  Future<PostVoteResponseModel> postVote(
     String userId,
     String username,
     String denoId,
     String participantId,
-    String count,
+    int count,
     String type,
     String refTransactionId,
   ) async {
@@ -136,19 +137,19 @@ class _NetworkServices implements NetworkServices {
       'refTransactionId': refTransactionId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<EventListResponseModel>(Options(
+        _setStreamType<PostVoteResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'event/list',
+              'api/vote/participant',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EventListResponseModel.fromJson(_result.data!);
+    final value = PostVoteResponseModel.fromJson(_result.data!);
     return value;
   }
 
