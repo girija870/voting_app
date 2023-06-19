@@ -6,7 +6,6 @@ import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/dinomination_list_page.dart';
 import 'package:voting_app/src/widgets/circle_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
@@ -24,10 +23,9 @@ class ContestantDetailsPage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: false,
             automaticallyImplyLeading: true,
-            actions: [const Icon(Icons.share).pOnly(right: 20.w)],
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -71,7 +69,8 @@ class ContestantDetailsPage extends StatelessWidget {
                 60.verticalSpace,
                 Text(
                   eventListResponseModel.participants[index].name,
-                  style: AppStyles.boldText14.copyWith(color: AppColors.kColorPrimary)
+                  style: AppStyles.boldText14
+                      .copyWith(color: AppColors.kColorPrimary)
                       .lineHeight(21.h),
                   textAlign: TextAlign.center,
                 ),

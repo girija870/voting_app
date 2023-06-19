@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/gen/assets.gen.dart';
-import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/denomination_list_riverpod.dart';
+import 'package:voting_app/src/event_voting/presentation/widgets/manual_voting_bottom_sheet.dart';
 
 import 'package:voting_app/src/widgets/circle_view.dart';
-import 'package:voting_app/src/widgets/custom_button.dart';
 
 import 'package:voting_app/src/widgets/custom_dialog_view.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
@@ -98,8 +95,9 @@ class DenominationListPage extends StatelessWidget {
                                                       .participants[
                                                           participantIndex]
                                                       .id,
-                                              denominationListResponseModel:
-                                                  data[index],
+                                              count: data[index].count,
+                                              type: data[index].type,
+                                              denoId: data[index].id,
                                             )),
                                     child: Stack(
                                       clipBehavior: Clip.antiAlias,
@@ -205,108 +203,10 @@ class DenominationListPage extends StatelessWidget {
                             onTap: () => showModalBottomSheet(
                               backgroundColor: AppColors.kColorWhite,
                               context: context,
-                              builder: (context) => StatefulBuilder(
-                                builder: (BuildContext context,
-                                    void Function(void Function()) setState) {
-                                  return KeyboardVisibilityBuilder(
-                                    builder: (context, bool isKeyboardVisible) {
-                                      return FractionallySizedBox(
-                                        heightFactor:
-                                            isKeyboardVisible ? .8 : .6,
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              20.verticalSpace,
-                                              Text(
-                                                'Enter Votes Manually',
-                                                style: AppStyles.mediumText16,
-                                              ),
-
-                                              20.verticalSpace,
-                                              Container(
-                                                height: 48.h,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: AppColors
-                                                        .kColorSecondary,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                                child: TextFormField(
-                                                  onChanged: (value) {},
-                                                  cursorColor:
-                                                      AppColors.kColorSecondary,
-                                                  textInputAction:
-                                                      TextInputAction.done,
-                                                  keyboardType:
-                                                      TextInputType.text,
-                                                  style: AppStyles.regularText14
-                                                      .copyWith(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                  decoration: InputDecoration(
-                                                    counter:
-                                                        const SizedBox.shrink(),
-                                                    hintText: 'Number of Votes',
-                                                    hintStyle: AppStyles
-                                                        .regularText12
-                                                        .copyWith(
-                                                            color: AppColors
-                                                                .kColorNeutralBlack),
-                                                    contentPadding:
-                                                        const EdgeInsets.all(
-                                                            16),
-                                                    border: OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6.r),
-                                                      gapPadding: 0,
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6.r),
-                                                      gapPadding: 0,
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6.r),
-                                                      gapPadding: 0,
-                                                    ),
-                                                    isDense: true,
-                                                  ),
-                                                ),
-                                              ),
-                                              // if (errorText != null && errorText.isNotEmpty)
-                                              //   Text(
-                                              //     errorText,
-                                              //     style: AppStyles.text12PxRegular.appFontFamily.redColor,
-                                              //     textAlign: TextAlign.left,
-                                              //   ).py(10)
-                                              30.verticalSpace,
-                                              const CustomButton(
-                                                title: 'VOTE NOW',
-                                              )
-                                            ],
-                                          ).px(20.w),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
+                              builder: (context) => ManualVotingBottomSheet(
+                                eventDetailsId: eventListResponseModel
+                                    .participants[participantIndex].id,
+                                price: eventListResponseModel.price,
                               ),
                               isScrollControlled: true,
                               useRootNavigator: true,

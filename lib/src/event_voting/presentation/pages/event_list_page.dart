@@ -9,8 +9,6 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/event_details_page.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/voting_contestant_page.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/event_list_riverpod.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
@@ -113,9 +111,13 @@ class EventListPage extends StatelessWidget {
                                             ? Navigator.of(context).pushNamed(
                                                 RoutePath
                                                     .votingContestantListPage,
-                                                arguments: eventData)
+                                                arguments: [
+                                                    eventData,
+                                                    eventData.participants
+                                                  ])
                                             : Navigator.of(context).pushNamed(
-                                                RoutePath.groupListPage,arguments: eventData);
+                                                RoutePath.groupListPage,
+                                                arguments: eventData);
                                       },
                                     )
                                   ],

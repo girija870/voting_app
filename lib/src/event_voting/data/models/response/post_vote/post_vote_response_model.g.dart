@@ -11,6 +11,7 @@ _$_PostVoteResponseModel _$$_PostVoteResponseModelFromJson(
     _$_PostVoteResponseModel(
       success: json['success'] as bool,
       message: json['message'] as String,
+      data: json['data'] as String?,
     );
 
 Map<String, dynamic> _$$_PostVoteResponseModelToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$_PostVoteResponseModelToJson(
     <String, dynamic>{
       'success': instance.success,
       'message': instance.message,
+      'data': instance.data,
     };

@@ -59,6 +59,7 @@ Map<String, dynamic> _$$_EventListDataToJson(_$_EventListData instance) =>
 _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>
     _$_Participants(
       id: json['id'] as String,
+      contestantNo: json['contestantNo'] as int,
       name: json['name'] as String,
       image: json['image'] as String?,
       judge: json['judge'] == null
@@ -69,6 +70,7 @@ _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ParticipantsToJson(_$_Participants instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'contestantNo': instance.contestantNo,
       'name': instance.name,
       'image': instance.image,
       'judge': instance.judge?.toJson(),

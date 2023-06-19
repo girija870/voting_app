@@ -562,6 +562,8 @@ Participants _$ParticipantsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Participants {
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contestantNo')
+  int get contestantNo => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   Judge? get judge => throw _privateConstructorUsedError;
@@ -578,7 +580,12 @@ abstract class $ParticipantsCopyWith<$Res> {
           Participants value, $Res Function(Participants) then) =
       _$ParticipantsCopyWithImpl<$Res, Participants>;
   @useResult
-  $Res call({String id, String name, String? image, Judge? judge});
+  $Res call(
+      {String id,
+      @JsonKey(name: 'contestantNo') int contestantNo,
+      String name,
+      String? image,
+      Judge? judge});
 
   $JudgeCopyWith<$Res>? get judge;
 }
@@ -597,6 +604,7 @@ class _$ParticipantsCopyWithImpl<$Res, $Val extends Participants>
   @override
   $Res call({
     Object? id = null,
+    Object? contestantNo = null,
     Object? name = null,
     Object? image = freezed,
     Object? judge = freezed,
@@ -606,6 +614,10 @@ class _$ParticipantsCopyWithImpl<$Res, $Val extends Participants>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      contestantNo: null == contestantNo
+          ? _value.contestantNo
+          : contestantNo // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -642,7 +654,12 @@ abstract class _$$_ParticipantsCopyWith<$Res>
       __$$_ParticipantsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String? image, Judge? judge});
+  $Res call(
+      {String id,
+      @JsonKey(name: 'contestantNo') int contestantNo,
+      String name,
+      String? image,
+      Judge? judge});
 
   @override
   $JudgeCopyWith<$Res>? get judge;
@@ -660,6 +677,7 @@ class __$$_ParticipantsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? contestantNo = null,
     Object? name = null,
     Object? image = freezed,
     Object? judge = freezed,
@@ -669,6 +687,10 @@ class __$$_ParticipantsCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      contestantNo: null == contestantNo
+          ? _value.contestantNo
+          : contestantNo // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -690,13 +712,20 @@ class __$$_ParticipantsCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class _$_Participants implements _Participants {
   const _$_Participants(
-      {required this.id, required this.name, this.image, this.judge});
+      {required this.id,
+      @JsonKey(name: 'contestantNo') required this.contestantNo,
+      required this.name,
+      this.image,
+      this.judge});
 
   factory _$_Participants.fromJson(Map<String, dynamic> json) =>
       _$$_ParticipantsFromJson(json);
 
   @override
   final String id;
+  @override
+  @JsonKey(name: 'contestantNo')
+  final int contestantNo;
   @override
   final String name;
   @override
@@ -706,7 +735,7 @@ class _$_Participants implements _Participants {
 
   @override
   String toString() {
-    return 'Participants(id: $id, name: $name, image: $image, judge: $judge)';
+    return 'Participants(id: $id, contestantNo: $contestantNo, name: $name, image: $image, judge: $judge)';
   }
 
   @override
@@ -715,6 +744,8 @@ class _$_Participants implements _Participants {
         (other.runtimeType == runtimeType &&
             other is _$_Participants &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.contestantNo, contestantNo) ||
+                other.contestantNo == contestantNo) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.judge, judge) || other.judge == judge));
@@ -722,7 +753,8 @@ class _$_Participants implements _Participants {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, image, judge);
+  int get hashCode =>
+      Object.hash(runtimeType, id, contestantNo, name, image, judge);
 
   @JsonKey(ignore: true)
   @override
@@ -741,6 +773,7 @@ class _$_Participants implements _Participants {
 abstract class _Participants implements Participants {
   const factory _Participants(
       {required final String id,
+      @JsonKey(name: 'contestantNo') required final int contestantNo,
       required final String name,
       final String? image,
       final Judge? judge}) = _$_Participants;
@@ -750,6 +783,9 @@ abstract class _Participants implements Participants {
 
   @override
   String get id;
+  @override
+  @JsonKey(name: 'contestantNo')
+  int get contestantNo;
   @override
   String get name;
   @override

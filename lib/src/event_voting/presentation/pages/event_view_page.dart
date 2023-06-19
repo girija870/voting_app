@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
-import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/extensions/num_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/app_colors.dart';
 
 import 'package:voting_app/src/event_voting/presentation/pages/event_list_page.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/voting_history_page.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/event_category_riverpod.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/event_list_riverpod.dart';
 
@@ -73,8 +71,13 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                                     (index) => Directionality(
                                           textDirection: TextDirection.rtl,
                                           child: ActionChip(
-                                            side: const BorderSide(
-                                                color: AppColors.kColorPrimary),
+                                            side: BorderSide(
+                                                color: selectedTabs == index
+                                                    ? AppColors.kColorPrimary
+                                                        .withOpacity(.3)
+                                                    : AppColors
+                                                        .kColorNeutralBlack
+                                                        .withOpacity(.2)),
                                             onPressed: () => setState(() {
                                               selectedTabs = index;
                                               selectedTabsValue =
@@ -89,11 +92,11 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
                                             }),
                                             label: Text(data.data[index]
                                                 .replaceAll('_', ' ')),
-                                            backgroundColor:
-                                                selectedTabs == index
-                                                    ? AppColors.kColorPrimary
-                                                        .withOpacity(.4)
-                                                    : Colors.transparent,
+                                            backgroundColor: selectedTabs ==
+                                                    index
+                                                ? AppColors.kColorNeutralDark
+                                                    .withOpacity(.4)
+                                                : Colors.transparent,
                                           ).px(6.w),
                                         ))),
                           );

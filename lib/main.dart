@@ -4,7 +4,6 @@ import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/helpers/theme_helper.dart';
 import 'package:voting_app/src/core/routes/app_router.dart';
-import 'src/event_voting/presentation/pages/event_view_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {

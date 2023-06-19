@@ -2,9 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/state/app_state.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_category_use_case.dart';
-import 'package:voting_app/src/event_voting/domain/use_cases/fetch_event_list_use_case.dart';
 
 class EventCategoryNotifier
     extends StateNotifier<AppState<CategoryResponseModel>> {

@@ -26,10 +26,9 @@ class EventDetailsPage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: false,
             automaticallyImplyLeading: true,
-            actions: [const Icon(Icons.share).pOnly(right: 20.w)],
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -108,7 +107,10 @@ class EventDetailsPage extends StatelessWidget {
                             eventListResponseModel.type.toLowerCase())
                         ? Navigator.of(context).pushNamed(
                             RoutePath.votingContestantListPage,
-                            arguments: eventListResponseModel)
+                            arguments: [
+                                eventListResponseModel,
+                                eventListResponseModel.participants
+                              ])
                         : Navigator.of(context)
                             .pushNamed(RoutePath.groupListPage)),
               ],

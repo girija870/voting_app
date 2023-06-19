@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:voting_app/src/core/errors/app_error.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
-import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';

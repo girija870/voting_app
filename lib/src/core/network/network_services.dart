@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 import 'package:retrofit/retrofit.dart';
 import 'package:voting_app/src/core/network/api_endpoints.dart';
-import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';

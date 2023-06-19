@@ -3,15 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
-import 'package:voting_app/src/core/di/injection.dart';
 
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
-import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/voting_history_page.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/post_vote_riverpod.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,14 +20,18 @@ class CustomDialogView extends ConsumerWidget {
       required this.onConfirmClicked,
       required this.buttonLabel,
       required this.eventDetailsId,
-      required this.denominationListResponseModel})
+      required this.count,
+      required this.type,
+      this.denoId})
       : super(key: key);
 
   final String message;
   final String buttonLabel;
   final VoidCallback onConfirmClicked;
   final String eventDetailsId;
-  final DenominationListResponseModel denominationListResponseModel;
+  final int count;
+  final String type;
+  final String? denoId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -63,7 +64,8 @@ class CustomDialogView extends ConsumerWidget {
             children: [
               Text(
                 message,
-                style: AppStyles.mediumText14.copyWith(color: AppColors.kColorSecondary)
+                style: AppStyles.mediumText14
+                    .copyWith(color: AppColors.kColorSecondary)
                     .lineHeight(18.sp),
                 textAlign: TextAlign.center,
               ),
@@ -78,8 +80,8 @@ class CustomDialogView extends ConsumerWidget {
                       : CustomButton(
                           width: context.width * .5,
                           title: buttonLabel,
-                          titleStyle: AppStyles
-                              .mediumText14.copyWith(color: AppColors.kColorWhite)
+                          titleStyle: AppStyles.mediumText14
+                              .copyWith(color: AppColors.kColorWhite)
                               .lineHeight(16.59),
                           onPressed: () {
                             ref
@@ -88,13 +90,10 @@ class CustomDialogView extends ConsumerWidget {
                                     param: ContestantVotingParam(
                                         userId: 'String',
                                         participantId: eventDetailsId,
-                                        count:
-                                            denominationListResponseModel.count,
-                                        type:
-                                            denominationListResponseModel.type,
+                                        count: count,
+                                        type: type,
                                         username: '9849423081',
-                                        denoId:
-                                            denominationListResponseModel.id,
+                                        denoId: denoId ?? '',
                                         refTransactionId:
                                             Random().nextInt(40).toString()));
                           },

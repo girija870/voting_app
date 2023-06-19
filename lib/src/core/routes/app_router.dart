@@ -27,10 +27,12 @@ class AppRouter {
         );
 
       case RoutePath.votingContestantListPage:
-        final eventData = settings.arguments as EventListData;
+        List<dynamic> arguments = settings.arguments as List<dynamic>;
         return MaterialPageRoute(
-          builder: (_) =>
-              VotingContestantPage(eventListResponseModel: eventData),
+          builder: (_) => VotingContestantPage(
+            eventListResponseModel: arguments[0],
+            participants: arguments[1],
+          ),
         );
 
       case RoutePath.groupListPage:

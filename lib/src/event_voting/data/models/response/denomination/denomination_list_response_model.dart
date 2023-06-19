@@ -4,7 +4,6 @@ part 'denomination_list_response_model.freezed.dart';
 
 part 'denomination_list_response_model.g.dart';
 
-
 @freezed
 class DenominationResponseModel with _$DenominationResponseModel {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
@@ -15,6 +14,7 @@ class DenominationResponseModel with _$DenominationResponseModel {
   factory DenominationResponseModel.fromJson(Map<String, dynamic> json) =>
       _$DenominationResponseModelFromJson(json);
 }
+
 @freezed
 class DenominationListResponseModel with _$DenominationListResponseModel {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)

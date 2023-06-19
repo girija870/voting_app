@@ -8,18 +8,20 @@ import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/contestant_details_page.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/dinomination_list_page.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
 class VotingContestantPage extends StatelessWidget {
-  const VotingContestantPage({Key? key, required this.eventListResponseModel})
+  const VotingContestantPage(
+      {Key? key,
+      required this.eventListResponseModel,
+      required this.participants})
       : super(key: key);
 
   final EventListData eventListResponseModel;
+  final List<Participants> participants;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,6 @@ class VotingContestantPage extends StatelessWidget {
               pinned: true,
               floating: true,
               automaticallyImplyLeading: true,
-              actions: [const Icon(Icons.share).pOnly(right: 20.w)],
               bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(40),
                   child: Align(
@@ -116,7 +117,7 @@ class VotingContestantPage extends StatelessWidget {
                       children: [
                         10.verticalSpace,
                         Text(
-                          eventListResponseModel.participants[index].id,
+                          participants[index].contestantNo.toString(),
                           style: AppStyles.regularText12
                               .copyWith(color: AppColors.kColorNeutralBlack),
                           overflow: TextOverflow.ellipsis,
@@ -139,7 +140,7 @@ class VotingContestantPage extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         Text(
-                          eventListResponseModel.participants[index].name,
+                          participants[index].name,
                           style: AppStyles.semiBoldText12
                               .copyWith(color: AppColors.kColorNeutralBlack),
                         ),
@@ -153,7 +154,7 @@ class VotingContestantPage extends StatelessWidget {
                       ],
                     )).px(20.h);
               },
-              childCount: eventListResponseModel.participants.length,
+              childCount: participants.length,
             ),
           ),
         ],

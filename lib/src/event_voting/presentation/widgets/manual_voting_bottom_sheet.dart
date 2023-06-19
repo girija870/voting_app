@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
+import 'package:voting_app/src/widgets/custom_dialog_view.dart';
 
 class ManualVotingBottomSheet extends StatefulWidget {
-  const ManualVotingBottomSheet({Key? key}) : super(key: key);
+  const ManualVotingBottomSheet(
+      {super.key, required this.eventDetailsId, required this.price});
+
+  final String eventDetailsId;
+  final double? price;
 
   @override
   State<ManualVotingBottomSheet> createState() =>
@@ -15,12 +19,17 @@ class ManualVotingBottomSheet extends StatefulWidget {
 }
 
 class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  String errorText = '';
+  double totalAmount = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
       builder: (context, bool isKeyboardVisible) {
         return FractionallySizedBox(
-          heightFactor: isKeyboardVisible ? .6 : .4,
+          heightFactor: isKeyboardVisible ? .8 : .4,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +39,6 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                   'Enter Votes Manually',
                   style: AppStyles.mediumText16,
                 ),
-
                 20.verticalSpace,
                 Container(
                   height: 48.h,
@@ -41,18 +49,28 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextFormField(
-                    onChanged: (value) {},
+                    controller: _textEditingController,
+                    onChanged: (value) {
+                      setState(() {
+                        if (int.parse(value) < 1) {
+                          errorText = ' Please enter more then 0';
+                        } else {
+                          errorText = '';
+                        }
+                        totalAmount = double.parse(value) * widget.price!;
+                      });
+                    },
                     cursorColor: AppColors.kColorSecondary,
                     textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: AppStyles.regularText14.copyWith(
                       overflow: TextOverflow.ellipsis,
                     ),
                     decoration: InputDecoration(
                       counter: const SizedBox.shrink(),
                       hintText: 'Number of Votes',
-                      hintStyle: AppStyles
-                          .regularText12.copyWith(color: AppColors.kColorNeutralBlack),
+                      hintStyle: AppStyles.regularText12
+                          .copyWith(color: AppColors.kColorNeutralBlack),
                       contentPadding: const EdgeInsets.all(16),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
@@ -73,15 +91,57 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                     ),
                   ),
                 ),
-                // if (errorText != null && errorText.isNotEmpty)
-                //   Text(
-                //     errorText,
-                //     style: AppStyles.text12PxRegular.appFontFamily.redColor,
-                //     textAlign: TextAlign.left,
-                //   ).py(10)
+                if (errorText.isNotEmpty)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      errorText,
+                      style: AppStyles.regularText12
+                          .copyWith(color: AppColors.kColorRed),
+                    ).py(10),
+                  ),
+                if (totalAmount > 0)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Total Amount',
+                        style: AppStyles.regularText12
+                            .copyWith(color: AppColors.kColorNeutralBlack),
+                        textAlign: TextAlign.right,
+                      ).py(10),
+                      const Spacer(),
+                      Text(
+                        'RS.\t${totalAmount.toString()}',
+                        style: AppStyles.regularText12
+                            .copyWith(color: AppColors.kColorNeutralBlack),
+                        textAlign: TextAlign.right,
+                      ).py(10),
+                    ],
+                  ),
                 30.verticalSpace,
-                const CustomButton(
+                CustomButton(
                   title: 'VOTE NOW',
+                  onPressed: () {
+                    if (_textEditingController.text.isNotEmpty &&
+                        int.parse(_textEditingController.text) > 0) {
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (context) => CustomDialogView(
+                                message: 'Are you sure to proceed',
+                                onConfirmClicked: () {},
+                                buttonLabel: 'Confirm',
+                                eventDetailsId: widget.eventDetailsId,
+                                count: int.parse(_textEditingController.text),
+                                type: 'PAID',
+                              ));
+                    } else {
+                      setState(() {
+                        errorText = 'Please enter votes';
+                      });
+                    }
+                  },
                 )
               ],
             ).px(20.w),

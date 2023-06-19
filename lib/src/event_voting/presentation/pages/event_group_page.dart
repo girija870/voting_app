@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/current_remaining_time.dart';
-import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
-import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/contestant_details_page.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/dinomination_list_page.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/group_list_riverpod.dart';
-import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
@@ -33,7 +27,7 @@ class EventGroupPage extends StatelessWidget {
               .watch(eventGroupNotifierProvider(eventListData.id))
               .maybeWhen(
                   orElse: () => const SizedBox(),
-                  loading: () => const Loader(),
+                  loading: () => const Center(child: Loader()),
                   success: (data) {
                     return CustomScrollView(
                       slivers: [
@@ -65,10 +59,6 @@ class EventGroupPage extends StatelessWidget {
                                     children: [
                                       10.verticalSpace,
                                       InkWell(
-                                        // onTap: () =>
-                                        // Navigator.of(context).pushNamed(
-                                        // RoutePath.contestantDetailsPage,
-                                        // arguments: [index, eventListResponseModel]),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.all(60.circular),
@@ -88,13 +78,18 @@ class EventGroupPage extends StatelessWidget {
                                                     .kColorNeutralBlack),
                                       ),
                                       6.verticalSpace,
-                                      const CustomButton(
-                                        width: 120,
-                                        title: 'SELECT',
-                                        // onPressed: () => Navigator.of(context).pushNamed(
-                                        //     RoutePath.denominationListPage,
-                                        //     arguments: [index, eventListResponseModel])
-                                      )
+                                      CustomButton(
+                                          width: 120,
+                                          title: 'SELECT',
+                                          onPressed: () => Navigator.of(context)
+                                                  .pushNamed(
+                                                      RoutePath
+                                                          .votingContestantListPage,
+                                                      arguments: [
+                                                    eventListData,
+                                                    data.data[index]
+                                                        .participants
+                                                  ]))
                                     ],
                                   )).px(20.h);
                             },

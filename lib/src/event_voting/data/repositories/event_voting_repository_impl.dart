@@ -4,7 +4,6 @@ import 'package:voting_app/src/core/errors/app_error.dart';
 import 'package:voting_app/src/core/errors/app_exception.dart';
 import 'package:voting_app/src/core/helpers/internet_info_helper.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
-import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
@@ -22,8 +21,8 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   EventVotingRepositoryImpl(this._internetInfo, this._remoteSource);
 
   @override
-  Future<Either<AppError, DenominationResponseModel>>
-      fetchDenominationList({required String eventId}) async {
+  Future<Either<AppError, DenominationResponseModel>> fetchDenominationList(
+      {required String eventId}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response =
@@ -38,8 +37,8 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   }
 
   @override
-  Future<Either<AppError, EventHistoryResponseModel>>
-      fetchVoteHistory({required String userId}) async {
+  Future<Either<AppError, EventHistoryResponseModel>> fetchVoteHistory(
+      {required String userId}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response = await _remoteSource.fetchEventHistory(userId: userId);
@@ -53,8 +52,8 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   }
 
   @override
-  Future<Either<AppError, EventListResponseModel>>
-      fetchEventList({required String eventType}) async {
+  Future<Either<AppError, EventListResponseModel>> fetchEventList(
+      {required String eventType}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response =
@@ -69,8 +68,7 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   }
 
   @override
-  Future<Either<AppError, CategoryResponseModel>>
-      fetchEventCategory() async {
+  Future<Either<AppError, CategoryResponseModel>> fetchEventCategory() async {
     if (await _internetInfo.isConnected) {
       try {
         final response = await _remoteSource.fetchEventCategory();
@@ -99,7 +97,8 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
   }
 
   @override
-  Future<Either<AppError, GroupListResponseModel>> fetchGroupList({required String eventId}) async{
+  Future<Either<AppError, GroupListResponseModel>> fetchGroupList(
+      {required String eventId}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response = await _remoteSource.fetchGroupList(eventId: eventId);
@@ -110,6 +109,5 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
     } else {
       return left(const AppError.noInternet());
     }
-
   }
 }

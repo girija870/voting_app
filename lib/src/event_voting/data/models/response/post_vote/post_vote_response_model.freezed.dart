@@ -23,6 +23,7 @@ PostVoteResponseModel _$PostVoteResponseModelFromJson(
 mixin _$PostVoteResponseModel {
   bool get success => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  String? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $PostVoteResponseModelCopyWith<$Res> {
           $Res Function(PostVoteResponseModel) then) =
       _$PostVoteResponseModelCopyWithImpl<$Res, PostVoteResponseModel>;
   @useResult
-  $Res call({bool success, String message});
+  $Res call({bool success, String message, String? data});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$PostVoteResponseModelCopyWithImpl<$Res,
   $Res call({
     Object? success = null,
     Object? message = null,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       success: null == success
@@ -65,6 +67,10 @@ class _$PostVoteResponseModelCopyWithImpl<$Res,
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -77,7 +83,7 @@ abstract class _$$_PostVoteResponseModelCopyWith<$Res>
       __$$_PostVoteResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool success, String message});
+  $Res call({bool success, String message, String? data});
 }
 
 /// @nodoc
@@ -93,6 +99,7 @@ class __$$_PostVoteResponseModelCopyWithImpl<$Res>
   $Res call({
     Object? success = null,
     Object? message = null,
+    Object? data = freezed,
   }) {
     return _then(_$_PostVoteResponseModel(
       success: null == success
@@ -103,6 +110,10 @@ class __$$_PostVoteResponseModelCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -112,7 +123,7 @@ class __$$_PostVoteResponseModelCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class _$_PostVoteResponseModel implements _PostVoteResponseModel {
   const _$_PostVoteResponseModel(
-      {required this.success, required this.message});
+      {required this.success, required this.message, this.data});
 
   factory _$_PostVoteResponseModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostVoteResponseModelFromJson(json);
@@ -121,10 +132,12 @@ class _$_PostVoteResponseModel implements _PostVoteResponseModel {
   final bool success;
   @override
   final String message;
+  @override
+  final String? data;
 
   @override
   String toString() {
-    return 'PostVoteResponseModel(success: $success, message: $message)';
+    return 'PostVoteResponseModel(success: $success, message: $message, data: $data)';
   }
 
   @override
@@ -133,12 +146,13 @@ class _$_PostVoteResponseModel implements _PostVoteResponseModel {
         (other.runtimeType == runtimeType &&
             other is _$_PostVoteResponseModel &&
             (identical(other.success, success) || other.success == success) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, success, message);
+  int get hashCode => Object.hash(runtimeType, success, message, data);
 
   @JsonKey(ignore: true)
   @override
@@ -158,7 +172,8 @@ class _$_PostVoteResponseModel implements _PostVoteResponseModel {
 abstract class _PostVoteResponseModel implements PostVoteResponseModel {
   const factory _PostVoteResponseModel(
       {required final bool success,
-      required final String message}) = _$_PostVoteResponseModel;
+      required final String message,
+      final String? data}) = _$_PostVoteResponseModel;
 
   factory _PostVoteResponseModel.fromJson(Map<String, dynamic> json) =
       _$_PostVoteResponseModel.fromJson;
@@ -167,6 +182,8 @@ abstract class _PostVoteResponseModel implements PostVoteResponseModel {
   bool get success;
   @override
   String get message;
+  @override
+  String? get data;
   @override
   @JsonKey(ignore: true)
   _$$_PostVoteResponseModelCopyWith<_$_PostVoteResponseModel> get copyWith =>
