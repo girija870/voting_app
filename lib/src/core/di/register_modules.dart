@@ -14,7 +14,7 @@ abstract class RegisterModule {
   Dio get authenticatedDio {
     return Dio(
       BaseOptions(
-        baseUrl: 'https://voting.ncash.online/',
+        baseUrl: 'http://103.168.87.54:8080/',
         receiveTimeout: 60000.milliSeconds,
         connectTimeout: 60000.milliSeconds,
         responseType: ResponseType.json,
