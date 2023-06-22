@@ -22,8 +22,8 @@ class CircleView extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.whiteColor,
-        border: Border.all(color: AppColors.whiteColor),
+        color: AppColors.kColorWhite,
+        border: Border.all(color: AppColors.kColorWhite),
       ),
       child: Padding(
         padding: EdgeInsets.all(borderWidth),

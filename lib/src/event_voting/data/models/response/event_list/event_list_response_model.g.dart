@@ -9,14 +9,28 @@ part of 'event_list_response_model.dart';
 _$_EventListResponseModel _$$_EventListResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_EventListResponseModel(
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => EventListData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$_EventListResponseModelToJson(
+        _$_EventListResponseModel instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+    };
+
+_$_EventListData _$$_EventListDataFromJson(Map<String, dynamic> json) =>
+    _$_EventListData(
       id: json['id'] as String,
       name: json['name'] as String,
       location: json['location'] as String?,
       startDate: json['startDate'] as String?,
-      endDate: json['endDate'] as String,
+      endDate: json['endDate'] as String?,
       image: json['image'] as String,
-      description: json['description'] as String,
-      type: json['type'] as String?,
+      description: json['description'] as String?,
+      type: json['type'] as String,
       setting: json['setting'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       status: json['status'] as String?,
@@ -26,8 +40,7 @@ _$_EventListResponseModel _$$_EventListResponseModelFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$_EventListResponseModelToJson(
-        _$_EventListResponseModel instance) =>
+Map<String, dynamic> _$$_EventListDataToJson(_$_EventListData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -46,6 +59,7 @@ Map<String, dynamic> _$$_EventListResponseModelToJson(
 _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>
     _$_Participants(
       id: json['id'] as String,
+      contestantNo: json['contestantNo'] as int,
       name: json['name'] as String,
       image: json['image'] as String?,
       judge: json['judge'] == null
@@ -56,6 +70,7 @@ _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ParticipantsToJson(_$_Participants instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'contestantNo': instance.contestantNo,
       'name': instance.name,
       'image': instance.image,
       'judge': instance.judge?.toJson(),

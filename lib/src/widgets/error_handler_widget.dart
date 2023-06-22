@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 
 class ErrorHandlerWidget extends StatelessWidget {
@@ -22,7 +21,9 @@ class ErrorHandlerWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10.h),
           child: Column(
             children: [
-              Text(errorMessage!, style: AppStyles.text12PxMedium.activeAccent),
+              Text(errorMessage!,
+                  style: AppStyles.mediumText12
+                      .copyWith(color: AppColors.kColorSecondary)),
               SizedBox(
                 height: 10.h,
               ),
@@ -34,7 +35,7 @@ class ErrorHandlerWidget extends StatelessWidget {
                     vertical: 2.h,
                   ),
                   decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.activeAccent),
+                      border: Border.all(color: AppColors.kColorSecondary),
                       borderRadius: BorderRadius.circular(10.r)),
                   child: const Text('Retry'),
                 ),

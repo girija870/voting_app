@@ -21,20 +21,7 @@ EventListResponseModel _$EventListResponseModelFromJson(
 
 /// @nodoc
 mixin _$EventListResponseModel {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
-  @JsonKey(name: 'startDate')
-  String? get startDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'endDate')
-  String get endDate => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
-  String? get setting => throw _privateConstructorUsedError;
-  double? get price => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  List<Participants> get participants => throw _privateConstructorUsedError;
+  List<EventListData> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,19 +35,7 @@ abstract class $EventListResponseModelCopyWith<$Res> {
           $Res Function(EventListResponseModel) then) =
       _$EventListResponseModelCopyWithImpl<$Res, EventListResponseModel>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String? location,
-      @JsonKey(name: 'startDate') String? startDate,
-      @JsonKey(name: 'endDate') String endDate,
-      String image,
-      String description,
-      String? type,
-      String? setting,
-      double? price,
-      String? status,
-      List<Participants> participants});
+  $Res call({List<EventListData> data});
 }
 
 /// @nodoc
@@ -77,14 +52,187 @@ class _$EventListResponseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<EventListData>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_EventListResponseModelCopyWith<$Res>
+    implements $EventListResponseModelCopyWith<$Res> {
+  factory _$$_EventListResponseModelCopyWith(_$_EventListResponseModel value,
+          $Res Function(_$_EventListResponseModel) then) =
+      __$$_EventListResponseModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<EventListData> data});
+}
+
+/// @nodoc
+class __$$_EventListResponseModelCopyWithImpl<$Res>
+    extends _$EventListResponseModelCopyWithImpl<$Res,
+        _$_EventListResponseModel>
+    implements _$$_EventListResponseModelCopyWith<$Res> {
+  __$$_EventListResponseModelCopyWithImpl(_$_EventListResponseModel _value,
+      $Res Function(_$_EventListResponseModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$_EventListResponseModel(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<EventListData>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+class _$_EventListResponseModel implements _EventListResponseModel {
+  const _$_EventListResponseModel({final List<EventListData> data = const []})
+      : _data = data;
+
+  factory _$_EventListResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_EventListResponseModelFromJson(json);
+
+  final List<EventListData> _data;
+  @override
+  @JsonKey()
+  List<EventListData> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'EventListResponseModel(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EventListResponseModel &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>
+      __$$_EventListResponseModelCopyWithImpl<_$_EventListResponseModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_EventListResponseModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _EventListResponseModel implements EventListResponseModel {
+  const factory _EventListResponseModel({final List<EventListData> data}) =
+      _$_EventListResponseModel;
+
+  factory _EventListResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_EventListResponseModel.fromJson;
+
+  @override
+  List<EventListData> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+EventListData _$EventListDataFromJson(Map<String, dynamic> json) {
+  return _EventListData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$EventListData {
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'startDate')
+  String? get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'endDate')
+  String? get endDate => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+  String? get setting => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  List<Participants> get participants => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $EventListDataCopyWith<EventListData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EventListDataCopyWith<$Res> {
+  factory $EventListDataCopyWith(
+          EventListData value, $Res Function(EventListData) then) =
+      _$EventListDataCopyWithImpl<$Res, EventListData>;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? location,
+      @JsonKey(name: 'startDate') String? startDate,
+      @JsonKey(name: 'endDate') String? endDate,
+      String image,
+      String? description,
+      String type,
+      String? setting,
+      double? price,
+      String? status,
+      List<Participants> participants});
+}
+
+/// @nodoc
+class _$EventListDataCopyWithImpl<$Res, $Val extends EventListData>
+    implements $EventListDataCopyWith<$Res> {
+  _$EventListDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
     Object? id = null,
     Object? name = null,
     Object? location = freezed,
     Object? startDate = freezed,
-    Object? endDate = null,
+    Object? endDate = freezed,
     Object? image = null,
-    Object? description = null,
-    Object? type = freezed,
+    Object? description = freezed,
+    Object? type = null,
     Object? setting = freezed,
     Object? price = freezed,
     Object? status = freezed,
@@ -107,22 +255,22 @@ class _$EventListResponseModelCopyWithImpl<$Res,
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      endDate: null == endDate
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: freezed == type
+              as String?,
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       setting: freezed == setting
           ? _value.setting
           : setting // ignore: cast_nullable_to_non_nullable
@@ -144,11 +292,11 @@ class _$EventListResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_EventListResponseModelCopyWith<$Res>
-    implements $EventListResponseModelCopyWith<$Res> {
-  factory _$$_EventListResponseModelCopyWith(_$_EventListResponseModel value,
-          $Res Function(_$_EventListResponseModel) then) =
-      __$$_EventListResponseModelCopyWithImpl<$Res>;
+abstract class _$$_EventListDataCopyWith<$Res>
+    implements $EventListDataCopyWith<$Res> {
+  factory _$$_EventListDataCopyWith(
+          _$_EventListData value, $Res Function(_$_EventListData) then) =
+      __$$_EventListDataCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -156,10 +304,10 @@ abstract class _$$_EventListResponseModelCopyWith<$Res>
       String name,
       String? location,
       @JsonKey(name: 'startDate') String? startDate,
-      @JsonKey(name: 'endDate') String endDate,
+      @JsonKey(name: 'endDate') String? endDate,
       String image,
-      String description,
-      String? type,
+      String? description,
+      String type,
       String? setting,
       double? price,
       String? status,
@@ -167,12 +315,11 @@ abstract class _$$_EventListResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EventListResponseModelCopyWithImpl<$Res>
-    extends _$EventListResponseModelCopyWithImpl<$Res,
-        _$_EventListResponseModel>
-    implements _$$_EventListResponseModelCopyWith<$Res> {
-  __$$_EventListResponseModelCopyWithImpl(_$_EventListResponseModel _value,
-      $Res Function(_$_EventListResponseModel) _then)
+class __$$_EventListDataCopyWithImpl<$Res>
+    extends _$EventListDataCopyWithImpl<$Res, _$_EventListData>
+    implements _$$_EventListDataCopyWith<$Res> {
+  __$$_EventListDataCopyWithImpl(
+      _$_EventListData _value, $Res Function(_$_EventListData) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -182,16 +329,16 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
     Object? name = null,
     Object? location = freezed,
     Object? startDate = freezed,
-    Object? endDate = null,
+    Object? endDate = freezed,
     Object? image = null,
-    Object? description = null,
-    Object? type = freezed,
+    Object? description = freezed,
+    Object? type = null,
     Object? setting = freezed,
     Object? price = freezed,
     Object? status = freezed,
     Object? participants = null,
   }) {
-    return _then(_$_EventListResponseModel(
+    return _then(_$_EventListData(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -208,22 +355,22 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      endDate: null == endDate
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: freezed == type
+              as String?,
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       setting: freezed == setting
           ? _value.setting
           : setting // ignore: cast_nullable_to_non_nullable
@@ -247,24 +394,24 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$_EventListResponseModel implements _EventListResponseModel {
-  const _$_EventListResponseModel(
+class _$_EventListData implements _EventListData {
+  const _$_EventListData(
       {required this.id,
       required this.name,
       this.location,
       @JsonKey(name: 'startDate') this.startDate,
-      @JsonKey(name: 'endDate') required this.endDate,
+      @JsonKey(name: 'endDate') this.endDate,
       required this.image,
-      required this.description,
-      this.type,
+      this.description,
+      required this.type,
       this.setting,
       this.price,
       this.status,
       final List<Participants> participants = const []})
       : _participants = participants;
 
-  factory _$_EventListResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_EventListResponseModelFromJson(json);
+  factory _$_EventListData.fromJson(Map<String, dynamic> json) =>
+      _$$_EventListDataFromJson(json);
 
   @override
   final String id;
@@ -277,13 +424,13 @@ class _$_EventListResponseModel implements _EventListResponseModel {
   final String? startDate;
   @override
   @JsonKey(name: 'endDate')
-  final String endDate;
+  final String? endDate;
   @override
   final String image;
   @override
-  final String description;
+  final String? description;
   @override
-  final String? type;
+  final String type;
   @override
   final String? setting;
   @override
@@ -301,14 +448,14 @@ class _$_EventListResponseModel implements _EventListResponseModel {
 
   @override
   String toString() {
-    return 'EventListResponseModel(id: $id, name: $name, location: $location, startDate: $startDate, endDate: $endDate, image: $image, description: $description, type: $type, setting: $setting, price: $price, status: $status, participants: $participants)';
+    return 'EventListData(id: $id, name: $name, location: $location, startDate: $startDate, endDate: $endDate, image: $image, description: $description, type: $type, setting: $setting, price: $price, status: $status, participants: $participants)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EventListResponseModel &&
+            other is _$_EventListData &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.location, location) ||
@@ -347,35 +494,34 @@ class _$_EventListResponseModel implements _EventListResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>
-      __$$_EventListResponseModelCopyWithImpl<_$_EventListResponseModel>(
-          this, _$identity);
+  _$$_EventListDataCopyWith<_$_EventListData> get copyWith =>
+      __$$_EventListDataCopyWithImpl<_$_EventListData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EventListResponseModelToJson(
+    return _$$_EventListDataToJson(
       this,
     );
   }
 }
 
-abstract class _EventListResponseModel implements EventListResponseModel {
-  const factory _EventListResponseModel(
+abstract class _EventListData implements EventListData {
+  const factory _EventListData(
       {required final String id,
       required final String name,
       final String? location,
       @JsonKey(name: 'startDate') final String? startDate,
-      @JsonKey(name: 'endDate') required final String endDate,
+      @JsonKey(name: 'endDate') final String? endDate,
       required final String image,
-      required final String description,
-      final String? type,
+      final String? description,
+      required final String type,
       final String? setting,
       final double? price,
       final String? status,
-      final List<Participants> participants}) = _$_EventListResponseModel;
+      final List<Participants> participants}) = _$_EventListData;
 
-  factory _EventListResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_EventListResponseModel.fromJson;
+  factory _EventListData.fromJson(Map<String, dynamic> json) =
+      _$_EventListData.fromJson;
 
   @override
   String get id;
@@ -388,13 +534,13 @@ abstract class _EventListResponseModel implements EventListResponseModel {
   String? get startDate;
   @override
   @JsonKey(name: 'endDate')
-  String get endDate;
+  String? get endDate;
   @override
   String get image;
   @override
-  String get description;
+  String? get description;
   @override
-  String? get type;
+  String get type;
   @override
   String? get setting;
   @override
@@ -405,7 +551,7 @@ abstract class _EventListResponseModel implements EventListResponseModel {
   List<Participants> get participants;
   @override
   @JsonKey(ignore: true)
-  _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>
+  _$$_EventListDataCopyWith<_$_EventListData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -416,6 +562,8 @@ Participants _$ParticipantsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Participants {
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contestantNo')
+  int get contestantNo => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   Judge? get judge => throw _privateConstructorUsedError;
@@ -432,7 +580,12 @@ abstract class $ParticipantsCopyWith<$Res> {
           Participants value, $Res Function(Participants) then) =
       _$ParticipantsCopyWithImpl<$Res, Participants>;
   @useResult
-  $Res call({String id, String name, String? image, Judge? judge});
+  $Res call(
+      {String id,
+      @JsonKey(name: 'contestantNo') int contestantNo,
+      String name,
+      String? image,
+      Judge? judge});
 
   $JudgeCopyWith<$Res>? get judge;
 }
@@ -451,6 +604,7 @@ class _$ParticipantsCopyWithImpl<$Res, $Val extends Participants>
   @override
   $Res call({
     Object? id = null,
+    Object? contestantNo = null,
     Object? name = null,
     Object? image = freezed,
     Object? judge = freezed,
@@ -460,6 +614,10 @@ class _$ParticipantsCopyWithImpl<$Res, $Val extends Participants>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      contestantNo: null == contestantNo
+          ? _value.contestantNo
+          : contestantNo // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -496,7 +654,12 @@ abstract class _$$_ParticipantsCopyWith<$Res>
       __$$_ParticipantsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String? image, Judge? judge});
+  $Res call(
+      {String id,
+      @JsonKey(name: 'contestantNo') int contestantNo,
+      String name,
+      String? image,
+      Judge? judge});
 
   @override
   $JudgeCopyWith<$Res>? get judge;
@@ -514,6 +677,7 @@ class __$$_ParticipantsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? contestantNo = null,
     Object? name = null,
     Object? image = freezed,
     Object? judge = freezed,
@@ -523,6 +687,10 @@ class __$$_ParticipantsCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      contestantNo: null == contestantNo
+          ? _value.contestantNo
+          : contestantNo // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -544,13 +712,20 @@ class __$$_ParticipantsCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class _$_Participants implements _Participants {
   const _$_Participants(
-      {required this.id, required this.name, this.image, this.judge});
+      {required this.id,
+      @JsonKey(name: 'contestantNo') required this.contestantNo,
+      required this.name,
+      this.image,
+      this.judge});
 
   factory _$_Participants.fromJson(Map<String, dynamic> json) =>
       _$$_ParticipantsFromJson(json);
 
   @override
   final String id;
+  @override
+  @JsonKey(name: 'contestantNo')
+  final int contestantNo;
   @override
   final String name;
   @override
@@ -560,7 +735,7 @@ class _$_Participants implements _Participants {
 
   @override
   String toString() {
-    return 'Participants(id: $id, name: $name, image: $image, judge: $judge)';
+    return 'Participants(id: $id, contestantNo: $contestantNo, name: $name, image: $image, judge: $judge)';
   }
 
   @override
@@ -569,6 +744,8 @@ class _$_Participants implements _Participants {
         (other.runtimeType == runtimeType &&
             other is _$_Participants &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.contestantNo, contestantNo) ||
+                other.contestantNo == contestantNo) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.judge, judge) || other.judge == judge));
@@ -576,7 +753,8 @@ class _$_Participants implements _Participants {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, image, judge);
+  int get hashCode =>
+      Object.hash(runtimeType, id, contestantNo, name, image, judge);
 
   @JsonKey(ignore: true)
   @override
@@ -595,6 +773,7 @@ class _$_Participants implements _Participants {
 abstract class _Participants implements Participants {
   const factory _Participants(
       {required final String id,
+      @JsonKey(name: 'contestantNo') required final int contestantNo,
       required final String name,
       final String? image,
       final Judge? judge}) = _$_Participants;
@@ -604,6 +783,9 @@ abstract class _Participants implements Participants {
 
   @override
   String get id;
+  @override
+  @JsonKey(name: 'contestantNo')
+  int get contestantNo;
   @override
   String get name;
   @override

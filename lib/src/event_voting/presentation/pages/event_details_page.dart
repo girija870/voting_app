@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
+import 'package:voting_app/src/core/enums/event_type.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
-import 'package:voting_app/src/event_voting/presentation/pages/voting_contestant_page.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/timer_count_view.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
@@ -15,19 +16,19 @@ import 'package:voting_app/src/widgets/network_image_cache.dart';
 class EventDetailsPage extends StatelessWidget {
   const EventDetailsPage({Key? key, required this.eventListResponseModel})
       : super(key: key);
-  final EventListResponseModel eventListResponseModel;
+  final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime =
-        DateTime.parse(eventListResponseModel.endDate).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: false,
             automaticallyImplyLeading: true,
-            actions: [const Icon(Icons.share).pOnly(right: 20.w)],
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -45,25 +46,27 @@ class EventDetailsPage extends StatelessWidget {
                 10.verticalSpace,
                 Text(
                   eventListResponseModel.name,
-                  style: AppStyles.text14PxBold.appFontFamily.activeNormal
+                  style: AppStyles.boldText14
+                      .copyWith(color: AppColors.kColorPrimary)
                       .lineHeight(21.h),
                   textAlign: TextAlign.center,
                 ),
                 10.verticalSpace,
                 Text(
-                  eventListResponseModel.description,
-                  style: AppStyles.text12PxRegular.appFontFamily.inActiveAccent
+                  eventListResponseModel.description ?? '',
+                  style: AppStyles.regularText12
+                      .copyWith(color: AppColors.kColorNeutralBlack)
                       .lineHeight(18.h),
                 ),
                 20.verticalSpace,
                 Container(
-                  color: AppColors.activeAccent.withOpacity(.1),
+                  color: AppColors.kColorSecondary.withOpacity(.1),
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Column(
                     children: [
                       Text('Voting Closes In:',
-                          style: AppStyles
-                              .text12PxRegular.appFontFamily.inActiveAccent
+                          style: AppStyles.regularText12
+                              .copyWith(color: AppColors.kColorNeutralBlack)
                               .lineHeight(18.h)),
                       6.verticalSpace,
                       CountdownTimer(
@@ -72,8 +75,8 @@ class EventDetailsPage extends StatelessWidget {
                           if (time == null) {
                             return Text(
                               'Voting Closed',
-                              style: AppStyles.text12PxRegular
-                                  .copyWith(color: AppColors.inActiveAccent),
+                              style: AppStyles.regularText12.copyWith(
+                                  color: AppColors.kColorNeutralBlack),
                             );
                           }
                           return Row(
@@ -90,8 +93,8 @@ class EventDetailsPage extends StatelessWidget {
                             ],
                           );
                         },
-                        textStyle: AppStyles.text14PxSemiBold.copyWith(
-                            color: AppColors.activeAccent,
+                        textStyle: AppStyles.semiBoldText14.copyWith(
+                            color: AppColors.kColorSecondary,
                             fontWeight: FontWeight.w600),
                       ),
                     ],
@@ -99,15 +102,17 @@ class EventDetailsPage extends StatelessWidget {
                 ),
                 40.verticalSpace,
                 CustomButton(
-                  title: 'VOTE NOW',
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VotingContestantPage(
-                          eventListResponseModel: eventListResponseModel,
-                        ),
-                      )),
-                ),
+                    title: 'VOTE NOW',
+                    onPressed: () => (EventType.DIRECT.name.toLowerCase() ==
+                            eventListResponseModel.type.toLowerCase())
+                        ? Navigator.of(context).pushNamed(
+                            RoutePath.votingContestantListPage,
+                            arguments: [
+                                eventListResponseModel,
+                                eventListResponseModel.participants
+                              ])
+                        : Navigator.of(context)
+                            .pushNamed(RoutePath.groupListPage)),
               ],
             ).px(20.w),
           )

@@ -1,3 +1,4 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'event_list_response_model.freezed.dart';
@@ -8,18 +9,7 @@ part 'event_list_response_model.g.dart';
 class EventListResponseModel with _$EventListResponseModel {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory EventListResponseModel({
-    required String id,
-    required String name,
-    String? location,
-    @JsonKey(name: 'startDate') String? startDate,
-    @JsonKey(name: 'endDate') required String endDate,
-    required String image,
-    required String description,
-    String? type,
-    String? setting,
-    double? price,
-    String? status,
-    @Default([]) List<Participants> participants,
+    @Default([]) List<EventListData> data,
   }) = _EventListResponseModel;
 
   factory EventListResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -27,10 +17,33 @@ class EventListResponseModel with _$EventListResponseModel {
 }
 
 @freezed
+class EventListData with _$EventListData {
+  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+  const factory EventListData({
+    required String id,
+    required String name,
+    String? location,
+    @JsonKey(name: 'startDate') String? startDate,
+    @JsonKey(name: 'endDate') String? endDate,
+    required String image,
+    String? description,
+    required String type,
+    String? setting,
+    double? price,
+    String? status,
+    @Default([]) List<Participants> participants,
+  }) = _EventListData;
+
+  factory EventListData.fromJson(Map<String, dynamic> json) =>
+      _$EventListDataFromJson(json);
+}
+
+@freezed
 class Participants with _$Participants {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory Participants({
     required String id,
+    @JsonKey(name: 'contestantNo') required int contestantNo,
     required String name,
     String? image,
     Judge? judge,

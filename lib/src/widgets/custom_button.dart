@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     this.title,
     this.onPressed,
     this.titleStyle,
-    this.backgroundColor = AppColors.activeDark,
+    this.backgroundColor = AppColors.kColorDark,
     this.width = 140,
     this.height = 50,
     this.icon,
@@ -37,8 +37,8 @@ class CustomButton extends StatelessWidget {
   ShapeBorder get _shape => RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.r),
         side: BorderSide(
-          color: (backgroundColor == AppColors.whiteColor)
-              ? AppColors.activeNormal
+          color: (backgroundColor == AppColors.kColorWhite)
+              ? AppColors.kColorPrimary
               : Colors.transparent,
         ),
       );
@@ -52,7 +52,7 @@ class CustomButton extends StatelessWidget {
       type: MaterialType.card,
       clipBehavior: Clip.antiAlias,
       shape: _shape,
-      shadowColor: AppColors.whiteColor,
+      shadowColor: AppColors.kColorWhite,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         color: backgroundColor,
@@ -75,7 +75,8 @@ class CustomButton extends StatelessWidget {
                     Text(
                       title!,
                       style: titleStyle ??
-                          AppStyles.text14PxMedium.appFontFamily.whiteColor
+                          AppStyles.mediumText14
+                              .copyWith(color: AppColors.kColorWhite)
                               .lineHeight(16.59),
                     ),
                   ],

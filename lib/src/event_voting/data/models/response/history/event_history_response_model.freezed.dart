@@ -16,16 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 EventHistoryResponseModel _$EventHistoryResponseModelFromJson(
     Map<String, dynamic> json) {
-  return _EventListResponseModel.fromJson(json);
+  return _EventHistoryResponseModel.fromJson(json);
 }
 
 /// @nodoc
 mixin _$EventHistoryResponseModel {
-  int? get count => throw _privateConstructorUsedError;
-  @JsonKey(name: 'voteDate')
-  String? get voteDate => throw _privateConstructorUsedError;
-  double? get amount => throw _privateConstructorUsedError;
-  Event? get event => throw _privateConstructorUsedError;
+  List<EventHistoryData> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,6 +35,162 @@ abstract class $EventHistoryResponseModelCopyWith<$Res> {
           $Res Function(EventHistoryResponseModel) then) =
       _$EventHistoryResponseModelCopyWithImpl<$Res, EventHistoryResponseModel>;
   @useResult
+  $Res call({List<EventHistoryData> data});
+}
+
+/// @nodoc
+class _$EventHistoryResponseModelCopyWithImpl<$Res,
+        $Val extends EventHistoryResponseModel>
+    implements $EventHistoryResponseModelCopyWith<$Res> {
+  _$EventHistoryResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<EventHistoryData>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_EventHistoryResponseModelCopyWith<$Res>
+    implements $EventHistoryResponseModelCopyWith<$Res> {
+  factory _$$_EventHistoryResponseModelCopyWith(
+          _$_EventHistoryResponseModel value,
+          $Res Function(_$_EventHistoryResponseModel) then) =
+      __$$_EventHistoryResponseModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<EventHistoryData> data});
+}
+
+/// @nodoc
+class __$$_EventHistoryResponseModelCopyWithImpl<$Res>
+    extends _$EventHistoryResponseModelCopyWithImpl<$Res,
+        _$_EventHistoryResponseModel>
+    implements _$$_EventHistoryResponseModelCopyWith<$Res> {
+  __$$_EventHistoryResponseModelCopyWithImpl(
+      _$_EventHistoryResponseModel _value,
+      $Res Function(_$_EventHistoryResponseModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$_EventHistoryResponseModel(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<EventHistoryData>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+class _$_EventHistoryResponseModel implements _EventHistoryResponseModel {
+  const _$_EventHistoryResponseModel(
+      {final List<EventHistoryData> data = const []})
+      : _data = data;
+
+  factory _$_EventHistoryResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_EventHistoryResponseModelFromJson(json);
+
+  final List<EventHistoryData> _data;
+  @override
+  @JsonKey()
+  List<EventHistoryData> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'EventHistoryResponseModel(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EventHistoryResponseModel &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EventHistoryResponseModelCopyWith<_$_EventHistoryResponseModel>
+      get copyWith => __$$_EventHistoryResponseModelCopyWithImpl<
+          _$_EventHistoryResponseModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_EventHistoryResponseModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _EventHistoryResponseModel implements EventHistoryResponseModel {
+  const factory _EventHistoryResponseModel(
+      {final List<EventHistoryData> data}) = _$_EventHistoryResponseModel;
+
+  factory _EventHistoryResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_EventHistoryResponseModel.fromJson;
+
+  @override
+  List<EventHistoryData> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_EventHistoryResponseModelCopyWith<_$_EventHistoryResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+EventHistoryData _$EventHistoryDataFromJson(Map<String, dynamic> json) {
+  return _EventHistoryData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$EventHistoryData {
+  int? get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'voteDate')
+  String? get voteDate => throw _privateConstructorUsedError;
+  double? get amount => throw _privateConstructorUsedError;
+  Event? get event => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $EventHistoryDataCopyWith<EventHistoryData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EventHistoryDataCopyWith<$Res> {
+  factory $EventHistoryDataCopyWith(
+          EventHistoryData value, $Res Function(EventHistoryData) then) =
+      _$EventHistoryDataCopyWithImpl<$Res, EventHistoryData>;
+  @useResult
   $Res call(
       {int? count,
       @JsonKey(name: 'voteDate') String? voteDate,
@@ -49,10 +201,9 @@ abstract class $EventHistoryResponseModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EventHistoryResponseModelCopyWithImpl<$Res,
-        $Val extends EventHistoryResponseModel>
-    implements $EventHistoryResponseModelCopyWith<$Res> {
-  _$EventHistoryResponseModelCopyWithImpl(this._value, this._then);
+class _$EventHistoryDataCopyWithImpl<$Res, $Val extends EventHistoryData>
+    implements $EventHistoryDataCopyWith<$Res> {
+  _$EventHistoryDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -101,11 +252,11 @@ class _$EventHistoryResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_EventListResponseModelCopyWith<$Res>
-    implements $EventHistoryResponseModelCopyWith<$Res> {
-  factory _$$_EventListResponseModelCopyWith(_$_EventListResponseModel value,
-          $Res Function(_$_EventListResponseModel) then) =
-      __$$_EventListResponseModelCopyWithImpl<$Res>;
+abstract class _$$_EventHistoryDataCopyWith<$Res>
+    implements $EventHistoryDataCopyWith<$Res> {
+  factory _$$_EventHistoryDataCopyWith(
+          _$_EventHistoryData value, $Res Function(_$_EventHistoryData) then) =
+      __$$_EventHistoryDataCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -119,12 +270,11 @@ abstract class _$$_EventListResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EventListResponseModelCopyWithImpl<$Res>
-    extends _$EventHistoryResponseModelCopyWithImpl<$Res,
-        _$_EventListResponseModel>
-    implements _$$_EventListResponseModelCopyWith<$Res> {
-  __$$_EventListResponseModelCopyWithImpl(_$_EventListResponseModel _value,
-      $Res Function(_$_EventListResponseModel) _then)
+class __$$_EventHistoryDataCopyWithImpl<$Res>
+    extends _$EventHistoryDataCopyWithImpl<$Res, _$_EventHistoryData>
+    implements _$$_EventHistoryDataCopyWith<$Res> {
+  __$$_EventHistoryDataCopyWithImpl(
+      _$_EventHistoryData _value, $Res Function(_$_EventHistoryData) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -135,7 +285,7 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
     Object? amount = freezed,
     Object? event = freezed,
   }) {
-    return _then(_$_EventListResponseModel(
+    return _then(_$_EventHistoryData(
       count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -159,15 +309,15 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$_EventListResponseModel implements _EventListResponseModel {
-  const _$_EventListResponseModel(
+class _$_EventHistoryData implements _EventHistoryData {
+  const _$_EventHistoryData(
       {this.count,
       @JsonKey(name: 'voteDate') this.voteDate,
       this.amount,
       this.event});
 
-  factory _$_EventListResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_EventListResponseModelFromJson(json);
+  factory _$_EventHistoryData.fromJson(Map<String, dynamic> json) =>
+      _$$_EventHistoryDataFromJson(json);
 
   @override
   final int? count;
@@ -181,14 +331,14 @@ class _$_EventListResponseModel implements _EventListResponseModel {
 
   @override
   String toString() {
-    return 'EventHistoryResponseModel(count: $count, voteDate: $voteDate, amount: $amount, event: $event)';
+    return 'EventHistoryData(count: $count, voteDate: $voteDate, amount: $amount, event: $event)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EventListResponseModel &&
+            other is _$_EventHistoryData &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.voteDate, voteDate) ||
                 other.voteDate == voteDate) &&
@@ -203,27 +353,26 @@ class _$_EventListResponseModel implements _EventListResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>
-      __$$_EventListResponseModelCopyWithImpl<_$_EventListResponseModel>(
-          this, _$identity);
+  _$$_EventHistoryDataCopyWith<_$_EventHistoryData> get copyWith =>
+      __$$_EventHistoryDataCopyWithImpl<_$_EventHistoryData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EventListResponseModelToJson(
+    return _$$_EventHistoryDataToJson(
       this,
     );
   }
 }
 
-abstract class _EventListResponseModel implements EventHistoryResponseModel {
-  const factory _EventListResponseModel(
+abstract class _EventHistoryData implements EventHistoryData {
+  const factory _EventHistoryData(
       {final int? count,
       @JsonKey(name: 'voteDate') final String? voteDate,
       final double? amount,
-      final Event? event}) = _$_EventListResponseModel;
+      final Event? event}) = _$_EventHistoryData;
 
-  factory _EventListResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_EventListResponseModel.fromJson;
+  factory _EventHistoryData.fromJson(Map<String, dynamic> json) =
+      _$_EventHistoryData.fromJson;
 
   @override
   int? get count;
@@ -236,7 +385,7 @@ abstract class _EventListResponseModel implements EventHistoryResponseModel {
   Event? get event;
   @override
   @JsonKey(ignore: true)
-  _$$_EventListResponseModelCopyWith<_$_EventListResponseModel> get copyWith =>
+  _$$_EventHistoryDataCopyWith<_$_EventHistoryData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

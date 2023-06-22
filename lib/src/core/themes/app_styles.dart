@@ -6,243 +6,234 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppStyles {
   const AppStyles._();
 
-  static TextStyle get text12PxLight =>
-      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w300);
+  static TextStyle boldText20 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w700,
+    fontSize: 20.sp,
+  );
 
-  static TextStyle get text6PxRegular =>
-      TextStyle(fontSize: 6.sp, fontWeight: FontWeight.w400);
+  ///Bold Text 16sp
+  static TextStyle boldText16 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
 
-  static TextStyle get text12PxRegular =>
-      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400);
+  ///Bold Text 14sp
+  static TextStyle boldText14 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w700,
+    fontSize: 14.sp,
+  );
+  static TextStyle boldText12 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w700,
+    fontSize: 12.sp,
+  );
 
-  static TextStyle get text12PxMedium =>
-      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500);
+  ///SemiBold Text 18sp
+  static TextStyle semiBoldText20 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w600,
+    fontSize: 20.sp,
+  );
 
-  static TextStyle get text12PxSemiBold =>
-      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600);
+  ///SemiBold Text 18sp
+  static TextStyle semiBoldText18 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w600,
+    fontSize: 18.sp,
+  );
 
-  static TextStyle get text12PxBold =>
-      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold);
+  ///SemiBold Text 16sp
+  static TextStyle semiBoldText16 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
 
-  static TextStyle get text8PxRegular => TextStyle(
-        fontSize: 8.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///SemiBold Text 14sp
+  static TextStyle semiBoldText14 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
 
-  //light
-  static TextStyle get text30PxLight => TextStyle(
-        fontSize: 30.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///SemiBold Text 12sp
+  static TextStyle semiBoldText12 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w600,
+    fontSize: 12.sp,
+  );
 
-  static TextStyle get text26PxLight => TextStyle(
-        fontSize: 26.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///Medium Text 20sp
+  static TextStyle mediumText20 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 20.sp,
+  );
+  static TextStyle mediumText30 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 30.sp,
+  );
 
-  static TextStyle get text24PxLight => TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///Medium Text 18sp
+  static TextStyle mediumText18 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 18.sp,
+  );
 
-  static TextStyle get text20PxLight => TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///Medium Text 19sp
+  static TextStyle mediumText19 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 19.sp,
+  );
 
-  static TextStyle get text18PxLight => TextStyle(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///Medium Text 16sp
+  static TextStyle mediumText16 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
 
-  static TextStyle get text16PxLight => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///Medium Text 14sp
+  static TextStyle mediumText14 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
 
-  static TextStyle get text14PxLight => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w300,
-      );
+  ///Medium Text 12sp
+  static TextStyle mediumText12 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
+  );
 
-  //regular
-  static TextStyle get text30PxRegular => TextStyle(
-        fontSize: 30.sp,
-        fontWeight: FontWeight.w400,
-      );
+  static TextStyle mediumText11 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 11.sp,
+  );
+  static TextStyle mediumText13 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w500,
+    fontSize: 13.sp,
+  );
 
-  static TextStyle get text26PxRegular => TextStyle(
-        fontSize: 26.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///Medium Text 40sp
+  static TextStyle regularText40 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 40.sp,
+    letterSpacing: 1.w,
+    height: 1.2,
+  );
 
-  static TextStyle get text24PxRegular => TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///Medium Text 60sp
+  static TextStyle regularText60 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 60.sp,
+    letterSpacing: 1.w,
+    height: 1.2,
+  );
 
-  static TextStyle get text23PxRegular => TextStyle(
-        fontSize: 23.sp,
-        fontWeight: FontWeight.w400,
-      );
+  static TextStyle regularText24 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 24.sp,
+    letterSpacing: 1.w,
+    height: 1.2,
+  );
 
-  static TextStyle get text20PxRegular => TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w400,
-      );
+  static TextStyle regularText20 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 20.sp,
+  );
 
-  static TextStyle get text18PxRegular => TextStyle(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///Medium Text 18sp
+  static TextStyle regularText18 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 18.sp,
+  );
 
-  static TextStyle get text16PxRegular => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///Medium Text 14sp
+  static TextStyle regularText16 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 16.sp,
+  );
 
-  static TextStyle get text14PxRegular => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///Medium Text 14sp
+  static TextStyle regularText14 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+  );
+  static TextStyle regularText15 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 15.sp,
+  );
+  static TextStyle regularText13 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 13.sp,
+  );
 
-  static TextStyle get text10PxRegular => TextStyle(
-        fontSize: 10.sp,
-        fontWeight: FontWeight.w400,
-      );
+  ///Medium Text 12sp
+  static TextStyle regularText12 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+  );
 
-//medium
+  ///Medium Text 10sp
+  static TextStyle regularText10 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 10.sp,
+  );
 
-  static TextStyle get text30PxMedium => TextStyle(
-        fontSize: 30.sp,
-        fontWeight: FontWeight.w500,
-      );
+  static TextStyle regularText11 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w400,
+    fontSize: 11.sp,
+  );
 
-  static TextStyle get text26PxMedium => TextStyle(
-        fontSize: 26.sp,
-        fontWeight: FontWeight.w500,
-      );
+  ///Medium Text 12sp
+  static TextStyle lightText12 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w300,
+    fontSize: 12.sp,
+  );
 
-  static TextStyle get text24PxMedium => TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w500,
-      );
+  static TextStyle lightText14 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w300,
+    fontSize: 14.sp,
+  );
+  static TextStyle lightText13 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w300,
+    fontSize: 13.sp,
+  );
 
-  static TextStyle get text20PxMedium => TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w500,
-      );
+  static TextStyle lightText15 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w300,
+    fontSize: 14.sp,
+  );
 
-  static TextStyle get text19PxMedium => TextStyle(
-        fontSize: 19.sp,
-        fontWeight: FontWeight.w500,
-      );
-
-  static TextStyle get text18PxMedium => TextStyle(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w500,
-      );
-
-  static TextStyle get text16PxMedium => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w500,
-      );
-
-  static TextStyle get text14PxMedium => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w500,
-      );
-
-  static TextStyle get text10PxMedium => TextStyle(
-        fontSize: 10.sp,
-        fontWeight: FontWeight.w500,
-      );
-
-//semi bold
-
-  static TextStyle get text30PxSemiBold => TextStyle(
-        fontSize: 30.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text26PxSemiBold => TextStyle(
-        fontSize: 26.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text24PxSemiBold => TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text20PxSemiBold => TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text18PxSemiBold => TextStyle(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text16PxSemiBold => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text14PxSemiBold => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  static TextStyle get text10PxSemiBold => TextStyle(
-        fontSize: 10.sp,
-        fontWeight: FontWeight.w600,
-      );
-
-  //bold
-  static TextStyle get text30PxBold => TextStyle(
-        fontSize: 30.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text26PxBold => TextStyle(
-        fontSize: 26.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text24PxBold => TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text20PxBold => TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text19PxBold => TextStyle(
-        fontSize: 19.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text18PxBold => TextStyle(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text16PxBold => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text14PxBold => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.bold,
-      );
-
-  static TextStyle get text10PxBold => TextStyle(
-        fontSize: 10.sp,
-        fontWeight: FontWeight.bold,
-      );
+  static TextStyle lightText10 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w300,
+    fontSize: 10.sp,
+  );
 }

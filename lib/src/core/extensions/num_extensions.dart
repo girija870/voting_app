@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 
 extension NumX on num {
-
   Duration get milliSeconds => Duration(milliseconds: toInt());
 
+  Duration get seconds => Duration(seconds: toInt());
+
   Radius get circular => Radius.circular(toDouble());
+
   BorderRadiusGeometry get rounded => BorderRadius.circular(toDouble());
 
-
+  Future<dynamic> get delayedSeconds async => Future.delayed(toInt().seconds);
 }
