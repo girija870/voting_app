@@ -9,6 +9,7 @@ import 'package:voting_app/src/core/themes/app_colors.dart';
 import 'package:voting_app/src/event_voting/presentation/pages/event_list_page.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/event_category_riverpod.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/event_list_riverpod.dart';
+import 'package:voting_app/src/widgets/custom_app_bar.dart';
 
 class EventViewPage extends ConsumerStatefulWidget {
   const EventViewPage({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _EventViewPageState extends ConsumerState<EventViewPage>
           SliverAppBar(
             floating: true,
             pinned: true,
-            title: const Text('Voting'),
+            title: CustomAppBar(appBarTitle: 'Voting',),
             actions: [
               IconButton(
                 onPressed: () => Navigator.of(context)
