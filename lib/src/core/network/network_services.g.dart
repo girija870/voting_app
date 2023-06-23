@@ -42,9 +42,13 @@ class _NetworkServices implements NetworkServices {
   }
 
   @override
-  Future<EventListResponseModel> fetchEventList(String category) async {
+  Future<EventListResponseModel> fetchEventList(
+    String category,
+    String? search,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'category': category};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;

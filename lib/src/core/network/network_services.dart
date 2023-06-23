@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import 'package:retrofit/retrofit.dart';
 import 'package:voting_app/src/core/network/api_endpoints.dart';
 import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
@@ -21,6 +20,7 @@ abstract class NetworkServices {
   @GET(ApiEndPoints.fetchEventsList)
   Future<EventListResponseModel> fetchEventList(
     @Header('category') String category,
+    @Query('search') String? search,
   );
 
   @GET(ApiEndPoints.fetchGroupList)

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:voting_app/gen/assets.gen.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/enums/event_type.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
@@ -9,19 +11,86 @@ import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/core/widgets/custom_back_button.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/rounded_date_viewer.dart';
+import 'package:voting_app/src/widgets/vertical_timer_count_view.dart';
 import 'package:voting_app/src/widgets/widgets.dart';
 
 class EventDetailsPage extends StatelessWidget {
-  const EventDetailsPage({Key? key, required this.eventListResponseModel})
-      : super(key: key);
+  const EventDetailsPage({Key? key, required this.eventListResponseModel}) : super(key: key);
   final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.parse(
-            eventListResponseModel.endDate ?? DateTime.now().toString())
-        .millisecondsSinceEpoch;
+    int endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+
+    final date = DateFormat('dd').format(DateTime.parse(eventListResponseModel.startDate ?? DateTime.now().toString()));
+
+    final month = DateFormat('MMM').format(DateTime.parse(eventListResponseModel.startDate ?? DateTime.now().toString()));
     return Scaffold(
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: AppColors.kColorTextWhite,
+          borderRadius: BorderRadius.only(
+            topLeft: 50.circular,
+            topRight: 50.circular,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            10.verticalSpace,
+            Divider(
+              endIndent: context.width * 0.4,
+              thickness: 3,
+              indent: context.width * 0.4,
+            ),
+            10.verticalSpace,
+            Center(
+              child: SizedBox(
+                width: 241,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Event ends in',
+                      style: AppStyles.regularText12.copyWith(
+                        color: AppColors.kColorActive,
+                      ),
+                    ),
+                    10.verticalSpace,
+                    Center(
+                      child: HorizontalTimerCountView(
+                        endTime: endTime,
+                        width: 241,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            20.verticalSpace,
+            CustomButton(
+              title: 'VOTE NOW',
+              width: context.width,
+              onPressed: () => (EventType.DIRECT.name.toLowerCase() == eventListResponseModel.type.toLowerCase())
+                  ? Navigator.of(context).pushNamed(
+                      RoutePath.votingContestantListPage,
+                      arguments: [eventListResponseModel, eventListResponseModel.participants],
+                    )
+                  : Navigator.of(context).pushNamed(
+                      RoutePath.groupListPage,
+                      arguments: eventListResponseModel,
+                    ),
+              icon: Assets.icons.voteFav.svg(
+                colorFilter: const ColorFilter.mode(
+                  AppColors.kColorTextWhite,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ).px(35.w),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -56,9 +125,9 @@ class EventDetailsPage extends StatelessWidget {
                   10.verticalSpace,
                   Row(
                     children: [
-                      const RoundedDateViewer(
-                        month: 'JUN',
-                        date: '03',
+                      RoundedDateViewer(
+                        month: month,
+                        date: date,
                         backgroundColor: AppColors.kColorTextWhite,
                       ),
                       Expanded(
@@ -68,9 +137,7 @@ class EventDetailsPage extends StatelessWidget {
                           children: [
                             Text(
                               eventListResponseModel.name,
-                              style: AppStyles.boldText14
-                                  .copyWith(color: AppColors.kColorPrimary)
-                                  .lineHeight(21.h),
+                              style: AppStyles.boldText14.copyWith(color: AppColors.kColorPrimary).lineHeight(21.h),
                               textAlign: TextAlign.center,
                             ),
                             Text(
@@ -82,11 +149,8 @@ class EventDetailsPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.share),
-                        ),
+                      const Expanded(
+                        child: SizedBox.shrink(),
                       ),
                     ],
                   ).px(20.w),
@@ -104,9 +168,7 @@ class EventDetailsPage extends StatelessWidget {
                         10.verticalSpace,
                         Text(
                           eventListResponseModel.description ?? '',
-                          style: AppStyles.regularText12
-                              .copyWith(color: AppColors.kColorNeutralBlack)
-                              .lineHeight(18.h),
+                          style: AppStyles.regularText12.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h),
                         ),
                       ],
                     ).px(20.w),
@@ -143,22 +205,6 @@ class EventDetailsPage extends StatelessWidget {
                   //   ),
                   // ),
                   // 40.verticalSpace,
-                    CustomButton(
-                      title: 'VOTE NOW',
-                      onPressed: () => (EventType.DIRECT.name.toLowerCase() ==
-                              eventListResponseModel.type.toLowerCase())
-                          ? Navigator.of(context).pushNamed(
-                              RoutePath.votingContestantListPage,
-                              arguments: [
-                                eventListResponseModel,
-                                eventListResponseModel.participants
-                              ],
-                            )
-                          : Navigator.of(context).pushNamed(
-                              RoutePath.groupListPage,
-                              arguments: eventListResponseModel,
-                            ),
-                    ),
                 ],
               ),
             )

@@ -12,7 +12,7 @@ abstract class EventVotingRepository {
   Future<Either<AppError, CategoryResponseModel>> fetchEventCategory();
 
   Future<Either<AppError, EventListResponseModel>> fetchEventList(
-      {required String eventType});
+      {required String eventType, String? search});
 
   Future<Either<AppError, DenominationResponseModel>> fetchDenominationList(
       {required String eventId});
