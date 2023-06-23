@@ -141,7 +141,7 @@ class EventDetailsPage extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              'Location',
+                              eventListResponseModel.location ?? '',
                               style: AppStyles.regularText12.copyWith(
                                 color: AppColors.kColorActive.withOpacity(.70),
                               ),

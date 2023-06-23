@@ -3,6 +3,7 @@ import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:voting_app/gen/assets.gen.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
@@ -101,10 +102,15 @@ class _EventListPageState extends ConsumerState<EventListPage> {
                                             fit: BoxFit.cover,
                                             imageUrl: eventData.image,
                                           ),
-                                          const Positioned(
-                                            right: 10,
-                                            child: RoundedDateViewer(month: 'JUN', date: '03'),
-                                          ),
+                                          Builder(builder: (context) {
+                                            final date = DateFormat('dd').format(DateTime.parse(eventData.startDate ?? DateTime.now().toString()));
+
+                                            final month = DateFormat('MMM').format(DateTime.parse(eventData.startDate ?? DateTime.now().toString()));
+                                            return Positioned(
+                                              right: 10,
+                                              child: RoundedDateViewer(month: month, date: date),
+                                            );
+                                          }),
                                         ],
                                       ),
                                     ),
