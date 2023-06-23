@@ -25,7 +25,7 @@ abstract class EventVotingRemoteSource {
 
   Future<PostVoteResponseModel> postVote({required ContestantVotingParam param});
 
-  Future<GroupListResponseModel> fetchGroupList({required String eventId});
+  Future<GroupListResponseModel> fetchGroupList({required String eventId, String? search});
 }
 
 @LazySingleton(as: EventVotingRemoteSource)
@@ -69,7 +69,7 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<GroupListResponseModel> fetchGroupList({required String eventId}) async {
-    return await _networkServices.fetchGroupList(eventId);
+  Future<GroupListResponseModel> fetchGroupList({required String eventId, String? search}) async {
+    return await _networkServices.fetchGroupList(eventId, search);
   }
 }

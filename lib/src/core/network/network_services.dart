@@ -26,6 +26,7 @@ abstract class NetworkServices {
   @GET(ApiEndPoints.fetchGroupList)
   Future<GroupListResponseModel> fetchGroupList(
     @Header('eventId') String eventId,
+    @Query('search') String? search,
   );
 
   @GET(ApiEndPoints.fetchDenominationList)

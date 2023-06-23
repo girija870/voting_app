@@ -24,5 +24,5 @@ abstract class EventVotingRepository {
       {required ContestantVotingParam param});
 
   Future<Either<AppError, GroupListResponseModel>> fetchGroupList(
-      {required String eventId});
+      {required String eventId, String? search});
 }

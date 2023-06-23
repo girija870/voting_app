@@ -70,9 +70,13 @@ class _NetworkServices implements NetworkServices {
   }
 
   @override
-  Future<GroupListResponseModel> fetchGroupList(String eventId) async {
+  Future<GroupListResponseModel> fetchGroupList(
+    String eventId,
+    String? search,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'eventId': eventId};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;

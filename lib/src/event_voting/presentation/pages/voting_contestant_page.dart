@@ -11,15 +11,48 @@ import 'package:voting_app/src/event_voting/data/models/response/event_list/even
 import 'package:voting_app/src/widgets/custom_card_view.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
-class VotingContestantPage extends StatelessWidget {
+class VotingContestantPage extends StatefulWidget {
   const VotingContestantPage({Key? key, required this.eventListResponseModel, required this.participants}) : super(key: key);
 
   final EventListData eventListResponseModel;
   final List<Participants> participants;
 
   @override
+  State<VotingContestantPage> createState() => _VotingContestantPageState();
+}
+
+class _VotingContestantPageState extends State<VotingContestantPage> {
+  late List<Participants> searchedParticipants;
+
+  late TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    searchedParticipants = widget.participants;
+    _searchController = TextEditingController()
+      ..addListener(() {
+        if (_searchController.text.isEmpty) {
+          setState(() {
+            searchedParticipants = widget.participants;
+          });
+        } else {
+          setState(() {
+            searchedParticipants = widget.participants.where((element) => element.name.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+          });
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(widget.eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
 
     return Scaffold(
       body: CustomScrollView(
@@ -33,13 +66,13 @@ class VotingContestantPage extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
               ),
             ),
-            title: Text(eventListResponseModel.name),
+            title: Text(widget.eventListResponseModel.name),
             automaticallyImplyLeading: true,
           ),
           30.verticalSpace.toSliverBox,
           CustomTextField(
             hintText: 'Search',
-            controller: TextEditingController(),
+            controller: _searchController,
             prefixIcon: Transform.scale(scale: .5, child: Assets.icons.search.svg()),
             suffixIcon: Transform.scale(scale: .5, child: Assets.icons.filtered.svg()),
           ).px(20.w).toSliverBox,
@@ -63,7 +96,10 @@ class VotingContestantPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         InkWell(
-                          onTap: () => Navigator.of(context).pushNamed(RoutePath.denominationListPage, arguments: [index, eventListResponseModel]),
+                          onTap: () => Navigator.of(context).pushNamed(
+                            RoutePath.denominationListPage,
+                            arguments: [index, widget.eventListResponseModel],
+                          ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
                               topLeft: 20.circular,
@@ -73,7 +109,7 @@ class VotingContestantPage extends StatelessWidget {
                               height: 100.h,
                               width: 150.w,
                               fit: BoxFit.fill,
-                              imageUrl: participants[index].image,
+                              imageUrl: searchedParticipants[index].image,
                             ),
                           ),
                         ),
@@ -84,7 +120,7 @@ class VotingContestantPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                participants[index].name,
+                                searchedParticipants[index].name,
                                 style: AppStyles.semiBoldText12.copyWith(color: AppColors.kColorNeutralBlack),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
@@ -94,14 +130,14 @@ class VotingContestantPage extends StatelessWidget {
                           ],
                         ).px(4.w),
                         Text(
-                          participants[index].contestantNo.toString(),
+                          searchedParticipants[index].contestantNo.toString(),
                           style: AppStyles.semiBoldText12.copyWith(color: AppColors.kColorNeutralBlack),
                           textAlign: TextAlign.center,
                         )
                       ],
                     ));
               },
-              childCount: participants.length,
+              childCount: searchedParticipants.length,
             ),
           ),
           40.verticalSpace.toSliverBox,

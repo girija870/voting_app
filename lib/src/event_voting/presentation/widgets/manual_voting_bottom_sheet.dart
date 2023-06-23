@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
+import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
 
 class ManualVotingBottomSheet extends StatefulWidget {
-  const ManualVotingBottomSheet({super.key, required this.eventDetailsId, required this.price});
+  const ManualVotingBottomSheet({super.key, required this.event});
 
-  final String eventDetailsId;
-  final double? price;
+  final EventListData event;
 
   @override
   State<ManualVotingBottomSheet> createState() => _ManualVotingBottomSheetState();
@@ -35,7 +35,7 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
               children: [
                 20.verticalSpace,
                 Text(
-                  'Enter Votes Manually',
+                  'Enter Votes',
                   style: AppStyles.mediumText16,
                 ),
                 20.verticalSpace,
@@ -56,7 +56,7 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                         } else {
                           errorText = '';
                         }
-                        totalAmount = double.parse(value) * widget.price!;
+                        totalAmount = double.parse(value) * widget.event.price!;
                       });
                     },
                     cursorColor: AppColors.kColorSecondary,
@@ -116,10 +116,23 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                   ),
                 30.verticalSpace,
                 CustomButton(
-                  title: 'VOTE NOW',
+                  title: 'NEXT',
                   onPressed: () {
                     if (_textEditingController.text.isNotEmpty && int.parse(_textEditingController.text) > 0) {
-                      Navigator.of(context).pushNamed(RoutePath.payForVotePage, arguments: [1, const EventListData(id: '3', name: 'name', image: 'image', type: 'type')]);
+                      Navigator.of(context).pushNamed(
+                        RoutePath.payForVotePage,
+                        arguments: [
+                          1,
+                          widget.event,
+                          DenominationListResponseModel(
+                            id: '',
+                            count: int.parse(_textEditingController.text),
+                            amount: totalAmount,
+                            type: 'PAID',
+                            title: '',
+                          ),
+                        ],
+                      );
                     } else {
                       setState(() {
                         errorText = 'Please enter votes';

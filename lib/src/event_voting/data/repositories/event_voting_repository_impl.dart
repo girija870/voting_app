@@ -98,7 +98,7 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
 
   @override
   Future<Either<AppError, GroupListResponseModel>> fetchGroupList(
-      {required String eventId}) async {
+      {required String eventId, String? search}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response = await _remoteSource.fetchGroupList(eventId: eventId);

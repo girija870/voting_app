@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,25 +10,29 @@ import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/core/widgets/custom_back_button.dart';
+import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
+import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/post_vote_riverpod.dart';
-import 'package:voting_app/src/widgets/custom_button.dart';
-import 'package:voting_app/src/widgets/network_image_cache.dart';
 import 'package:voting_app/src/widgets/vertical_timer_count_view.dart';
+import 'package:voting_app/src/widgets/widgets.dart';
 
 class PaymentForVotePage extends ConsumerWidget {
   const PaymentForVotePage({
     Key? key,
     required this.participantIndex,
     required this.eventListResponseModel,
+    this.denomination,
   }) : super(key: key);
 
   final int participantIndex;
   final EventListData eventListResponseModel;
+  final DenominationListResponseModel? denomination;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+
     ref.listen(postVoteNotifierProvider, (previous, next) {
       next.maybeWhen(
           orElse: () => SizedBox.new,
@@ -35,8 +41,7 @@ class PaymentForVotePage extends ConsumerWidget {
             context.showErrorSnackBar(title: 'error', message: errMessage, context: context);
           },
           success: (data) {
-            Navigator.pop(context);
-            Navigator.of(context).pushNamed(RoutePath.votingHistoryPage);
+            Navigator.of(context).pushNamed(RoutePath.successPage);
           });
     });
     return Scaffold(
@@ -151,7 +156,7 @@ class PaymentForVotePage extends ConsumerWidget {
               Assets.icons.voteFilled.svg(width: 50.w, height: 50.h),
               10.horizontalSpace,
               Text(
-                '3000',
+                denomination!.count.toString(),
                 style: AppStyles.semiBoldText16.copyWith(color: AppColors.kColorNeutralBlack),
               )
             ],
@@ -159,7 +164,7 @@ class PaymentForVotePage extends ConsumerWidget {
           20.verticalSpace.toSliverBox,
           Center(
             child: Text(
-              'Nrs.10000',
+              'Nrs. ${denomination!.amount}',
               style: AppStyles.semiBoldText16.lineHeight(21.h).copyWith(color: AppColors.kColorNeutralBlack),
             ),
           ).toSliverBox,
@@ -167,26 +172,25 @@ class PaymentForVotePage extends ConsumerWidget {
           Consumer(
             builder: (context, ref, child) {
               final loading = ref.watch(postVoteNotifierProvider).maybeWhen(orElse: () => false, loading: () => true);
-              return loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : CustomButton(
-                      width: context.width * .5,
-                      title: 'Pay',
-                      titleStyle: AppStyles.mediumText14.copyWith(color: AppColors.kColorWhite).lineHeight(16.59),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RoutePath.successPage);
-                        // ref.read(postVoteNotifierProvider.notifier).postVote(
-                        //     param: ContestantVotingParam(
-                        //         userId: 'String',
-                        //         participantId: 'eventDetailsId',
-                        //         count: 4,
-                        //         type: 'type',
-                        //         username: '9849423081',
-                        //         denoId: 'denoId' ?? '',
-                        //         refTransactionId:
-                        //         Random().nextInt(40).toString()));
-                      },
-                    );
+              return CustomButton(
+                width: context.width * .5,
+                title: 'Pay',
+                loading: loading,
+                titleStyle: AppStyles.mediumText14.copyWith(color: AppColors.kColorWhite).lineHeight(16.59),
+                onPressed: () {
+                  ref.read(postVoteNotifierProvider.notifier).postVote(
+                        param: ContestantVotingParam(
+                          userId: 'String',
+                          participantId: eventListResponseModel.participants[participantIndex].id,
+                          count: denomination!.count,
+                          type: denomination!.type,
+                          username: '9849423081',
+                          denoId: denomination?.id ?? '',
+                          refTransactionId: Random().nextInt(40).toString(),
+                        ),
+                      );
+                },
+              );
             },
           ).px(20.w).toSliverBox
         ],

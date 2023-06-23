@@ -135,7 +135,7 @@ class DenominationListPage extends StatelessWidget {
                             data.length,
                             (index) => ListTile(
                               onTap: () {
-                                Navigator.of(context).pushNamed(RoutePath.payForVotePage, arguments: [index, eventListResponseModel]);
+                                Navigator.of(context).pushNamed(RoutePath.payForVotePage, arguments: [index, eventListResponseModel, data[index]]);
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.r),
@@ -191,8 +191,7 @@ class DenominationListPage extends StatelessWidget {
                               backgroundColor: AppColors.kColorWhite,
                               context: context,
                               builder: (context) => ManualVotingBottomSheet(
-                                eventDetailsId: eventListResponseModel.participants[participantIndex].id,
-                                price: eventListResponseModel.price,
+                                event: eventListResponseModel,
                               ),
                               isScrollControlled: true,
                               useRootNavigator: true,
