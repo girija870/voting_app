@@ -4,17 +4,23 @@ import 'package:voting_app/src/core/extensions/num_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 
 class RoundedDateViewer extends StatelessWidget {
-  const RoundedDateViewer({Key? key, required this.month, required this.date}) : super(key: key);
+  const RoundedDateViewer({
+    Key? key,
+    required this.month,
+    required this.date,
+    this.backgroundColor,
+  }) : super(key: key);
 
   final String month;
   final String date;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: AppColors.kColorWhite,
+        color: backgroundColor ?? AppColors.kColorWhite,
         borderRadius: 20.rounded,
       ),
       child: Column(

@@ -29,6 +29,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filtered.svg
   SvgGenImage get filtered => const SvgGenImage('assets/icons/filtered.svg');
 
+  /// File path: assets/icons/heart.svg
+  SvgGenImage get heart => const SvgGenImage('assets/icons/heart.svg');
+
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
@@ -56,6 +59,7 @@ class $AssetsIconsGen {
         bookNow,
         clock,
         filtered,
+        heart,
         search,
         share,
         stopWatch,
