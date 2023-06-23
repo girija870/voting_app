@@ -6,5 +6,10 @@ ThemeData getApplicationTheme() {
     useMaterial3: true,
     primaryColor: AppColors.kColorPrimary,
     scaffoldBackgroundColor: AppColors.kColorWhite,
+    appBarTheme: AppBarTheme(
+      titleTextStyle: AppStyles.semiBoldText24.copyWith(
+        color: AppColors.kColorActive,
+      ),
+    ),
   );
 }

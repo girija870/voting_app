@@ -23,4 +23,5 @@ class AppColors {
   static Color kColorPurple = const Color(0xFFE3E3FE);
   static Color kColorDarkPurple = const Color(0xFF5B63B7);
   static const kColorSecondaryVarient = Color(0xFF00C9C8);
+  static const kColorActive = Color(0XFF454545);
 }

@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'denomination_list_response_model.freezed.dart';
-
 part 'denomination_list_response_model.g.dart';
 
 @freezed

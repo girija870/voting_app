@@ -6,8 +6,7 @@ import 'package:voting_app/src/core/themes/app_colors.dart';
 import 'package:voting_app/src/core/themes/app_styles.dart';
 
 class TimerCountView extends StatelessWidget {
-  const TimerCountView({Key? key, required this.title, required this.value})
-      : super(key: key);
+  const TimerCountView({Key? key, required this.title, required this.value}) : super(key: key);
 
   final String title;
   final String value;
@@ -20,16 +19,12 @@ class TimerCountView extends StatelessWidget {
       children: [
         Text(
           value,
-          style: AppStyles.semiBoldText14
-              .copyWith(color: AppColors.kColorDark)
-              .lineHeight(0.h),
+          style: AppStyles.regularText14.copyWith(color: AppColors.kColorDark).lineHeight(0.h),
           textAlign: TextAlign.center,
         ),
         Text(
           title,
-          style: AppStyles.regularText12
-              .copyWith(color: AppColors.kColorDark)
-              .lineHeight(0.h),
+          style: AppStyles.regularText12.copyWith(color: AppColors.kColorDark).lineHeight(0.h),
           textAlign: TextAlign.center,
         ),
       ],

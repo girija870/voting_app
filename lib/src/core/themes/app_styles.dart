@@ -38,6 +38,12 @@ class AppStyles {
     fontSize: 20.sp,
   );
 
+  static TextStyle semiBoldText24 = TextStyle(
+    fontFamily: 'PoppinsRegular',
+    fontWeight: FontWeight.w600,
+    fontSize: 24.sp,
+  );
+
   ///SemiBold Text 18sp
   static TextStyle semiBoldText18 = TextStyle(
     fontFamily: 'PoppinsRegular',

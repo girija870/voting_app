@@ -10,7 +10,9 @@ part of 'network_services.dart';
 
 class _NetworkServices implements NetworkServices {
   _NetworkServices(
-    this._dio);
+    this._dio, {
+    this.baseUrl,
+  });
 
   final Dio _dio;
 
@@ -21,7 +23,7 @@ class _NetworkServices implements NetworkServices {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CategoryResponseModel>(Options(
       method: 'GET',
@@ -45,7 +47,7 @@ class _NetworkServices implements NetworkServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'category': category};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<EventListResponseModel>(Options(
       method: 'GET',
@@ -69,7 +71,7 @@ class _NetworkServices implements NetworkServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'eventId': eventId};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GroupListResponseModel>(Options(
       method: 'GET',
@@ -94,7 +96,7 @@ class _NetworkServices implements NetworkServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'eventId': eventId};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DenominationResponseModel>(Options(
       method: 'GET',
@@ -118,7 +120,7 @@ class _NetworkServices implements NetworkServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'username': userId};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<EventHistoryResponseModel>(Options(
       method: 'GET',
