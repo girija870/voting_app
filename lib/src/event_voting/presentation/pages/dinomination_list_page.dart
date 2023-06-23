@@ -70,11 +70,17 @@ class DenominationListPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    eventListResponseModel.location ?? 'Tripureshor, Kathmandu',
+                    eventListResponseModel.location ?? '',
                     style: AppStyles.regularText12.copyWith(
                       color: AppColors.kColorActive.withOpacity(.70),
                     ),
                   ),
+                  Text(
+                    '#${eventListResponseModel.participants[participantIndex].contestantNo.toString()}',
+                    style: AppStyles.regularText12.copyWith(
+                      color: AppColors.kColorActive.withOpacity(.70),
+                    ),
+                  )
                 ],
               ),
               const Spacer(),
