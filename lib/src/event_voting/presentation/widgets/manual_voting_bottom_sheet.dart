@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/history/event_history_response_model.dart';
 import 'package:voting_app/src/widgets/custom_button.dart';
-import 'package:voting_app/src/widgets/custom_dialog_view.dart';
 
 class ManualVotingBottomSheet extends StatefulWidget {
   const ManualVotingBottomSheet(
@@ -125,17 +127,15 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                   onPressed: () {
                     if (_textEditingController.text.isNotEmpty &&
                         int.parse(_textEditingController.text) > 0) {
-                      Navigator.pop(context);
-                      showDialog(
-                          context: context,
-                          builder: (context) => CustomDialogView(
-                                message: 'Are you sure to proceed',
-                                onConfirmClicked: () {},
-                                buttonLabel: 'Confirm',
-                                eventDetailsId: widget.eventDetailsId,
-                                count: int.parse(_textEditingController.text),
-                                type: 'PAID',
-                              ));
+                      Navigator.of(context).pushNamed(RoutePath.payForVotePage,
+                          arguments: [
+                            1,
+                            EventListData(
+                                id: '3',
+                                name: 'name',
+                                image: 'image',
+                                type: 'type')
+                          ]);
                     } else {
                       setState(() {
                         errorText = 'Please enter votes';

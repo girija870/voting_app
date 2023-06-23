@@ -41,6 +41,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/stop_watch.svg
   SvgGenImage get stopWatch => const SvgGenImage('assets/icons/stop_watch.svg');
 
+  /// File path: assets/icons/success_icon.svg
+  SvgGenImage get successIcon =>
+      const SvgGenImage('assets/icons/success_icon.svg');
+
   /// File path: assets/icons/vote_border.svg
   SvgGenImage get voteBorder =>
       const SvgGenImage('assets/icons/vote_border.svg');
@@ -63,6 +67,7 @@ class $AssetsIconsGen {
         search,
         share,
         stopWatch,
+        successIcon,
         voteBorder,
         voteFav,
         voteFilled

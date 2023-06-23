@@ -38,20 +38,21 @@ class CustomCardView extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          border: border,
           color: backgroundColor ?? AppColors.kColorWhite,
+          // border: Border(left: BorderSide()),
           boxShadow: boxShadowEnabled
               ? [
                   BoxShadow(
                     offset: Offset.zero,
                     spreadRadius: 2,
                     blurRadius: 8,
+
                     color: boxShadowColor ??
                         AppColors.kColorPrimary.withOpacity(0.1),
                   )
                 ]
               : [],
-          borderRadius:
+          borderRadius: borderRadius ??
               BorderRadius.only(topLeft: 8.circular, topRight: 8.circular),
         ),
         child: Container(

@@ -22,7 +22,7 @@ class PostVoteNotifier extends StateNotifier<AppState<PostVoteResponseModel>> {
 }
 
 final postVoteNotifierProvider =
-    StateNotifierProvider<PostVoteNotifier, AppState<PostVoteResponseModel>>(
+    StateNotifierProvider.autoDispose<PostVoteNotifier, AppState<PostVoteResponseModel>>(
         (ref) {
   return PostVoteNotifier(getIt<PostVoteUseCase>());
 });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
-import 'package:voting_app/src/widgets/circle_back_button.dart';
+import 'package:voting_app/src/core/widgets/custom_back_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -21,8 +21,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         appBarTitle ?? '',
         style: AppStyles.mediumText18.copyWith(color: AppColors.kColorPrimary),
       ).pOnly(right: 42.w),
-      leading: CircleButton(
-        onTap: () {},
+      leading: CustomBackButton(
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

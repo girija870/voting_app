@@ -12,12 +12,15 @@ import 'package:voting_app/src/event_voting/presentation/widgets/rounded_date_vi
 import 'package:voting_app/src/widgets/widgets.dart';
 
 class EventDetailsPage extends StatelessWidget {
-  const EventDetailsPage({Key? key, required this.eventListResponseModel}) : super(key: key);
+  const EventDetailsPage({Key? key, required this.eventListResponseModel})
+      : super(key: key);
   final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -65,7 +68,9 @@ class EventDetailsPage extends StatelessWidget {
                           children: [
                             Text(
                               eventListResponseModel.name,
-                              style: AppStyles.boldText14.copyWith(color: AppColors.kColorPrimary).lineHeight(21.h),
+                              style: AppStyles.boldText14
+                                  .copyWith(color: AppColors.kColorPrimary)
+                                  .lineHeight(21.h),
                               textAlign: TextAlign.center,
                             ),
                             Text(
@@ -99,7 +104,9 @@ class EventDetailsPage extends StatelessWidget {
                         10.verticalSpace,
                         Text(
                           eventListResponseModel.description ?? '',
-                          style: AppStyles.regularText12.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h),
+                          style: AppStyles.regularText12
+                              .copyWith(color: AppColors.kColorNeutralBlack)
+                              .lineHeight(18.h),
                         ),
                       ],
                     ).px(20.w),
@@ -136,17 +143,22 @@ class EventDetailsPage extends StatelessWidget {
                   //   ),
                   // ),
                   // 40.verticalSpace,
-                  CustomButton(
-                    title: 'VOTE NOW',
-                    onPressed: () => (EventType.DIRECT.name.toLowerCase() == eventListResponseModel.type.toLowerCase())
-                        ? Navigator.of(context).pushNamed(
-                            RoutePath.votingContestantListPage,
-                            arguments: [eventListResponseModel, eventListResponseModel.participants],
-                          )
-                        : Navigator.of(context).pushNamed(
-                            RoutePath.groupListPage,
-                          ),
-                  ),
+                    CustomButton(
+                      title: 'VOTE NOW',
+                      onPressed: () => (EventType.DIRECT.name.toLowerCase() ==
+                              eventListResponseModel.type.toLowerCase())
+                          ? Navigator.of(context).pushNamed(
+                              RoutePath.votingContestantListPage,
+                              arguments: [
+                                eventListResponseModel,
+                                eventListResponseModel.participants
+                              ],
+                            )
+                          : Navigator.of(context).pushNamed(
+                              RoutePath.groupListPage,
+                              arguments: eventListResponseModel,
+                            ),
+                    ),
                 ],
               ),
             )

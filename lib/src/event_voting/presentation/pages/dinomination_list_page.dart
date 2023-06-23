@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:voting_app/gen/assets.gen.dart';
+import 'package:voting_app/src/core/constants/route_path.dart';
 import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
@@ -9,7 +10,6 @@ import 'package:voting_app/src/core/widgets/custom_back_button.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/denomination_list_riverpod.dart';
 import 'package:voting_app/src/event_voting/presentation/widgets/manual_voting_bottom_sheet.dart';
-import 'package:voting_app/src/widgets/custom_dialog_view.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
@@ -130,18 +130,8 @@ class DenominationListPage extends StatelessWidget {
                             data.length,
                             (index) => ListTile(
                               onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => CustomDialogView(
-                                    message: 'Are you sure to proceed',
-                                    onConfirmClicked: () {},
-                                    buttonLabel: 'Confirm',
-                                    eventDetailsId: eventListResponseModel.participants[participantIndex].id,
-                                    count: data[index].count,
-                                    type: data[index].type,
-                                    denoId: data[index].id,
-                                  ),
-                                );
+                                Navigator.of(context).pushNamed(RoutePath.payForVotePage,arguments: [index,eventListResponseModel]);
+
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.r),

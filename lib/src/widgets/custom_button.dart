@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
   final Widget? icon;
 
   ShapeBorder get _shape => RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(50.r),
         side: BorderSide(
           color: (backgroundColor == AppColors.kColorWhite)
               ? AppColors.kColorPrimary
