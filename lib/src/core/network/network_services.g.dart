@@ -42,9 +42,13 @@ class _NetworkServices implements NetworkServices {
   }
 
   @override
-  Future<EventListResponseModel> fetchEventList(String category) async {
+  Future<EventListResponseModel> fetchEventList(
+    String category,
+    String? search,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'category': category};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
@@ -66,9 +70,13 @@ class _NetworkServices implements NetworkServices {
   }
 
   @override
-  Future<GroupListResponseModel> fetchGroupList(String eventId) async {
+  Future<GroupListResponseModel> fetchGroupList(
+    String eventId,
+    String? search,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'eventId': eventId};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
@@ -146,7 +154,6 @@ class _NetworkServices implements NetworkServices {
     String participantId,
     int count,
     String type,
-    String refTransactionId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -158,7 +165,6 @@ class _NetworkServices implements NetworkServices {
       'participantId': participantId,
       'count': count,
       'type': type,
-      'refTransactionId': refTransactionId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PostVoteResponseModel>(Options(

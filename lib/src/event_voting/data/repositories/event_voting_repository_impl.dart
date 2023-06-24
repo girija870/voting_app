@@ -53,11 +53,11 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
 
   @override
   Future<Either<AppError, EventListResponseModel>> fetchEventList(
-      {required String eventType}) async {
+      {required String eventType, String? search}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response =
-            await _remoteSource.fetchEventList(eventType: eventType);
+            await _remoteSource.fetchEventList(eventType: eventType, search: search);
         return right(response);
       } on AppException catch (e) {
         return left(AppError.serverError(message: e.message));
@@ -98,7 +98,7 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
 
   @override
   Future<Either<AppError, GroupListResponseModel>> fetchGroupList(
-      {required String eventId}) async {
+      {required String eventId, String? search}) async {
     if (await _internetInfo.isConnected) {
       try {
         final response = await _remoteSource.fetchGroupList(eventId: eventId);

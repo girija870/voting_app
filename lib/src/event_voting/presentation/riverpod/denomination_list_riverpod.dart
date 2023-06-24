@@ -21,10 +21,9 @@ class DenominationListNotifier
   }
 }
 
-final denominationListNotifierProvider = StateNotifierProvider.family<
-    DenominationListNotifier,
-    AppState<List<DenominationListResponseModel>>,
-    String>((ref, eventId) {
+final denominationListNotifierProvider = StateNotifierProvider.family
+    .autoDispose<DenominationListNotifier,
+        AppState<List<DenominationListResponseModel>>, String>((ref, eventId) {
   return DenominationListNotifier(getIt<FetchDenominationListUseCase>())
     ..fetchDenominationList(eventId: eventId);
 });

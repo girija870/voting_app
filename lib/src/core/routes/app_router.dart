@@ -46,9 +46,7 @@ class AppRouter {
       case RoutePath.denominationListPage:
         List<dynamic> arguments = settings.arguments as List<dynamic>;
         return MaterialPageRoute(
-          builder: (_) => DenominationListPage(
-              participantIndex: arguments[0],
-              eventListResponseModel: arguments[1]),
+          builder: (_) => DenominationListPage(participantIndex: arguments[0], eventListResponseModel: arguments[1]),
         );
 
       case RoutePath.votingHistoryPage:
@@ -60,8 +58,10 @@ class AppRouter {
         List<dynamic> arguments = settings.arguments as List<dynamic>;
         return MaterialPageRoute(
           builder: (_) => PaymentForVotePage(
-              participantIndex: arguments[0],
-              eventListResponseModel: arguments[1]),
+            participantIndex: arguments[0],
+            eventListResponseModel: arguments[1],
+            denomination: arguments[2],
+          ),
         );
 
       case RoutePath.successPage:

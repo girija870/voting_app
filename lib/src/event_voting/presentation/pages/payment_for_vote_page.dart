@@ -11,37 +11,37 @@ import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/core/widgets/custom_back_button.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
+import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
-import 'package:voting_app/src/event_voting/presentation/riverpod/denomination_list_riverpod.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/post_vote_riverpod.dart';
-import 'package:voting_app/src/event_voting/presentation/widgets/manual_voting_bottom_sheet.dart';
-import 'package:voting_app/src/widgets/custom_button.dart';
-import 'package:voting_app/src/widgets/loader/loader.dart';
-import 'package:voting_app/src/widgets/network_image_cache.dart';
+import 'package:voting_app/src/widgets/vertical_timer_count_view.dart';
+import 'package:voting_app/src/widgets/widgets.dart';
 
 class PaymentForVotePage extends ConsumerWidget {
   const PaymentForVotePage({
     Key? key,
     required this.participantIndex,
     required this.eventListResponseModel,
+    this.denomination,
   }) : super(key: key);
 
   final int participantIndex;
   final EventListData eventListResponseModel;
+  final DenominationListResponseModel? denomination;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+
     ref.listen(postVoteNotifierProvider, (previous, next) {
       next.maybeWhen(
           orElse: () => SizedBox.new,
           error: (errMessage) {
             Navigator.pop(context);
-            context.showErrorSnackBar(
-                title: 'error', message: errMessage, context: context);
+            context.showErrorSnackBar(title: 'error', message: errMessage, context: context);
           },
           success: (data) {
-            Navigator.pop(context);
-            Navigator.of(context).pushNamed(RoutePath.votingHistoryPage);
+            Navigator.of(context).pushNamed(RoutePath.successPage);
           });
     });
     return Scaffold(
@@ -65,7 +65,7 @@ class PaymentForVotePage extends ConsumerWidget {
               topRight: Radius.circular(20.r),
             ),
             child: CacheNetworkImageViewer(
-              imageUrl: eventListResponseModel.image,
+              imageUrl: eventListResponseModel.participants[participantIndex].image,
               height: 150.h,
               width: context.width,
             ),
@@ -83,13 +83,13 @@ class PaymentForVotePage extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    eventListResponseModel.location ?? 'Tripureshor, Kathmandu',
+                    eventListResponseModel.location ?? '',
                     style: AppStyles.regularText12.copyWith(
                       color: AppColors.kColorActive.withOpacity(.70),
                     ),
                   ),
                   Text(
-                    '43',
+                    '#${eventListResponseModel.participants[participantIndex].contestantNo}',
                     style: AppStyles.regularText12.copyWith(
                       color: AppColors.kColorActive.withOpacity(.70),
                     ),
@@ -107,24 +107,22 @@ class PaymentForVotePage extends ConsumerWidget {
                     ),
                   ),
                   4.verticalSpace,
-                  Container(
-                    height: 30.h,
-                    width: 120.w,
-                    padding: EdgeInsets.symmetric(
+
+                  HorizontalTimerCountView(
+                    contentPadding: EdgeInsets.symmetric(
                       horizontal: 10.w,
                       vertical: 3.h,
                     ),
-                    decoration: BoxDecoration(
-                      color: AppColors.kColorTextWhite,
-                      borderRadius: BorderRadius.circular(50.r),
+                    color: AppColors.kColorTextWhite,
+                    showDays: false,
+                    endTime: endTime,
+                    width: 120.w,
+                    height: 30,
+                    tileStyle: AppStyles.regularText12.copyWith(
+                      color: AppColors.kColorDark,
                     ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('05'),
-                        Text('05'),
-                        Text('05'),
-                      ],
+                    valueStyle: AppStyles.semiBoldText12.copyWith(
+                      color: AppColors.kColorDark,
                     ),
                   ),
                 ],
@@ -139,50 +137,40 @@ class PaymentForVotePage extends ConsumerWidget {
               Assets.icons.voteFilled.svg(width: 50.w, height: 50.h),
               10.horizontalSpace,
               Text(
-                '3000',
-                style: AppStyles.semiBoldText16
-                    .copyWith(color: AppColors.kColorNeutralBlack),
+                denomination!.count.toString(),
+                style: AppStyles.semiBoldText16.copyWith(color: AppColors.kColorNeutralBlack),
               )
             ],
           ).toSliverBox,
           20.verticalSpace.toSliverBox,
           Center(
             child: Text(
-              'Nrs.10000',
-              style: AppStyles.semiBoldText16
-                  .lineHeight(21.h)
-                  .copyWith(color: AppColors.kColorNeutralBlack),
+              'Nrs. ${denomination!.amount}',
+              style: AppStyles.semiBoldText16.lineHeight(21.h).copyWith(color: AppColors.kColorNeutralBlack),
             ),
           ).toSliverBox,
           170.verticalSpace.toSliverBox,
           Consumer(
             builder: (context, ref, child) {
-              final loading = ref
-                  .watch(postVoteNotifierProvider)
-                  .maybeWhen(orElse: () => false, loading: () => true);
-              return loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : CustomButton(
-                      width: context.width * .5,
-                      title: 'Pay',
-                      titleStyle: AppStyles.mediumText14
-                          .copyWith(color: AppColors.kColorWhite)
-                          .lineHeight(16.59),
-
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RoutePath.successPage);
-                        // ref.read(postVoteNotifierProvider.notifier).postVote(
-                        //     param: ContestantVotingParam(
-                        //         userId: 'String',
-                        //         participantId: 'eventDetailsId',
-                        //         count: 4,
-                        //         type: 'type',
-                        //         username: '9849423081',
-                        //         denoId: 'denoId' ?? '',
-                        //         refTransactionId:
-                        //         Random().nextInt(40).toString()));
-                      },
-                    );
+              final loading = ref.watch(postVoteNotifierProvider).maybeWhen(orElse: () => false, loading: () => true);
+              return CustomButton(
+                width: context.width * .5,
+                title: 'Pay',
+                loading: loading,
+                titleStyle: AppStyles.mediumText14.copyWith(color: AppColors.kColorWhite).lineHeight(16.59),
+                onPressed: () {
+                  ref.read(postVoteNotifierProvider.notifier).postVote(
+                        param: ContestantVotingParam(
+                          userId: 'String',
+                          participantId: eventListResponseModel.participants[participantIndex].id,
+                          count: denomination!.count,
+                          type: denomination!.type,
+                          username: '9849423081',
+                          denoId: denomination?.id ?? '',
+                        ),
+                      );
+                },
+              );
             },
           ).px(20.w).toSliverBox
         ],

@@ -12,6 +12,7 @@ import 'package:voting_app/src/event_voting/presentation/riverpod/denomination_l
 import 'package:voting_app/src/event_voting/presentation/widgets/manual_voting_bottom_sheet.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
+import 'package:voting_app/src/widgets/vertical_timer_count_view.dart';
 
 class DenominationListPage extends StatelessWidget {
   const DenominationListPage({
@@ -25,6 +26,7 @@ class DenominationListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -48,7 +50,7 @@ class DenominationListPage extends StatelessWidget {
                   topRight: Radius.circular(20.r),
                 ),
                 child: CacheNetworkImageViewer(
-                  imageUrl: eventListResponseModel.image,
+                  imageUrl: eventListResponseModel.participants[participantIndex].image,
                   height: 150.h,
                   width: context.width,
                 ),
@@ -68,11 +70,17 @@ class DenominationListPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    eventListResponseModel.location ?? 'Tripureshor, Kathmandu',
+                    eventListResponseModel.location ?? '',
                     style: AppStyles.regularText12.copyWith(
                       color: AppColors.kColorActive.withOpacity(.70),
                     ),
                   ),
+                  Text(
+                    '#${eventListResponseModel.participants[participantIndex].contestantNo.toString()}',
+                    style: AppStyles.regularText12.copyWith(
+                      color: AppColors.kColorActive.withOpacity(.70),
+                    ),
+                  )
                 ],
               ),
               const Spacer(),
@@ -86,24 +94,21 @@ class DenominationListPage extends StatelessWidget {
                     ),
                   ),
                   4.verticalSpace,
-                  Container(
-                    height: 30.h,
-                    width: 120.w,
-                    padding: EdgeInsets.symmetric(
+                  HorizontalTimerCountView(
+                    contentPadding: EdgeInsets.symmetric(
                       horizontal: 10.w,
                       vertical: 3.h,
                     ),
-                    decoration: BoxDecoration(
-                      color: AppColors.kColorTextWhite,
-                      borderRadius: BorderRadius.circular(50.r),
+                    color: AppColors.kColorTextWhite,
+                    showDays: false,
+                    endTime: endTime,
+                    width: 120.w,
+                    height: 30,
+                    tileStyle: AppStyles.regularText12.copyWith(
+                      color: AppColors.kColorDark,
                     ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('05'),
-                        Text('05'),
-                        Text('05'),
-                      ],
+                    valueStyle: AppStyles.semiBoldText12.copyWith(
+                      color: AppColors.kColorDark,
                     ),
                   ),
                 ],
@@ -130,8 +135,7 @@ class DenominationListPage extends StatelessWidget {
                             data.length,
                             (index) => ListTile(
                               onTap: () {
-                                Navigator.of(context).pushNamed(RoutePath.payForVotePage,arguments: [index,eventListResponseModel]);
-
+                                Navigator.of(context).pushNamed(RoutePath.payForVotePage, arguments: [index, eventListResponseModel, data[index]]);
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.r),
@@ -154,9 +158,9 @@ class DenominationListPage extends StatelessWidget {
                                   color: AppColors.kColorActive,
                                 ),
                               ),
-                            ),
+                            ).pOnly(bottom: 19.h),
                           ),
-                          10.verticalSpace,
+                          3.verticalSpace,
                           Row(
                             children: [
                               Expanded(
@@ -187,8 +191,7 @@ class DenominationListPage extends StatelessWidget {
                               backgroundColor: AppColors.kColorWhite,
                               context: context,
                               builder: (context) => ManualVotingBottomSheet(
-                                eventDetailsId: eventListResponseModel.participants[participantIndex].id,
-                                price: eventListResponseModel.price,
+                                event: eventListResponseModel,
                               ),
                               isScrollControlled: true,
                               useRootNavigator: true,
@@ -214,23 +217,14 @@ class DenominationListPage extends StatelessWidget {
                               ),
                             ),
                             subtitle: Text(
-                              'Rs 100/vote',
+                              'Rs ${eventListResponseModel.price}/vote',
                               style: AppStyles.regularText12.copyWith(
                                 color: AppColors.kColorActive.withOpacity(.70),
                               ),
                             ),
                           ),
                           40.verticalSpace,
-                          // SizedBox(
-                          //   width: context.width,
-                          //   child: const Row(
-                          //     children: [
-                          //       Expanded(child: Drawer()),
-                          //       Text('OR'),
-                          //       Expanded(child: Drawer()),
-                          //     ],
-                          //   ),
-                          // ),
+
                         ],
                       );
                     },

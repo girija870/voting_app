@@ -10,6 +10,7 @@ ThemeData getApplicationTheme() {
       titleTextStyle: AppStyles.semiBoldText24.copyWith(
         color: AppColors.kColorActive,
       ),
+      surfaceTintColor: Colors.transparent,
     ),
   );
 }

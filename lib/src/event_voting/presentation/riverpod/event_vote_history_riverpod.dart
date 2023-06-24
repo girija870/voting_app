@@ -20,7 +20,7 @@ class EventVoteHistoryNotifier
   }
 }
 
-final eventVoteHistoryNotifierProvider = StateNotifierProvider.family<
+final eventVoteHistoryNotifierProvider = StateNotifierProvider.family.autoDispose<
     EventVoteHistoryNotifier,
     AppState<EventHistoryResponseModel>,
     String>((ref, userId) {

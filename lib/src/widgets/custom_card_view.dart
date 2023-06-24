@@ -39,7 +39,6 @@ class CustomCardView extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.kColorWhite,
-          // border: Border(left: BorderSide()),
           boxShadow: boxShadowEnabled
               ? [
                   BoxShadow(
