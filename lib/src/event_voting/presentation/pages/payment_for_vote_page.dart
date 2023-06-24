@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,25 +18,28 @@ import 'package:voting_app/src/widgets/widgets.dart';
 class PaymentForVotePage extends ConsumerWidget {
   const PaymentForVotePage({
     Key? key,
-    required this.participantIndex,
+    required this.participant,
     required this.eventListResponseModel,
     this.denomination,
   }) : super(key: key);
 
-  final int participantIndex;
+  final Participants participant;
   final EventListData eventListResponseModel;
   final DenominationListResponseModel? denomination;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+    final endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
 
     ref.listen(postVoteNotifierProvider, (previous, next) {
       next.maybeWhen(
           orElse: () => SizedBox.new,
           error: (errMessage) {
             Navigator.pop(context);
-            context.showErrorSnackBar(title: 'error', message: errMessage, context: context);
+            context.showErrorSnackBar(
+                title: 'error', message: errMessage, context: context);
           },
           success: (data) {
             Navigator.of(context).pushNamed(RoutePath.successPage);
@@ -65,7 +66,7 @@ class PaymentForVotePage extends ConsumerWidget {
               topRight: Radius.circular(20.r),
             ),
             child: CacheNetworkImageViewer(
-              imageUrl: eventListResponseModel.participants[participantIndex].image,
+              imageUrl: participant.image,
               height: 150.h,
               width: context.width,
             ),
@@ -89,7 +90,7 @@ class PaymentForVotePage extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    '#${eventListResponseModel.participants[participantIndex].contestantNo}',
+                    '#${participant.contestantNo}',
                     style: AppStyles.regularText12.copyWith(
                       color: AppColors.kColorActive.withOpacity(.70),
                     ),
@@ -107,7 +108,6 @@ class PaymentForVotePage extends ConsumerWidget {
                     ),
                   ),
                   4.verticalSpace,
-
                   HorizontalTimerCountView(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: 10.w,
@@ -138,7 +138,8 @@ class PaymentForVotePage extends ConsumerWidget {
               10.horizontalSpace,
               Text(
                 denomination!.count.toString(),
-                style: AppStyles.semiBoldText16.copyWith(color: AppColors.kColorNeutralBlack),
+                style: AppStyles.semiBoldText24
+                    .copyWith(color: AppColors.kColorNeutralBlack),
               )
             ],
           ).toSliverBox,
@@ -146,23 +147,29 @@ class PaymentForVotePage extends ConsumerWidget {
           Center(
             child: Text(
               'Nrs. ${denomination!.amount}',
-              style: AppStyles.semiBoldText16.lineHeight(21.h).copyWith(color: AppColors.kColorNeutralBlack),
+              style: AppStyles.semiBoldText16
+                  .lineHeight(21.h)
+                  .copyWith(color: AppColors.kColorNeutralBlack),
             ),
           ).toSliverBox,
           170.verticalSpace.toSliverBox,
           Consumer(
             builder: (context, ref, child) {
-              final loading = ref.watch(postVoteNotifierProvider).maybeWhen(orElse: () => false, loading: () => true);
+              final loading = ref
+                  .watch(postVoteNotifierProvider)
+                  .maybeWhen(orElse: () => false, loading: () => true);
               return CustomButton(
                 width: context.width * .5,
                 title: 'Pay',
                 loading: loading,
-                titleStyle: AppStyles.mediumText14.copyWith(color: AppColors.kColorWhite).lineHeight(16.59),
+                titleStyle: AppStyles.mediumText14
+                    .copyWith(color: AppColors.kColorWhite)
+                    .lineHeight(16.59),
                 onPressed: () {
                   ref.read(postVoteNotifierProvider.notifier).postVote(
                         param: ContestantVotingParam(
                           userId: 'String',
-                          participantId: eventListResponseModel.participants[participantIndex].id,
+                          participantId: participant.id,
                           count: denomination!.count,
                           type: denomination!.type,
                           username: '9849423081',

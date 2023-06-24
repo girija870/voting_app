@@ -17,16 +17,18 @@ import 'package:voting_app/src/widgets/vertical_timer_count_view.dart';
 class DenominationListPage extends StatelessWidget {
   const DenominationListPage({
     Key? key,
-    required this.participantIndex,
+    required this.participant,
     required this.eventListResponseModel,
   }) : super(key: key);
 
-  final int participantIndex;
+  final Participants participant;
   final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -50,7 +52,8 @@ class DenominationListPage extends StatelessWidget {
                   topRight: Radius.circular(20.r),
                 ),
                 child: CacheNetworkImageViewer(
-                  imageUrl: eventListResponseModel.participants[participantIndex].image,
+                  imageUrl:
+                      participant.image,
                   height: 150.h,
                   width: context.width,
                 ),
@@ -76,7 +79,7 @@ class DenominationListPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '#${eventListResponseModel.participants[participantIndex].contestantNo.toString()}',
+                    '#${participant.contestantNo.toString()}',
                     style: AppStyles.regularText12.copyWith(
                       color: AppColors.kColorActive.withOpacity(.70),
                     ),
@@ -125,7 +128,10 @@ class DenominationListPage extends StatelessWidget {
           22.verticalSpace.toSliverBox,
           Consumer(
             builder: (context, ref, child) {
-              return ref.watch(denominationListNotifierProvider(eventListResponseModel.id)).maybeWhen(
+              return ref
+                  .watch(denominationListNotifierProvider(
+                      eventListResponseModel.id))
+                  .maybeWhen(
                     orElse: () => const SizedBox(),
                     loading: () => const Loader(),
                     success: (data) {
@@ -135,12 +141,19 @@ class DenominationListPage extends StatelessWidget {
                             data.length,
                             (index) => ListTile(
                               onTap: () {
-                                Navigator.of(context).pushNamed(RoutePath.payForVotePage, arguments: [index, eventListResponseModel, data[index]]);
+                                Navigator.of(context).pushNamed(
+                                    RoutePath.payForVotePage,
+                                    arguments: [
+                                      participant,
+                                      eventListResponseModel,
+                                      data[index]
+                                    ]);
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.r),
                               ),
-                              tileColor: AppColors.kColorTextWhite.withOpacity(.70),
+                              tileColor:
+                                  AppColors.kColorTextWhite.withOpacity(.70),
                               leading: Assets.icons.heart.svg(),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 20,
@@ -165,7 +178,8 @@ class DenominationListPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Divider(
-                                  color: AppColors.kColorActive.withOpacity(.70),
+                                  color:
+                                      AppColors.kColorActive.withOpacity(.70),
                                   thickness: 1,
                                 ),
                               ),
@@ -179,7 +193,8 @@ class DenominationListPage extends StatelessWidget {
                               10.horizontalSpace,
                               Expanded(
                                 child: Divider(
-                                  color: AppColors.kColorActive.withOpacity(.70),
+                                  color:
+                                      AppColors.kColorActive.withOpacity(.70),
                                   thickness: 1,
                                 ),
                               ),
@@ -192,6 +207,7 @@ class DenominationListPage extends StatelessWidget {
                               context: context,
                               builder: (context) => ManualVotingBottomSheet(
                                 event: eventListResponseModel,
+                                participant: participant,
                               ),
                               isScrollControlled: true,
                               useRootNavigator: true,
@@ -206,7 +222,8 @@ class DenominationListPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.r),
                             ),
                             leading: Assets.icons.heart.svg(),
-                            tileColor: AppColors.kColorTextWhite.withOpacity(.70),
+                            tileColor:
+                                AppColors.kColorTextWhite.withOpacity(.70),
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20,
                             ),
@@ -224,7 +241,6 @@ class DenominationListPage extends StatelessWidget {
                             ),
                           ),
                           40.verticalSpace,
-
                         ],
                       );
                     },

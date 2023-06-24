@@ -53,10 +53,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i5.InternetInfoImpl(gh<_i3.Connectivity>()));
     gh.lazySingleton<_i6.NetworkServices>(() => registerModule.networkServices);
     gh.lazySingleton<_i7.EventVotingRemoteSource>(
-        () => _i7.EventVotingRemoteSourceImpl(
-              gh<_i4.Dio>(),
-              gh<_i6.NetworkServices>(),
-            ));
+        () => _i7.EventVotingRemoteSourceImpl(gh<_i6.NetworkServices>()));
     gh.lazySingleton<_i8.EventVotingRepository>(
         () => _i9.EventVotingRepositoryImpl(
               gh<_i5.InternetInfo>(),

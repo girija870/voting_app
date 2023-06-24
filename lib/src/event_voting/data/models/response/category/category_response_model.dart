@@ -10,5 +10,6 @@ class CategoryResponseModel with _$CategoryResponseModel {
     @Default([]) List<String> data,
   }) = _CategoryResponseModel;
 
-  factory CategoryResponseModel.fromJson(Map<String, dynamic> json) => _$CategoryResponseModelFromJson(json);
+  factory CategoryResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$CategoryResponseModelFromJson(json);
 }

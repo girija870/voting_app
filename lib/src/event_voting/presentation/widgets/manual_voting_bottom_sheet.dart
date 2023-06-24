@@ -9,12 +9,14 @@ import 'package:voting_app/src/event_voting/data/models/response/event_list/even
 import 'package:voting_app/src/widgets/custom_button.dart';
 
 class ManualVotingBottomSheet extends StatefulWidget {
-  const ManualVotingBottomSheet({super.key, required this.event});
+  const ManualVotingBottomSheet({super.key, required this.event, required this.participant});
 
   final EventListData event;
+  final Participants participant;
 
   @override
-  State<ManualVotingBottomSheet> createState() => _ManualVotingBottomSheetState();
+  State<ManualVotingBottomSheet> createState() =>
+      _ManualVotingBottomSheetState();
 }
 
 class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
@@ -68,7 +70,8 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                     decoration: InputDecoration(
                       counter: const SizedBox.shrink(),
                       hintText: 'Number of Votes',
-                      hintStyle: AppStyles.regularText12.copyWith(color: AppColors.kColorNeutralBlack),
+                      hintStyle: AppStyles.regularText12
+                          .copyWith(color: AppColors.kColorNeutralBlack),
                       contentPadding: const EdgeInsets.all(16),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
@@ -94,7 +97,8 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       errorText,
-                      style: AppStyles.regularText12.copyWith(color: AppColors.kColorRed),
+                      style: AppStyles.regularText12
+                          .copyWith(color: AppColors.kColorRed),
                     ).py(10),
                   ),
                 if (totalAmount > 0)
@@ -103,13 +107,15 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                     children: [
                       Text(
                         'Total Amount',
-                        style: AppStyles.regularText12.copyWith(color: AppColors.kColorNeutralBlack),
+                        style: AppStyles.regularText12
+                            .copyWith(color: AppColors.kColorNeutralBlack),
                         textAlign: TextAlign.right,
                       ).py(10),
                       const Spacer(),
                       Text(
                         'RS.\t${totalAmount.toString()}',
-                        style: AppStyles.regularText12.copyWith(color: AppColors.kColorNeutralBlack),
+                        style: AppStyles.regularText12
+                            .copyWith(color: AppColors.kColorNeutralBlack),
                         textAlign: TextAlign.right,
                       ).py(10),
                     ],
@@ -118,13 +124,13 @@ class _ManualVotingBottomSheetState extends State<ManualVotingBottomSheet> {
                 CustomButton(
                   title: 'NEXT',
                   onPressed: () {
-                    if (_textEditingController.text.isNotEmpty && int.parse(_textEditingController.text) > 0) {
-
+                    if (_textEditingController.text.isNotEmpty &&
+                        int.parse(_textEditingController.text) > 0) {
                       Navigator.pop(context);
                       Navigator.of(context).pushNamed(
                         RoutePath.payForVotePage,
                         arguments: [
-                          1,
+                          widget.participant,
                           widget.event,
                           DenominationListResponseModel(
                             id: '',

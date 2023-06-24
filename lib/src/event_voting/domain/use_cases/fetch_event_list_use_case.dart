@@ -8,11 +8,13 @@ import 'package:voting_app/src/event_voting/domain/repositories/event_voting_rep
 import '../../data/models/response/event_list/event_list_response_model.dart';
 
 @lazySingleton
-class FetchEventListUseCase extends BaseUseCase<EventParams, EventListResponseModel> {
+class FetchEventListUseCase
+    extends BaseUseCase<EventParams, EventListResponseModel> {
   FetchEventListUseCase(this._repository);
 
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, EventListResponseModel>> execute(EventParams param) => _repository.fetchEventList(eventType: param.type, search: param.search);
+  Future<Either<AppError, EventListResponseModel>> execute(EventParams param) =>
+      _repository.fetchEventList(eventType: param.type, search: param.search);
 }

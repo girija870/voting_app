@@ -7,7 +7,6 @@ import 'package:voting_app/src/core/extensions/extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 import 'package:voting_app/src/core/widgets/custom_back_button.dart';
-import 'package:voting_app/src/core/widgets/custom_text_field.dart';
 import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
 import 'package:voting_app/src/event_voting/presentation/riverpod/group_list_riverpod.dart';
 import 'package:voting_app/src/widgets/custom_card_view.dart';

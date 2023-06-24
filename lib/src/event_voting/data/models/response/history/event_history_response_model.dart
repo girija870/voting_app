@@ -10,7 +10,8 @@ class EventHistoryResponseModel with _$EventHistoryResponseModel {
     required EventData data,
   }) = _EventHistoryResponseModel;
 
-  factory EventHistoryResponseModel.fromJson(Map<String, dynamic> json) => _$EventHistoryResponseModelFromJson(json);
+  factory EventHistoryResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$EventHistoryResponseModelFromJson(json);
 }
 
 @freezed
@@ -21,7 +22,8 @@ class EventData with _$EventData {
     @Default([]) List<EventHistoryData> votes,
   }) = _EventData;
 
-  factory EventData.fromJson(Map<String, dynamic> json) => _$EventDataFromJson(json);
+  factory EventData.fromJson(Map<String, dynamic> json) =>
+      _$EventDataFromJson(json);
 }
 
 @freezed
@@ -34,7 +36,8 @@ class EventHistoryData with _$EventHistoryData {
     Event? event,
   }) = _EventHistoryData;
 
-  factory EventHistoryData.fromJson(Map<String, dynamic> json) => _$EventHistoryDataFromJson(json);
+  factory EventHistoryData.fromJson(Map<String, dynamic> json) =>
+      _$EventHistoryDataFromJson(json);
 }
 
 @freezed

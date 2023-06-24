@@ -14,6 +14,7 @@ class FetchGroupListUseCase
   final EventVotingRepository _repository;
 
   @override
-  Future<Either<AppError, GroupListResponseModel>> execute(EventGroupParams param) =>
+  Future<Either<AppError, GroupListResponseModel>> execute(
+          EventGroupParams param) =>
       _repository.fetchGroupList(eventId: param.eventId, search: param.search);
 }

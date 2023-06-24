@@ -56,8 +56,8 @@ class EventVotingRepositoryImpl implements EventVotingRepository {
       {required String eventType, String? search}) async {
     if (await _internetInfo.isConnected) {
       try {
-        final response =
-            await _remoteSource.fetchEventList(eventType: eventType, search: search);
+        final response = await _remoteSource.fetchEventList(
+            eventType: eventType, search: search);
         return right(response);
       } on AppException catch (e) {
         return left(AppError.serverError(message: e.message));

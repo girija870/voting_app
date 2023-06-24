@@ -19,20 +19,21 @@ abstract class EventVotingRemoteSource {
     String? search,
   });
 
-  Future<DenominationResponseModel> fetchDenominationList({required String eventId});
+  Future<DenominationResponseModel> fetchDenominationList(
+      {required String eventId});
 
   Future<EventHistoryResponseModel> fetchEventHistory({required String userId});
 
-  Future<PostVoteResponseModel> postVote({required ContestantVotingParam param});
+  Future<PostVoteResponseModel> postVote(
+      {required ContestantVotingParam param});
 
-  Future<GroupListResponseModel> fetchGroupList({required String eventId, String? search});
+  Future<GroupListResponseModel> fetchGroupList(
+      {required String eventId, String? search});
 }
 
 @LazySingleton(as: EventVotingRemoteSource)
 class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
-  final Dio _dio;
-
-  EventVotingRemoteSourceImpl(this._dio, this._networkServices);
+  EventVotingRemoteSourceImpl(this._networkServices);
 
   final NetworkServices _networkServices;
 
@@ -50,26 +51,31 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<DenominationResponseModel> fetchDenominationList({required String eventId}) async {
+  Future<DenominationResponseModel> fetchDenominationList(
+      {required String eventId}) async {
     return await _networkServices.fetchDenominationList(eventId);
   }
 
   @override
-  Future<EventHistoryResponseModel> fetchEventHistory({required String userId}) async {
+  Future<EventHistoryResponseModel> fetchEventHistory(
+      {required String userId}) async {
     return await _networkServices.fetchEventHistory(userId);
   }
 
   @override
-  Future<PostVoteResponseModel> postVote({required ContestantVotingParam param}) async {
+  Future<PostVoteResponseModel> postVote(
+      {required ContestantVotingParam param}) async {
     try {
-      return await _networkServices.postVote(param.userId, param.username, param.denoId, param.participantId, param.count, param.type);
+      return await _networkServices.postVote(param.userId, param.username,
+          param.denoId, param.participantId, param.count, param.type);
     } on DioException catch (e) {
       throw AppException.fromDioError(e);
     }
   }
 
   @override
-  Future<GroupListResponseModel> fetchGroupList({required String eventId, String? search}) async {
+  Future<GroupListResponseModel> fetchGroupList(
+      {required String eventId, String? search}) async {
     return await _networkServices.fetchGroupList(eventId, search);
   }
 }

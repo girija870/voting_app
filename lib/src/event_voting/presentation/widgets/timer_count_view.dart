@@ -27,13 +27,19 @@ class TimerCountView extends StatelessWidget {
       children: [
         Text(
           value,
-          style: textStyle1 ?? AppStyles.regularText14.copyWith(color: AppColors.kColorDark).lineHeight(0.h),
+          style: textStyle1 ??
+              AppStyles.regularText14
+                  .copyWith(color: AppColors.kColorDark)
+                  .lineHeight(0.h),
           textAlign: TextAlign.center,
         ),
         if (title != null)
           Text(
             title!,
-            style: textStyle2 ?? AppStyles.regularText12.copyWith(color: AppColors.kColorDark).lineHeight(0.h),
+            style: textStyle2 ??
+                AppStyles.regularText12
+                    .copyWith(color: AppColors.kColorDark)
+                    .lineHeight(0.h),
             textAlign: TextAlign.center,
           ),
       ],

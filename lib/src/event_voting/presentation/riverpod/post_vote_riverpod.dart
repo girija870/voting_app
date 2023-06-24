@@ -5,7 +5,6 @@ import 'package:voting_app/src/event_voting/data/models/request/contestant_votin
 import 'package:voting_app/src/event_voting/data/models/response/post_vote/post_vote_response_model.dart';
 import 'package:voting_app/src/event_voting/domain/use_cases/post_vote_use_case.dart';
 
-
 class PostVoteNotifier extends StateNotifier<AppState<PostVoteResponseModel>> {
   PostVoteNotifier(this._useCase) : super(const AppState.initial());
 
@@ -21,8 +20,7 @@ class PostVoteNotifier extends StateNotifier<AppState<PostVoteResponseModel>> {
   }
 }
 
-final postVoteNotifierProvider =
-    StateNotifierProvider.autoDispose<PostVoteNotifier, AppState<PostVoteResponseModel>>(
-        (ref) {
+final postVoteNotifierProvider = StateNotifierProvider.autoDispose<
+    PostVoteNotifier, AppState<PostVoteResponseModel>>((ref) {
   return PostVoteNotifier(getIt<PostVoteUseCase>());
 });

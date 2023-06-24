@@ -15,16 +15,21 @@ import 'package:voting_app/src/widgets/vertical_timer_count_view.dart';
 import 'package:voting_app/src/widgets/widgets.dart';
 
 class EventDetailsPage extends StatelessWidget {
-  const EventDetailsPage({Key? key, required this.eventListResponseModel}) : super(key: key);
+  const EventDetailsPage({Key? key, required this.eventListResponseModel})
+      : super(key: key);
   final EventListData eventListResponseModel;
 
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.parse(eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+    int endTime = DateTime.parse(
+            eventListResponseModel.endDate ?? DateTime.now().toString())
+        .millisecondsSinceEpoch;
 
-    final date = DateFormat('dd').format(DateTime.parse(eventListResponseModel.startDate ?? DateTime.now().toString()));
+    final date = DateFormat('dd').format(DateTime.parse(
+        eventListResponseModel.startDate ?? DateTime.now().toString()));
 
-    final month = DateFormat('MMM').format(DateTime.parse(eventListResponseModel.startDate ?? DateTime.now().toString()));
+    final month = DateFormat('MMM').format(DateTime.parse(
+        eventListResponseModel.startDate ?? DateTime.now().toString()));
     return Scaffold(
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -72,10 +77,14 @@ class EventDetailsPage extends StatelessWidget {
             CustomButton(
               title: 'VOTE NOW',
               width: context.width,
-              onPressed: () => (EventType.DIRECT.name.toLowerCase() == eventListResponseModel.type.toLowerCase())
+              onPressed: () => (EventType.DIRECT.name.toLowerCase() ==
+                      eventListResponseModel.type.toLowerCase())
                   ? Navigator.of(context).pushNamed(
                       RoutePath.votingContestantListPage,
-                      arguments: [eventListResponseModel, eventListResponseModel.participants],
+                      arguments: [
+                        eventListResponseModel,
+                        eventListResponseModel.participants
+                      ],
                     )
                   : Navigator.of(context).pushNamed(
                       RoutePath.groupListPage,
@@ -137,7 +146,9 @@ class EventDetailsPage extends StatelessWidget {
                           children: [
                             Text(
                               eventListResponseModel.name,
-                              style: AppStyles.boldText14.copyWith(color: AppColors.kColorPrimary).lineHeight(21.h),
+                              style: AppStyles.boldText14
+                                  .copyWith(color: AppColors.kColorPrimary)
+                                  .lineHeight(21.h),
                               textAlign: TextAlign.center,
                             ),
                             Text(
@@ -168,7 +179,9 @@ class EventDetailsPage extends StatelessWidget {
                         10.verticalSpace,
                         Text(
                           eventListResponseModel.description ?? '',
-                          style: AppStyles.regularText12.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h),
+                          style: AppStyles.regularText12
+                              .copyWith(color: AppColors.kColorNeutralBlack)
+                              .lineHeight(18.h),
                         ),
                       ],
                     ).px(20.w),

@@ -45,7 +45,6 @@ class CustomCardView extends StatelessWidget {
                     offset: Offset.zero,
                     spreadRadius: 2,
                     blurRadius: 8,
-
                     color: boxShadowColor ??
                         AppColors.kColorPrimary.withOpacity(0.1),
                   )

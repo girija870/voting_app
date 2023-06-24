@@ -34,11 +34,14 @@ class CustomButton extends StatelessWidget {
   ShapeBorder get _shape => RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.r),
         side: BorderSide(
-          color: (backgroundColor == AppColors.kColorWhite) ? AppColors.kColorPrimary : Colors.transparent,
+          color: (backgroundColor == AppColors.kColorWhite)
+              ? AppColors.kColorPrimary
+              : Colors.transparent,
         ),
       );
 
-  BoxConstraints get _constraints => BoxConstraints.tightFor(width: width, height: height);
+  BoxConstraints get _constraints =>
+      BoxConstraints.tightFor(width: width, height: height);
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +83,9 @@ class CustomButton extends StatelessWidget {
                         if (title != null)
                           Text(
                             title!,
-                            style: titleStyle ?? AppStyles.mediumText14.copyWith(color: AppColors.kColorWhite),
+                            style: titleStyle ??
+                                AppStyles.mediumText14
+                                    .copyWith(color: AppColors.kColorWhite),
                           ),
                       ],
                     ),

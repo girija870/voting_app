@@ -21,58 +21,81 @@ class _VotingHistoryPageState extends State<VotingHistoryPage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        return ref.watch(eventVoteHistoryNotifierProvider('9849423081')).maybeWhen(
-            orElse: () => const SizedBox(),
-            loading: () => const Scaffold(body: Center(child: Loader())),
-            success: (data) {
-              return Scaffold(
-                body: CustomScrollView(
-                  slivers: [
-                    const SliverAppBar(
-                      pinned: false,
-                      automaticallyImplyLeading: true,
-                      title: Text('Voting History'),
-                    ),
-                    20.verticalSpace.toSliverBox,
-                    (data.data.votes.isNotEmpty)
-                        ? SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                final historyData = data.data.votes[index];
+        return ref
+            .watch(eventVoteHistoryNotifierProvider('9849423081'))
+            .maybeWhen(
+                orElse: () => const SizedBox(),
+                loading: () => const Scaffold(body: Center(child: Loader())),
+                success: (data) {
+                  return Scaffold(
+                    body: CustomScrollView(
+                      slivers: [
+                        const SliverAppBar(
+                          pinned: false,
+                          automaticallyImplyLeading: true,
+                          title: Text('Voting History'),
+                        ),
+                        20.verticalSpace.toSliverBox,
+                        (data.data.votes.isNotEmpty)
+                            ? SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    final historyData = data.data.votes[index];
 
-                                return Row(
-                                  children: [
-                                    CircleView(
-                                        child: CacheNetworkImageViewer(
-                                      imageUrl: historyData.event!.image,
-                                    )),
-                                    10.horizontalSpace,
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                    return Row(
                                       children: [
-                                        Text(historyData.event!.participant!, style: AppStyles.boldText16.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h)),
-                                        Text(historyData.event!.name, style: AppStyles.mediumText14.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h)),
-                                        Text(historyData.voteDate!, style: AppStyles.mediumText14.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h)),
+                                        CircleView(
+                                            child: CacheNetworkImageViewer(
+                                          imageUrl: historyData.event!.participantImage ?? '',
+                                        )),
+                                        10.horizontalSpace,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                historyData.event!.participant!,
+                                                style: AppStyles.boldText16
+                                                    .copyWith(
+                                                        color: AppColors
+                                                            .kColorNeutralBlack)
+                                                    .lineHeight(18.h)),
+                                            Text(historyData.event!.name,
+                                                style: AppStyles.mediumText14
+                                                    .copyWith(
+                                                        color: AppColors
+                                                            .kColorNeutralBlack)
+                                                    .lineHeight(18.h)),
+                                            Text(historyData.voteDate!,
+                                                style: AppStyles.mediumText14
+                                                    .copyWith(
+                                                        color: AppColors
+                                                            .kColorNeutralBlack)
+                                                    .lineHeight(18.h)),
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          '${historyData.count! > 1 ? '${historyData.count} Votes' : '${historyData.count} Votes'} ',
+                                          style: AppStyles.regularText14
+                                              .copyWith(
+                                                  color: AppColors
+                                                      .kColorNeutralBlack)
+                                              .lineHeight(18.h),
+                                        ),
                                       ],
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      '${historyData.count! > 1 ? '${historyData.count} Votes' : '${historyData.count} Votes'} ',
-                                      style: AppStyles.regularText14.copyWith(color: AppColors.kColorNeutralBlack).lineHeight(18.h),
-                                    ),
-                                  ],
-                                ).px(20.w).pOnly(bottom: 20.h);
-                              },
-                              childCount: data.data.votes.length,
-                            ),
-                          )
-                        : const Center(
-                            child: Text('No Voting History yet'),
-                          ).toSliverBox,
-                  ],
-                ),
-              );
-            });
+                                    ).px(20.w).pOnly(bottom: 20.h);
+                                  },
+                                  childCount: data.data.votes.length,
+                                ),
+                              )
+                            : const Center(
+                                child: Text('No Voting History yet'),
+                              ).toSliverBox,
+                      ],
+                    ),
+                  );
+                });
       },
     );
   }

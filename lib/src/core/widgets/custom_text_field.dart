@@ -22,7 +22,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: style ?? AppStyles.mediumText12.copyWith(color: AppColors.kColorActive.withOpacity(.70)),
+      style: style ??
+          AppStyles.mediumText12
+              .copyWith(color: AppColors.kColorActive.withOpacity(.70)),
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,

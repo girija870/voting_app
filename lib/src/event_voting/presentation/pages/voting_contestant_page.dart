@@ -110,7 +110,7 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
                         InkWell(
                           onTap: () => Navigator.of(context).pushNamed(
                             RoutePath.denominationListPage,
-                            arguments: [index, widget.eventListResponseModel],
+                            arguments: [searchedParticipants[index], widget.eventListResponseModel],
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(

@@ -5,7 +5,8 @@ import 'package:voting_app/src/event_voting/data/models/response/group_list/grou
 import 'package:voting_app/src/event_voting/domain/params/event_group_params.dart';
 import 'package:voting_app/src/event_voting/domain/use_cases/fetch_group_list_use_case.dart';
 
-class GroupListNotifier extends StateNotifier<AppState<GroupListResponseModel>> {
+class GroupListNotifier
+    extends StateNotifier<AppState<GroupListResponseModel>> {
   GroupListNotifier(this._useCase) : super(const AppState.initial());
 
   final FetchGroupListUseCase _useCase;
@@ -19,17 +20,29 @@ class GroupListNotifier extends StateNotifier<AppState<GroupListResponseModel>> 
       EventGroupParams(eventId: eventId),
     ))
         .fold(
-      (failure) => failure.when(serverError: (errMessage) => AppState.error(message: errMessage), noInternet: AppState.noInternet),
+      (failure) => failure.when(
+          serverError: (errMessage) => AppState.error(message: errMessage),
+          noInternet: AppState.noInternet),
       (data) => AppState.success(data: data),
     ));
   }
 
   Future<void> search({required String search}) async {
     state = (const AppState.loading());
-    state = ((await _useCase.execute(EventGroupParams(eventId: eventId!, search: search))).fold((failure) => failure.when(serverError: (errMessage) => AppState.error(message: errMessage), noInternet: AppState.noInternet), (data) => AppState.success(data: data)));
+    state = ((await _useCase
+            .execute(EventGroupParams(eventId: eventId!, search: search)))
+        .fold(
+            (failure) => failure.when(
+                serverError: (errMessage) =>
+                    AppState.error(message: errMessage),
+                noInternet: AppState.noInternet),
+            (data) => AppState.success(data: data)));
   }
 }
 
-final eventGroupNotifierProvider = StateNotifierProvider.family.autoDispose<GroupListNotifier, AppState<GroupListResponseModel>, String>((ref, eventId) {
-  return GroupListNotifier(getIt<FetchGroupListUseCase>())..fetchGroupList(eventId: eventId);
+final eventGroupNotifierProvider = StateNotifierProvider.family
+    .autoDispose<GroupListNotifier, AppState<GroupListResponseModel>, String>(
+        (ref, eventId) {
+  return GroupListNotifier(getIt<FetchGroupListUseCase>())
+    ..fetchGroupList(eventId: eventId);
 });

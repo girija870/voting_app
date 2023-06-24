@@ -13,7 +13,8 @@ class EventViewPage extends ConsumerStatefulWidget {
   ConsumerState<EventViewPage> createState() => _EventViewPageState();
 }
 
-class _EventViewPageState extends ConsumerState<EventViewPage> with SingleTickerProviderStateMixin {
+class _EventViewPageState extends ConsumerState<EventViewPage>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     selectedTabs = 0;
@@ -23,7 +24,9 @@ class _EventViewPageState extends ConsumerState<EventViewPage> with SingleTicker
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    0.delayedSeconds.then((value) => ref.read(eventListNotifierProvider.notifier).fetchEventList(eventType: 'ALL'));
+    0.delayedSeconds.then((value) => ref
+        .read(eventListNotifierProvider.notifier)
+        .fetchEventList(eventType: 'ALL'));
   }
 
   int? selectedTabs;
