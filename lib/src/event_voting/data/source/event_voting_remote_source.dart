@@ -66,8 +66,19 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   Future<PostVoteResponseModel> postVote(
       {required ContestantVotingParam param}) async {
     try {
-      return await _networkServices.postVote(param.userId, param.username,
-          param.denoId, param.participantId, param.count, param.type);
+      final response = await _networkServices.postVote(
+          param.userId,
+          param.username,
+          param.denoId,
+          param.participantId,
+          param.count,
+          param.type);
+
+      if (response.success == true) {
+        return response;
+      } else {
+        throw AppException(message: response.message);
+      }
     } on DioException catch (e) {
       throw AppException.fromDioError(e);
     }

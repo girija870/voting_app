@@ -32,7 +32,7 @@ class _NetworkServices implements NetworkServices {
     )
             .compose(
               _dio.options,
-              'api/category',
+              'api/vote/category',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -60,7 +60,7 @@ class _NetworkServices implements NetworkServices {
     )
             .compose(
               _dio.options,
-              'api/event/list',
+              'api/events',
               queryParameters: queryParameters,
               data: _data,
             )
