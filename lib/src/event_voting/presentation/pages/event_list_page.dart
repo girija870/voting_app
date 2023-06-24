@@ -27,8 +27,10 @@ class EventListPage extends StatelessWidget {
         CustomTextField(
           hintText: 'Search',
           controller: TextEditingController(),
-          prefixIcon: Transform.scale(scale: .5, child: Assets.icons.search.svg()),
-          suffixIcon: Transform.scale(scale: .5, child: Assets.icons.filtered.svg()),
+          prefixIcon:
+              Transform.scale(scale: .5, child: Assets.icons.search.svg()),
+          suffixIcon:
+              Transform.scale(scale: .5, child: Assets.icons.filtered.svg()),
         ).px(20.w),
         Consumer(
           builder: (context, ref, child) {
@@ -44,7 +46,9 @@ class EventListPage extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         final eventData = data[index];
-                        int endTime = DateTime.parse(eventData.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
+                        int endTime = DateTime.parse(
+                                eventData.endDate ?? DateTime.now().toString())
+                            .millisecondsSinceEpoch;
 
                         return CustomCardView(
                           boxShadowEnabled: true,
@@ -72,7 +76,8 @@ class EventListPage extends StatelessWidget {
                                       ),
                                       const Positioned(
                                         right: 10,
-                                        child: RoundedDateViewer(month: 'JUN', date: '03'),
+                                        child: RoundedDateViewer(
+                                            month: 'JUN', date: '03'),
                                       ),
                                     ],
                                   ),
@@ -106,35 +111,47 @@ class EventListPage extends StatelessWidget {
                                   if (time == null) {
                                     return Text(
                                       'Voting Closed',
-                                      style: AppStyles.boldText12.copyWith(color: AppColors.kColorRed),
+                                      style: AppStyles.boldText12
+                                          .copyWith(color: AppColors.kColorRed),
                                     );
                                   }
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Center(
-                                        child: Assets.icons.stopWatch.svg(height: 24, width: 24),
+                                        child: Assets.icons.stopWatch
+                                            .svg(height: 24, width: 24),
                                       ),
                                       14.horizontalSpace,
                                       Expanded(
                                         child: SizedBox(
                                           width: context.width,
                                           child: Container(
-                                            padding: const EdgeInsets.fromLTRB(13, 10, 7, 10),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                13, 10, 7, 10),
                                             decoration: BoxDecoration(
                                               color: AppColors.kColorTextWhite,
                                               borderRadius: 20.rounded,
                                             ),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 TimerCountView(
                                                   title: 'Days',
                                                   value: '${time.days ?? '00'}',
                                                 ),
-                                                TimerCountView(title: 'Hours', value: '${time.hours ?? '00'}'),
-                                                TimerCountView(title: 'Min', value: '${time.min ?? '00'}'),
+                                                TimerCountView(
+                                                    title: 'Hours',
+                                                    value:
+                                                        '${time.hours ?? '00'}'),
+                                                TimerCountView(
+                                                    title: 'Min',
+                                                    value:
+                                                        '${time.min ?? '00'}'),
                                               ],
                                             ),
                                           ),
@@ -143,7 +160,9 @@ class EventListPage extends StatelessWidget {
                                     ],
                                   );
                                 },
-                                textStyle: AppStyles.semiBoldText14.copyWith(color: AppColors.kColorPrimary, fontWeight: FontWeight.w600),
+                                textStyle: AppStyles.semiBoldText14.copyWith(
+                                    color: AppColors.kColorPrimary,
+                                    fontWeight: FontWeight.w600),
                               ).px(10.w).pOnly(bottom: 10.w)
                             ],
                           ),
