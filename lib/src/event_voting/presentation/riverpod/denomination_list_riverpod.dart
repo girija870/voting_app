@@ -27,3 +27,6 @@ final denominationListNotifierProvider = StateNotifierProvider.family
   return DenominationListNotifier(getIt<FetchDenominationListUseCase>())
     ..fetchDenominationList(eventId: eventId);
 });
+
+
+
