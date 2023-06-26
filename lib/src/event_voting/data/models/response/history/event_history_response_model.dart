@@ -5,7 +5,6 @@ part 'event_history_response_model.g.dart';
 
 @freezed
 class EventHistoryResponseModel with _$EventHistoryResponseModel {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory EventHistoryResponseModel({
     required EventData data,
   }) = _EventHistoryResponseModel;
@@ -28,10 +27,9 @@ class EventData with _$EventData {
 
 @freezed
 class EventHistoryData with _$EventHistoryData {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory EventHistoryData({
     int? count,
-    @JsonKey(name: 'voteDate') String? voteDate,
+    String? voteDate,
     double? amount,
     Event? event,
   }) = _EventHistoryData;
@@ -42,12 +40,11 @@ class EventHistoryData with _$EventHistoryData {
 
 @freezed
 class Event with _$Event {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory Event({
     String? participant,
     required String name,
     String? image,
-    @JsonKey(name: 'participantImage') String? participantImage,
+    String? participantImage,
   }) = _Event;
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);

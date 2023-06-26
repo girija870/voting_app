@@ -18,7 +18,7 @@ _$_GroupListResponseModel _$$_GroupListResponseModelFromJson(
 Map<String, dynamic> _$$_GroupListResponseModelToJson(
         _$_GroupListResponseModel instance) =>
     <String, dynamic>{
-      'data': instance.data.map((e) => e.toJson()).toList(),
+      'data': instance.data,
     };
 
 _$_GroupListData _$$_GroupListDataFromJson(Map<String, dynamic> json) =>
@@ -39,5 +39,5 @@ Map<String, dynamic> _$$_GroupListDataToJson(_$_GroupListData instance) =>
       'name': instance.name,
       'image': instance.image,
       'description': instance.description,
-      'participants': instance.participants.map((e) => e.toJson()).toList(),
+      'participants': instance.participants,
     };

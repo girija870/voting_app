@@ -19,7 +19,7 @@ _$_DenominationResponseModel _$$_DenominationResponseModelFromJson(
 Map<String, dynamic> _$$_DenominationResponseModelToJson(
         _$_DenominationResponseModel instance) =>
     <String, dynamic>{
-      'data': instance.data.map((e) => e.toJson()).toList(),
+      'data': instance.data,
     };
 
 _$_DenominationListResponseModel _$$_DenominationListResponseModelFromJson(

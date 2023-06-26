@@ -7,18 +7,15 @@ part 'group_list_response_model.g.dart';
 
 @freezed
 class GroupListResponseModel with _$GroupListResponseModel {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory GroupListResponseModel({
     @Default([]) List<GroupListData> data,
   }) = _GroupListResponseModel;
 
-  factory GroupListResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$GroupListResponseModelFromJson(json);
+  factory GroupListResponseModel.fromJson(Map<String, dynamic> json) => _$GroupListResponseModelFromJson(json);
 }
 
 @freezed
 class GroupListData with _$GroupListData {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory GroupListData({
     required String id,
     required String name,
@@ -27,6 +24,5 @@ class GroupListData with _$GroupListData {
     @Default([]) List<Participants> participants,
   }) = _GroupListData;
 
-  factory GroupListData.fromJson(Map<String, dynamic> json) =>
-      _$GroupListDataFromJson(json);
+  factory GroupListData.fromJson(Map<String, dynamic> json) => _$GroupListDataFromJson(json);
 }

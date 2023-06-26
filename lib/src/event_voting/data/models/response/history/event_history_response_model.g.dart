@@ -15,7 +15,7 @@ _$_EventHistoryResponseModel _$$_EventHistoryResponseModelFromJson(
 Map<String, dynamic> _$$_EventHistoryResponseModelToJson(
         _$_EventHistoryResponseModel instance) =>
     <String, dynamic>{
-      'data': instance.data.toJson(),
+      'data': instance.data,
     };
 
 _$_EventData _$$_EventDataFromJson(Map<String, dynamic> json) => _$_EventData(
@@ -49,7 +49,7 @@ Map<String, dynamic> _$$_EventHistoryDataToJson(_$_EventHistoryData instance) =>
       'count': instance.count,
       'voteDate': instance.voteDate,
       'amount': instance.amount,
-      'event': instance.event?.toJson(),
+      'event': instance.event,
     };
 
 _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(

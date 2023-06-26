@@ -12,11 +12,7 @@ import 'package:voting_app/src/widgets/custom_card_view.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
 
 class VotingContestantPage extends StatefulWidget {
-  const VotingContestantPage(
-      {Key? key,
-      required this.eventListResponseModel,
-      required this.participants})
-      : super(key: key);
+  const VotingContestantPage({Key? key, required this.eventListResponseModel, required this.participants}) : super(key: key);
 
   final EventListData eventListResponseModel;
   final List<Participants> participants;
@@ -42,11 +38,7 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
           });
         } else {
           setState(() {
-            searchedParticipants = widget.participants
-                .where((element) => element.name
-                    .toLowerCase()
-                    .contains(_searchController.text.toLowerCase()))
-                .toList();
+            searchedParticipants = widget.participants.where((element) => element.name.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
           });
         }
       });
@@ -60,9 +52,7 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
 
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.parse(
-            widget.eventListResponseModel.endDate ?? DateTime.now().toString())
-        .millisecondsSinceEpoch;
+    int endTime = DateTime.parse(widget.eventListResponseModel.endDate ?? DateTime.now().toString()).millisecondsSinceEpoch;
 
     return Scaffold(
       body: CustomScrollView(
@@ -83,10 +73,8 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
           CustomTextField(
             hintText: 'Search',
             controller: _searchController,
-            prefixIcon:
-                Transform.scale(scale: .5, child: Assets.icons.search.svg()),
-            suffixIcon:
-                Transform.scale(scale: .5, child: Assets.icons.filtered.svg()),
+            prefixIcon: Transform.scale(scale: .5, child: Assets.icons.search.svg()),
+            suffixIcon: Transform.scale(scale: .5, child: Assets.icons.filtered.svg()),
           ).px(20.w).toSliverBox,
           30.verticalSpace.toSliverBox,
           SliverGrid(
@@ -135,8 +123,7 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
                               Expanded(
                                 child: Text(
                                   searchedParticipants[index].name,
-                                  style: AppStyles.semiBoldText12.copyWith(
-                                      color: AppColors.kColorNeutralBlack),
+                                  style: AppStyles.semiBoldText12.copyWith(color: AppColors.kColorNeutralBlack),
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -148,8 +135,7 @@ class _VotingContestantPageState extends State<VotingContestantPage> {
                         4.verticalSpace,
                         Text(
                           '#${searchedParticipants[index].contestantNo.toString()}',
-                          style: AppStyles.semiBoldText12
-                              .copyWith(color: AppColors.kColorNeutralBlack),
+                          style: AppStyles.semiBoldText12.copyWith(color: AppColors.kColorNeutralBlack),
                           textAlign: TextAlign.center,
                         ),
                         10.verticalSpace

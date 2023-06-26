@@ -101,8 +101,7 @@ class __$$_DenominationResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_DenominationResponseModel implements _DenominationResponseModel {
   const _$_DenominationResponseModel(
       {final List<DenominationListResponseModel> data = const []})
@@ -324,8 +323,7 @@ class __$$_DenominationListResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_DenominationListResponseModel
     implements _DenominationListResponseModel {
   const _$_DenominationListResponseModel(

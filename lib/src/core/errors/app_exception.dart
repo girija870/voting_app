@@ -9,15 +9,13 @@ part 'app_exception.g.dart';
 class AppException with _$AppException {
   const AppException._();
 
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory AppException({
     required String message,
     int? statusCode,
     Map<String, dynamic>? errors,
   }) = _AppException;
 
-  factory AppException.fromJson(Map<String, dynamic> json) =>
-      _$AppExceptionFromJson(json);
+  factory AppException.fromJson(Map<String, dynamic> json) => _$AppExceptionFromJson(json);
 
   factory AppException.fromDioError(DioException e) {
     if (e.response != null) {

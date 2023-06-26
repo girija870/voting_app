@@ -113,8 +113,7 @@ class __$$_EventHistoryResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_EventHistoryResponseModel implements _EventHistoryResponseModel {
   const _$_EventHistoryResponseModel({required this.data});
 
@@ -359,7 +358,6 @@ EventHistoryData _$EventHistoryDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EventHistoryData {
   int? get count => throw _privateConstructorUsedError;
-  @JsonKey(name: 'voteDate')
   String? get voteDate => throw _privateConstructorUsedError;
   double? get amount => throw _privateConstructorUsedError;
   Event? get event => throw _privateConstructorUsedError;
@@ -376,11 +374,7 @@ abstract class $EventHistoryDataCopyWith<$Res> {
           EventHistoryData value, $Res Function(EventHistoryData) then) =
       _$EventHistoryDataCopyWithImpl<$Res, EventHistoryData>;
   @useResult
-  $Res call(
-      {int? count,
-      @JsonKey(name: 'voteDate') String? voteDate,
-      double? amount,
-      Event? event});
+  $Res call({int? count, String? voteDate, double? amount, Event? event});
 
   $EventCopyWith<$Res>? get event;
 }
@@ -444,11 +438,7 @@ abstract class _$$_EventHistoryDataCopyWith<$Res>
       __$$_EventHistoryDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? count,
-      @JsonKey(name: 'voteDate') String? voteDate,
-      double? amount,
-      Event? event});
+  $Res call({int? count, String? voteDate, double? amount, Event? event});
 
   @override
   $EventCopyWith<$Res>? get event;
@@ -492,14 +482,10 @@ class __$$_EventHistoryDataCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_EventHistoryData implements _EventHistoryData {
   const _$_EventHistoryData(
-      {this.count,
-      @JsonKey(name: 'voteDate') this.voteDate,
-      this.amount,
-      this.event});
+      {this.count, this.voteDate, this.amount, this.event});
 
   factory _$_EventHistoryData.fromJson(Map<String, dynamic> json) =>
       _$$_EventHistoryDataFromJson(json);
@@ -507,7 +493,6 @@ class _$_EventHistoryData implements _EventHistoryData {
   @override
   final int? count;
   @override
-  @JsonKey(name: 'voteDate')
   final String? voteDate;
   @override
   final double? amount;
@@ -552,7 +537,7 @@ class _$_EventHistoryData implements _EventHistoryData {
 abstract class _EventHistoryData implements EventHistoryData {
   const factory _EventHistoryData(
       {final int? count,
-      @JsonKey(name: 'voteDate') final String? voteDate,
+      final String? voteDate,
       final double? amount,
       final Event? event}) = _$_EventHistoryData;
 
@@ -562,7 +547,6 @@ abstract class _EventHistoryData implements EventHistoryData {
   @override
   int? get count;
   @override
-  @JsonKey(name: 'voteDate')
   String? get voteDate;
   @override
   double? get amount;
@@ -583,7 +567,6 @@ mixin _$Event {
   String? get participant => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  @JsonKey(name: 'participantImage')
   String? get participantImage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -600,7 +583,7 @@ abstract class $EventCopyWith<$Res> {
       {String? participant,
       String name,
       String? image,
-      @JsonKey(name: 'participantImage') String? participantImage});
+      String? participantImage});
 }
 
 /// @nodoc
@@ -652,7 +635,7 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       {String? participant,
       String name,
       String? image,
-      @JsonKey(name: 'participantImage') String? participantImage});
+      String? participantImage});
 }
 
 /// @nodoc
@@ -691,14 +674,13 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_Event implements _Event {
   const _$_Event(
       {this.participant,
       required this.name,
       this.image,
-      @JsonKey(name: 'participantImage') this.participantImage});
+      this.participantImage});
 
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
       _$$_EventFromJson(json);
@@ -710,7 +692,6 @@ class _$_Event implements _Event {
   @override
   final String? image;
   @override
-  @JsonKey(name: 'participantImage')
   final String? participantImage;
 
   @override
@@ -752,11 +733,10 @@ class _$_Event implements _Event {
 
 abstract class _Event implements Event {
   const factory _Event(
-          {final String? participant,
-          required final String name,
-          final String? image,
-          @JsonKey(name: 'participantImage') final String? participantImage}) =
-      _$_Event;
+      {final String? participant,
+      required final String name,
+      final String? image,
+      final String? participantImage}) = _$_Event;
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
@@ -767,7 +747,6 @@ abstract class _Event implements Event {
   @override
   String? get image;
   @override
-  @JsonKey(name: 'participantImage')
   String? get participantImage;
   @override
   @JsonKey(ignore: true)

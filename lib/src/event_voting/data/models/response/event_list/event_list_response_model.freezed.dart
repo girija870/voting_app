@@ -98,8 +98,7 @@ class __$$_EventListResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_EventListResponseModel implements _EventListResponseModel {
   const _$_EventListResponseModel({final List<EventListData> data = const []})
       : _data = data;
@@ -173,9 +172,7 @@ mixin _$EventListData {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
-  @JsonKey(name: 'startDate')
   String? get startDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'endDate')
   String? get endDate => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -201,8 +198,8 @@ abstract class $EventListDataCopyWith<$Res> {
       {String id,
       String name,
       String? location,
-      @JsonKey(name: 'startDate') String? startDate,
-      @JsonKey(name: 'endDate') String? endDate,
+      String? startDate,
+      String? endDate,
       String image,
       String? description,
       String type,
@@ -303,8 +300,8 @@ abstract class _$$_EventListDataCopyWith<$Res>
       {String id,
       String name,
       String? location,
-      @JsonKey(name: 'startDate') String? startDate,
-      @JsonKey(name: 'endDate') String? endDate,
+      String? startDate,
+      String? endDate,
       String image,
       String? description,
       String type,
@@ -392,15 +389,14 @@ class __$$_EventListDataCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_EventListData implements _EventListData {
   const _$_EventListData(
       {required this.id,
       required this.name,
       this.location,
-      @JsonKey(name: 'startDate') this.startDate,
-      @JsonKey(name: 'endDate') this.endDate,
+      this.startDate,
+      this.endDate,
       required this.image,
       this.description,
       required this.type,
@@ -420,10 +416,8 @@ class _$_EventListData implements _EventListData {
   @override
   final String? location;
   @override
-  @JsonKey(name: 'startDate')
   final String? startDate;
   @override
-  @JsonKey(name: 'endDate')
   final String? endDate;
   @override
   final String image;
@@ -510,8 +504,8 @@ abstract class _EventListData implements EventListData {
       {required final String id,
       required final String name,
       final String? location,
-      @JsonKey(name: 'startDate') final String? startDate,
-      @JsonKey(name: 'endDate') final String? endDate,
+      final String? startDate,
+      final String? endDate,
       required final String image,
       final String? description,
       required final String type,
@@ -530,10 +524,8 @@ abstract class _EventListData implements EventListData {
   @override
   String? get location;
   @override
-  @JsonKey(name: 'startDate')
   String? get startDate;
   @override
-  @JsonKey(name: 'endDate')
   String? get endDate;
   @override
   String get image;
@@ -562,7 +554,6 @@ Participants _$ParticipantsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Participants {
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'contestantNo')
   int get contestantNo => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
@@ -581,11 +572,7 @@ abstract class $ParticipantsCopyWith<$Res> {
       _$ParticipantsCopyWithImpl<$Res, Participants>;
   @useResult
   $Res call(
-      {String id,
-      @JsonKey(name: 'contestantNo') int contestantNo,
-      String name,
-      String? image,
-      Judge? judge});
+      {String id, int contestantNo, String name, String? image, Judge? judge});
 
   $JudgeCopyWith<$Res>? get judge;
 }
@@ -655,11 +642,7 @@ abstract class _$$_ParticipantsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      @JsonKey(name: 'contestantNo') int contestantNo,
-      String name,
-      String? image,
-      Judge? judge});
+      {String id, int contestantNo, String name, String? image, Judge? judge});
 
   @override
   $JudgeCopyWith<$Res>? get judge;
@@ -708,12 +691,11 @@ class __$$_ParticipantsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_Participants implements _Participants {
   const _$_Participants(
       {required this.id,
-      @JsonKey(name: 'contestantNo') required this.contestantNo,
+      required this.contestantNo,
       required this.name,
       this.image,
       this.judge});
@@ -724,7 +706,6 @@ class _$_Participants implements _Participants {
   @override
   final String id;
   @override
-  @JsonKey(name: 'contestantNo')
   final int contestantNo;
   @override
   final String name;
@@ -773,7 +754,7 @@ class _$_Participants implements _Participants {
 abstract class _Participants implements Participants {
   const factory _Participants(
       {required final String id,
-      @JsonKey(name: 'contestantNo') required final int contestantNo,
+      required final int contestantNo,
       required final String name,
       final String? image,
       final Judge? judge}) = _$_Participants;
@@ -784,7 +765,6 @@ abstract class _Participants implements Participants {
   @override
   String get id;
   @override
-  @JsonKey(name: 'contestantNo')
   int get contestantNo;
   @override
   String get name;
@@ -906,8 +886,7 @@ class __$$_JudgeCopyWithImpl<$Res> extends _$JudgeCopyWithImpl<$Res, _$_Judge>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_Judge implements _Judge {
   const _$_Judge(
       {required this.id, required this.name, this.description, this.image});

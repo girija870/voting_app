@@ -119,8 +119,7 @@ class __$$_PostVoteResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_PostVoteResponseModel implements _PostVoteResponseModel {
   const _$_PostVoteResponseModel(
       {required this.success, required this.message, this.data});

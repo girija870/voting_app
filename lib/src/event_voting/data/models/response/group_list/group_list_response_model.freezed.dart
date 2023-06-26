@@ -98,8 +98,7 @@ class __$$_GroupListResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_GroupListResponseModel implements _GroupListResponseModel {
   const _$_GroupListResponseModel({final List<GroupListData> data = const []})
       : _data = data;
@@ -299,8 +298,7 @@ class __$$_GroupListDataCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_GroupListData implements _GroupListData {
   const _$_GroupListData(
       {required this.id,

@@ -1,1 +1,1 @@
-enum EventType { DIRECT, GROUP }
+enum EventType { direct, group }

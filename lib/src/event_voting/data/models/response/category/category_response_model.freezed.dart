@@ -97,8 +97,7 @@ class __$$_CategoryResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_CategoryResponseModel implements _CategoryResponseModel {
   const _$_CategoryResponseModel({final List<String> data = const []})
       : _data = data;

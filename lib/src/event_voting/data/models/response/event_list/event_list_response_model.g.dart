@@ -18,7 +18,7 @@ _$_EventListResponseModel _$$_EventListResponseModelFromJson(
 Map<String, dynamic> _$$_EventListResponseModelToJson(
         _$_EventListResponseModel instance) =>
     <String, dynamic>{
-      'data': instance.data.map((e) => e.toJson()).toList(),
+      'data': instance.data,
     };
 
 _$_EventListData _$$_EventListDataFromJson(Map<String, dynamic> json) =>
@@ -53,7 +53,7 @@ Map<String, dynamic> _$$_EventListDataToJson(_$_EventListData instance) =>
       'setting': instance.setting,
       'price': instance.price,
       'status': instance.status,
-      'participants': instance.participants.map((e) => e.toJson()).toList(),
+      'participants': instance.participants,
     };
 
 _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>
@@ -73,7 +73,7 @@ Map<String, dynamic> _$$_ParticipantsToJson(_$_Participants instance) =>
       'contestantNo': instance.contestantNo,
       'name': instance.name,
       'image': instance.image,
-      'judge': instance.judge?.toJson(),
+      'judge': instance.judge,
     };
 
 _$_Judge _$$_JudgeFromJson(Map<String, dynamic> json) => _$_Judge(
