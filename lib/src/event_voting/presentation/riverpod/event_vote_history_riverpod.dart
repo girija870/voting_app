@@ -10,7 +10,7 @@ class EventVoteHistoryNotifier
 
   final FetchVoteHistoryUseCase _useCase;
 
-  Future<void> fetchEventVoteHistory({required String userId}) async {
+  void fetchEventVoteHistory({required String userId}) async {
     state = (const AppState.loading());
     state = ((await _useCase.execute(userId)).fold(
         (failure) => failure.when(

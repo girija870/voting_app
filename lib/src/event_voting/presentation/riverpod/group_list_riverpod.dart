@@ -13,7 +13,7 @@ class GroupListNotifier
 
   String? eventId;
 
-  Future<void> fetchGroupList({required String eventId}) async {
+  void fetchGroupList({required String eventId}) async {
     this.eventId = eventId;
     state = (const AppState.loading());
     state = ((await _useCase.execute(
@@ -27,7 +27,7 @@ class GroupListNotifier
     ));
   }
 
-  Future<void> search({required String search}) async {
+  void search({required String search}) async {
     state = (const AppState.loading());
     state = ((await _useCase
             .execute(EventGroupParams(eventId: eventId!, search: search)))

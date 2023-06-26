@@ -9,10 +9,7 @@ extension ContextX on BuildContext {
 
   double get height => MediaQuery.of(this).size.height;
 
-  void showErrorSnackBar(
-      {required String title,
-      required String message,
-      required BuildContext context}) {
+  void showErrorSnackBar({required String title, required String message, required BuildContext context}) {
     OverlayState? overlayState = Overlay.of(this);
     OverlayEntry overlayEntry;
 
@@ -29,8 +26,7 @@ extension ContextX on BuildContext {
               borderRadius: 17.rounded,
             ),
             margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            padding:
-                const EdgeInsets.only(left: 18, top: 15, right: 12, bottom: 12),
+            padding: const EdgeInsets.only(left: 18, top: 15, right: 12, bottom: 12),
             width: double.infinity,
             child: Align(
               alignment: Alignment.topLeft,
@@ -38,15 +34,11 @@ extension ContextX on BuildContext {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: AppStyles.mediumText14
-                          .copyWith(color: AppColors.kColorWhite)
-                          .lineHeight(16.59)),
+                  Text(title, style: AppStyles.mediumText14.copyWith(color: AppColors.kColorWhite).lineHeight(16.59)),
                   const SizedBox(height: 6),
                   Text(
                     message,
-                    style: AppStyles.regularText14.lineHeight(16.59).copyWith(
-                        color: AppColors.kColorWhite.withOpacity(0.7)),
+                    style: AppStyles.regularText14.lineHeight(16.59).copyWith(color: AppColors.kColorWhite.withOpacity(0.7)),
                     // overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -56,7 +48,7 @@ extension ContextX on BuildContext {
         ),
       );
     });
-    overlayState.insert(overlayEntry);
+    overlayState?.insert(overlayEntry);
     Future.delayed(const Duration(seconds: 4)).then((value) {
       overlayEntry.remove();
     });

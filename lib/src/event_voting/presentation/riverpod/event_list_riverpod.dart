@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/state/app_state.dart';
@@ -12,31 +14,18 @@ class EventListNotifier extends StateNotifier<AppState<List<EventListData>>> {
 
   String? eventType;
 
-  Future<void> fetchEventList({required String eventType}) async {
+  void fetchEventList({required String eventType}) async {
     this.eventType = eventType;
     state = (const AppState.loading());
-    state = ((await _useCase.execute(EventParams(type: eventType))).fold(
-        (failure) => failure.when(
-            serverError: (errMessage) => AppState.error(message: errMessage),
-            noInternet: AppState.noInternet),
-        (data) => AppState.success(data: data.data)));
+    state = ((await _useCase.execute(EventParams(type: eventType))).fold((failure) => failure.when(serverError: (errMessage) => AppState.error(message: errMessage), noInternet: AppState.noInternet), (data) => AppState.success(data: data.data)));
   }
 
-  Future<void> searchEvent(String text) async {
+  void searchEvent(String text) async {
     state = (const AppState.loading());
-    state =
-        ((await _useCase.execute(EventParams(type: eventType!, search: text)))
-            .fold(
-                (failure) => failure.when(
-                    serverError: (errMessage) =>
-                        AppState.error(message: errMessage),
-                    noInternet: AppState.noInternet),
-                (data) => AppState.success(data: data.data)));
+    state = ((await _useCase.execute(EventParams(type: eventType!, search: text))).fold((failure) => failure.when(serverError: (errMessage) => AppState.error(message: errMessage), noInternet: AppState.noInternet), (data) => AppState.success(data: data.data)));
   }
 }
 
-final eventListNotifierProvider =
-    StateNotifierProvider<EventListNotifier, AppState<List<EventListData>>>(
-        (ref) {
+final eventListNotifierProvider = StateNotifierProvider<EventListNotifier, AppState<List<EventListData>>>((ref) {
   return EventListNotifier(getIt<FetchEventListUseCase>());
 });
