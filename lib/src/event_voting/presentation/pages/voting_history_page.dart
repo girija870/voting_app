@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/src/core/di/injection.dart';
 import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/extensions/widget_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
-import 'package:voting_app/src/event_voting/presentation/cubit/event_vote_history/event_vote_history_cubit.dart';
+import 'package:voting_app/src/event_voting/presentation/riverpod/event_vote_history_riverpod.dart';
 import 'package:voting_app/src/widgets/circle_view.dart';
 import 'package:voting_app/src/widgets/loader/loader.dart';
 import 'package:voting_app/src/widgets/network_image_cache.dart';
@@ -20,73 +19,84 @@ class VotingHistoryPage extends StatefulWidget {
 class _VotingHistoryPageState extends State<VotingHistoryPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<EventVoteHistoryCubit>()
-        ..fetchEventVoteHistory(userId: 'string'),
-      child: BlocBuilder<EventVoteHistoryCubit, EventVoteHistoryState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-              orElse: () => const SizedBox(),
-              loading: () => const Scaffold(body: Center(child: Loader())),
-              success: (data) {
-                return Scaffold(
-                  body: CustomScrollView(
-                    slivers: [
-                      const SliverAppBar(
-                        pinned: false,
-                        automaticallyImplyLeading: true,
-                        title: Text('Voting History'),
-                      ),
-                      20.verticalSpace.toSliverBox,
-                      (data.data.isNotEmpty)
-                          ? SliverList(
-                              delegate:
-                                  SliverChildBuilderDelegate((context, index) {
-                              final historyData = data.data[index];
+    return Consumer(
+      builder: (context, ref, child) {
+        return ref
+            .watch(eventVoteHistoryNotifierProvider('9849423081'))
+            .maybeWhen(
+                orElse: () => const SizedBox(),
+                loading: () => const Scaffold(body: Center(child: Loader())),
+                success: (data) {
+                  return Scaffold(
+                    body: CustomScrollView(
+                      slivers: [
+                        const SliverAppBar(
+                          pinned: false,
+                          automaticallyImplyLeading: true,
+                          title: Text('Voting History'),
+                        ),
+                        20.verticalSpace.toSliverBox,
+                        (data.data.votes.isNotEmpty)
+                            ? SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    final historyData = data.data.votes[index];
 
-                              return Row(
-                                children: [
-                                  CircleView(
-                                      child: CacheNetworkImageViewer(
-                                    imageUrl: historyData.event!.image,
-                                  )),
-                                  10.horizontalSpace,
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(historyData.event!.participant!,
-                                          style: AppStyles.text16PxBold
-                                              .appFontFamily.inActiveAccent
-                                              .lineHeight(18.h)),
-                                      Text(historyData.event!.name,
-                                          style: AppStyles.text14PxMedium
-                                              .appFontFamily.inActiveAccent
-                                              .lineHeight(18.h)),
-                                      Text(historyData.voteDate!,
-                                          style: AppStyles.text14PxMedium
-                                              .appFontFamily.inActiveAccent
-                                              .lineHeight(18.h)),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                      '${historyData.count! > 1 ? '${historyData.count} Votes' : '${historyData.count} Votes'} ',
-                                      style: AppStyles.text14PxRegular
-                                          .appFontFamily.inActiveAccent
-                                          .lineHeight(18.h)),
-                                ],
-                              ).px(20.w).pOnly(bottom: 20.h);
-                            }, childCount: data.data.length))
-                          : const Center(
-                              child: Text('No Voting History yet'),
-                            ).toSliverBox,
-                    ],
-                  ),
-                );
-              });
-        },
-      ),
+                                    return Row(
+                                      children: [
+                                        CircleView(
+                                            child: CacheNetworkImageViewer(
+                                          imageUrl: historyData.event!.participantImage ?? '',
+                                        )),
+                                        10.horizontalSpace,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                historyData.event!.participant!,
+                                                style: AppStyles.boldText16
+                                                    .copyWith(
+                                                        color: AppColors
+                                                            .kColorNeutralBlack)
+                                                    .lineHeight(18.h)),
+                                            Text(historyData.event!.name,
+                                                style: AppStyles.mediumText14
+                                                    .copyWith(
+                                                        color: AppColors
+                                                            .kColorNeutralBlack)
+                                                    .lineHeight(18.h)),
+                                            Text(historyData.voteDate!,
+                                                style: AppStyles.mediumText14
+                                                    .copyWith(
+                                                        color: AppColors
+                                                            .kColorNeutralBlack)
+                                                    .lineHeight(18.h)),
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          '${historyData.count! > 1 ? '${historyData.count} Votes' : '${historyData.count} Votes'} ',
+                                          style: AppStyles.regularText14
+                                              .copyWith(
+                                                  color: AppColors
+                                                      .kColorNeutralBlack)
+                                              .lineHeight(18.h),
+                                        ),
+                                      ],
+                                    ).px(20.w).pOnly(bottom: 20.h);
+                                  },
+                                  childCount: data.data.votes.length,
+                                ),
+                              )
+                            : const Center(
+                                child: Text('No Voting History yet'),
+                              ).toSliverBox,
+                      ],
+                    ),
+                  );
+                });
+      },
     );
   }
 }

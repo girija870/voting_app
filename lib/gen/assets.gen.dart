@@ -29,11 +29,25 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filtered.svg
   SvgGenImage get filtered => const SvgGenImage('assets/icons/filtered.svg');
 
+  /// File path: assets/icons/heart.svg
+  SvgGenImage get heart => const SvgGenImage('assets/icons/heart.svg');
+
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
   /// File path: assets/icons/share.svg
   SvgGenImage get share => const SvgGenImage('assets/icons/share.svg');
+
+  /// File path: assets/icons/stop_watch.svg
+  SvgGenImage get stopWatch => const SvgGenImage('assets/icons/stop_watch.svg');
+
+  /// File path: assets/icons/success_icon.svg
+  SvgGenImage get successIcon =>
+      const SvgGenImage('assets/icons/success_icon.svg');
+
+  /// File path: assets/icons/ticket_icon.svg
+  SvgGenImage get ticketIcon =>
+      const SvgGenImage('assets/icons/ticket_icon.svg');
 
   /// File path: assets/icons/vote_border.svg
   SvgGenImage get voteBorder =>
@@ -53,8 +67,12 @@ class $AssetsIconsGen {
         bookNow,
         clock,
         filtered,
+        heart,
         search,
         share,
+        stopWatch,
+        successIcon,
+        ticketIcon,
         voteBorder,
         voteFav,
         voteFilled
@@ -181,7 +199,6 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,

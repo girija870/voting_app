@@ -1,97 +1,83 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:voting_app/src/core/errors/app_exception.dart';
-import 'package:voting_app/src/core/network/api_endpoints.dart';
+import 'package:voting_app/src/core/network/network_services.dart';
 import 'package:voting_app/src/event_voting/data/models/request/contestant_voting_param.dart';
-import 'package:voting_app/src/event_voting/data/models/response/api_response.dart';
+import 'package:voting_app/src/event_voting/data/models/response/category/category_response_model.dart';
 import 'package:voting_app/src/event_voting/data/models/response/denomination/denomination_list_response_model.dart';
-import 'package:voting_app/src/event_voting/data/models/response/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/event_list/event_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/group_list/group_list_response_model.dart';
+import 'package:voting_app/src/event_voting/data/models/response/post_vote/post_vote_response_model.dart';
 
 import '../models/response/history/event_history_response_model.dart';
 
 abstract class EventVotingRemoteSource {
-  Future<ApiResponse<List<String>>> fetchEventCategory();
+  Future<CategoryResponseModel> fetchEventCategory();
 
-  Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
-      {required String eventType});
+  Future<EventListResponseModel> fetchEventList({
+    required String eventType,
+    String? search,
+  });
 
-  Future<ApiResponse<List<DenominationListResponseModel>>>
-      fetchDenominationList({required String eventId});
+  Future<DenominationResponseModel> fetchDenominationList(
+      {required String eventId});
 
-  Future<ApiResponse<List<EventHistoryResponseModel>>> fetchEventHistory(
-      {required String userId});
+  Future<EventHistoryResponseModel> fetchEventHistory({required String userId});
 
-  Future<ApiResponse> postVote({required ContestantVotingParam param});
+  Future<PostVoteResponseModel> postVote(
+      {required ContestantVotingParam param});
+
+  Future<GroupListResponseModel> fetchGroupList(
+      {required String eventId, String? search});
 }
 
 @LazySingleton(as: EventVotingRemoteSource)
 class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
-  final Dio _dio;
+  EventVotingRemoteSourceImpl(this._networkServices);
 
-  EventVotingRemoteSourceImpl(this._dio);
+  final NetworkServices _networkServices;
 
   @override
-  Future<ApiResponse<List<EventListResponseModel>>> fetchEventList(
-      {required String eventType}) async {
-    try {
-      final response = await _dio.get(ApiEndPoints.fetchEventsList,
-          options: Options(headers: {'category': eventType}));
-      if (response.statusCode == 200) {
-        return ApiResponse(
-          data: List.from(response.data['data'])
-              .map((e) => EventListResponseModel.fromJson(e))
-              .toList(),
-          message: response.data['message'] as String,
-          success: response.data['success'] as bool,
-        );
-      } else {
-        throw const AppException(message: 'Unknown Error');
-      }
-    } on DioException catch (e) {
-      throw AppException.fromDioError(e);
-    }
+  Future<CategoryResponseModel> fetchEventCategory() async {
+    return await _networkServices.fetchEventCategory();
   }
 
   @override
-  Future<ApiResponse<List<DenominationListResponseModel>>>
-      fetchDenominationList({required String eventId}) async {
-    try {
-      final response = await _dio.get(ApiEndPoints.fetchDenominationList,
-          options: Options(headers: {'eventId': eventId}));
-      if (response.statusCode == 200) {
-        return ApiResponse(
-          data: List.from(response.data['data'])
-              .map((e) => DenominationListResponseModel.fromJson(e))
-              .toList(),
-          message: response.data['message'] != null
-              ? response.data['message'] as String
-              : 'Successfully',
-          success: response.data['success'] as bool,
-        );
-      } else {
-        throw const AppException(message: 'Unknown Error');
-      }
-    } on DioException catch (e) {
-      throw AppException.fromDioError(e);
-    }
+  Future<EventListResponseModel> fetchEventList({
+    required String eventType,
+    String? search,
+  }) async {
+    return await _networkServices.fetchEventList(eventType, search);
   }
 
   @override
-  Future<ApiResponse<List<EventHistoryResponseModel>>> fetchEventHistory(
+  Future<DenominationResponseModel> fetchDenominationList(
+      {required String eventId}) async {
+    return await _networkServices.fetchDenominationList(eventId);
+  }
+
+  @override
+  Future<EventHistoryResponseModel> fetchEventHistory(
       {required String userId}) async {
+    return await _networkServices.fetchEventHistory(userId);
+  }
+
+  @override
+  Future<PostVoteResponseModel> postVote(
+      {required ContestantVotingParam param}) async {
     try {
-      final response = await _dio.get(ApiEndPoints.fetchVoteHistory,
-          options: Options(headers: {'username': '9849423081'}));
-      if (response.statusCode == 200) {
-        return ApiResponse(
-          data: List.from(response.data['data'])
-              .map((e) => EventHistoryResponseModel.fromJson(e))
-              .toList(),
-          message: response.data['message'] as String,
-          success: response.data['success'] as bool,
-        );
+      final response = await _networkServices.postVote(
+          param.userId,
+          param.username,
+          param.denoId,
+          param.participantId,
+          param.count,
+          param.type);
+
+      if (response.success == true) {
+        return response;
       } else {
-        throw const AppException(message: 'Unknown Error');
+        throw AppException(message: response.message);
       }
     } on DioException catch (e) {
       throw AppException.fromDioError(e);
@@ -99,41 +85,8 @@ class EventVotingRemoteSourceImpl implements EventVotingRemoteSource {
   }
 
   @override
-  Future<ApiResponse<List<String>>> fetchEventCategory() async {
-    try {
-      final response = await _dio.get(ApiEndPoints.fetchCategory);
-      if (response.statusCode == 200) {
-        return ApiResponse(
-          data: List.from(response.data['data']),
-          message: response.data['message'] as String,
-          success: response.data['success'] as bool,
-        );
-      } else {
-        throw const AppException(message: 'Unknown Error');
-      }
-    } on DioException catch (e) {
-      throw AppException.fromDioError(e);
-    }
-  }
-
-  @override
-  Future<ApiResponse> postVote({required ContestantVotingParam param}) async {
-    try {
-      print('paramData${param.toJson}');
-      final response =
-          await _dio.post(ApiEndPoints.postVote, data: param.toJson);
-
-      if (response.statusCode == 200) {
-        return ApiResponse(
-          data: const {},
-          message: response.data['message'] as String,
-          success: response.data['success'] as bool,
-        );
-      } else {
-        throw const AppException(message: 'Unknown Error');
-      }
-    } on DioException catch (e) {
-      throw AppException.fromDioError(e);
-    }
+  Future<GroupListResponseModel> fetchGroupList(
+      {required String eventId, String? search}) async {
+    return await _networkServices.fetchGroupList(eventId, search);
   }
 }

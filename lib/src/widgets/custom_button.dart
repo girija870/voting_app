@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:voting_app/src/core/extensions/text_style_extensions.dart';
 import 'package:voting_app/src/core/themes/themes.dart';
 
 class CustomButton extends StatelessWidget {
@@ -9,36 +8,34 @@ class CustomButton extends StatelessWidget {
     this.title,
     this.onPressed,
     this.titleStyle,
-    this.backgroundColor = AppColors.activeDark,
+    this.backgroundColor = AppColors.kColorDark,
     this.width = 140,
     this.height = 50,
     this.icon,
+    this.loading = false,
   });
 
-  /// [title] argument is required
+  final bool loading;
+
   final String? title;
 
   final VoidCallback? onPressed;
 
-  /// [titleStyle] is used to style the button text
   final TextStyle? titleStyle;
 
-  /// [gradient] for enabled state of button
   final Color backgroundColor;
 
-  /// [width] button width, defaults is 140
   final double width;
 
-  /// [height] button height, defaults is 44
   final double height;
 
   final Widget? icon;
 
   ShapeBorder get _shape => RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(50.r),
         side: BorderSide(
-          color: (backgroundColor == AppColors.whiteColor)
-              ? AppColors.activeNormal
+          color: (backgroundColor == AppColors.kColorWhite)
+              ? AppColors.kColorPrimary
               : Colors.transparent,
         ),
       );
@@ -52,7 +49,7 @@ class CustomButton extends StatelessWidget {
       type: MaterialType.card,
       clipBehavior: Clip.antiAlias,
       shape: _shape,
-      shadowColor: AppColors.whiteColor,
+      shadowColor: AppColors.kColorWhite,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         color: backgroundColor,
@@ -65,22 +62,33 @@ class CustomButton extends StatelessWidget {
                 shape: _shape,
                 color: backgroundColor,
               ),
-              child: Padding(
-                padding: EdgeInsets.zero,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (icon != null) icon!,
-                    if (icon != null) 10.horizontalSpace,
-                    Text(
-                      title!,
-                      style: titleStyle ??
-                          AppStyles.text14PxMedium.appFontFamily.whiteColor
-                              .lineHeight(16.59),
+              child: loading
+                  ? const Center(
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: AppColors.kColorWhite,
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (icon != null) ...[
+                          icon!,
+                          if (icon != null) 10.horizontalSpace,
+                        ],
+                        if (title != null)
+                          Text(
+                            title!,
+                            style: titleStyle ??
+                                AppStyles.mediumText14
+                                    .copyWith(color: AppColors.kColorWhite),
+                          ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
             ),
           ),
         ),

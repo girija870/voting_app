@@ -14,6 +14,160 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+DenominationResponseModel _$DenominationResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _DenominationResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DenominationResponseModel {
+  List<DenominationListResponseModel> get data =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DenominationResponseModelCopyWith<DenominationResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DenominationResponseModelCopyWith<$Res> {
+  factory $DenominationResponseModelCopyWith(DenominationResponseModel value,
+          $Res Function(DenominationResponseModel) then) =
+      _$DenominationResponseModelCopyWithImpl<$Res, DenominationResponseModel>;
+  @useResult
+  $Res call({List<DenominationListResponseModel> data});
+}
+
+/// @nodoc
+class _$DenominationResponseModelCopyWithImpl<$Res,
+        $Val extends DenominationResponseModel>
+    implements $DenominationResponseModelCopyWith<$Res> {
+  _$DenominationResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<DenominationListResponseModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DenominationResponseModelCopyWith<$Res>
+    implements $DenominationResponseModelCopyWith<$Res> {
+  factory _$$_DenominationResponseModelCopyWith(
+          _$_DenominationResponseModel value,
+          $Res Function(_$_DenominationResponseModel) then) =
+      __$$_DenominationResponseModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<DenominationListResponseModel> data});
+}
+
+/// @nodoc
+class __$$_DenominationResponseModelCopyWithImpl<$Res>
+    extends _$DenominationResponseModelCopyWithImpl<$Res,
+        _$_DenominationResponseModel>
+    implements _$$_DenominationResponseModelCopyWith<$Res> {
+  __$$_DenominationResponseModelCopyWithImpl(
+      _$_DenominationResponseModel _value,
+      $Res Function(_$_DenominationResponseModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$_DenominationResponseModel(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<DenominationListResponseModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_DenominationResponseModel implements _DenominationResponseModel {
+  const _$_DenominationResponseModel(
+      {final List<DenominationListResponseModel> data = const []})
+      : _data = data;
+
+  factory _$_DenominationResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$$_DenominationResponseModelFromJson(json);
+
+  final List<DenominationListResponseModel> _data;
+  @override
+  @JsonKey()
+  List<DenominationListResponseModel> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'DenominationResponseModel(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DenominationResponseModel &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DenominationResponseModelCopyWith<_$_DenominationResponseModel>
+      get copyWith => __$$_DenominationResponseModelCopyWithImpl<
+          _$_DenominationResponseModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DenominationResponseModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DenominationResponseModel implements DenominationResponseModel {
+  const factory _DenominationResponseModel(
+          {final List<DenominationListResponseModel> data}) =
+      _$_DenominationResponseModel;
+
+  factory _DenominationResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_DenominationResponseModel.fromJson;
+
+  @override
+  List<DenominationListResponseModel> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DenominationResponseModelCopyWith<_$_DenominationResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 DenominationListResponseModel _$DenominationListResponseModelFromJson(
     Map<String, dynamic> json) {
   return _DenominationListResponseModel.fromJson(json);
@@ -169,8 +323,7 @@ class __$$_DenominationListResponseModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_DenominationListResponseModel
     implements _DenominationListResponseModel {
   const _$_DenominationListResponseModel(

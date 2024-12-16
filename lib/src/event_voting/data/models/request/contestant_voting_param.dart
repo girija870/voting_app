@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 class ContestantVotingParam extends Equatable {
@@ -8,7 +7,6 @@ class ContestantVotingParam extends Equatable {
   final String participantId;
   final int count;
   final String type;
-  final String refTransactionId;
 
   const ContestantVotingParam({
     required this.userId,
@@ -17,7 +15,6 @@ class ContestantVotingParam extends Equatable {
     required this.type,
     required this.username,
     required this.denoId,
-    required this.refTransactionId,
   });
 
   @override
@@ -30,6 +27,5 @@ class ContestantVotingParam extends Equatable {
         "participantId": participantId,
         "count": count,
         "type": type,
-        "refTransactionId": "string"
       };
 }

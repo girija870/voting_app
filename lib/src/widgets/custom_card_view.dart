@@ -31,15 +31,14 @@ class CustomCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: backgroundColor ?? AppColors.whiteColor,
+      color: backgroundColor ?? AppColors.kColorWhite,
       elevation: elevation ?? 0.sp,
       shadowColor: shadowColor,
       borderRadius: borderRadius ?? BorderRadius.circular(15.sp),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          border: border,
-          color: backgroundColor ?? AppColors.whiteColor,
+          color: backgroundColor ?? AppColors.kColorWhite,
           boxShadow: boxShadowEnabled
               ? [
                   BoxShadow(
@@ -47,11 +46,11 @@ class CustomCardView extends StatelessWidget {
                     spreadRadius: 2,
                     blurRadius: 8,
                     color: boxShadowColor ??
-                        AppColors.activeNormal.withOpacity(0.1),
+                        AppColors.kColorPrimary.withOpacity(0.1),
                   )
                 ]
               : [],
-          borderRadius:
+          borderRadius: borderRadius ??
               BorderRadius.only(topLeft: 8.circular, topRight: 8.circular),
         ),
         child: Container(

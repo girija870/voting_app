@@ -117,8 +117,7 @@ class __$$_AppExceptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_AppException extends _AppException {
   const _$_AppException(
       {required this.message,
